@@ -1,0 +1,28 @@
+{
+  "name": "bc-climate-explorer",
+  "version": "1.0.0",
+  "description": "a web application to explore the biogeoclimate ecosystem classification zones",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeyklee/bc-climate-explorer.git"
+  },
+  "author": "@joeyklee and @kevinkl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joeyklee/bc-climate-explorer/issues"
+  },
+  "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

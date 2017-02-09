@@ -1,5 +1,9 @@
-private/*
-.DS_Store
+build/
+release/
+node_modules/
 
 #IDEA IDE
 .idea/
+
+private/*
+.DS_Store
