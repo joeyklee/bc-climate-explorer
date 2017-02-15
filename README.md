@@ -2,12 +2,13 @@
 This is the current working repo of the bc-climate-explorer
 
 ## Used technologies
+- Bootstrap
 - JavaScript
 - jQuery
 - Grunt
 - npm
-- Jasmin
+- Karma/Jasmin
 
-## Pattern
+## Patterns
 - Pub/Sub pattern
 - Test driven development
