@@ -4,7 +4,8 @@
   "description": "a web application to explore the biogeoclimate ecosystem classification zones",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "grunt serve",
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,15 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-karma": "^2.0.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-browserify": "^5.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7"
   }
 }

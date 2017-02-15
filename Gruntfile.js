@@ -11,11 +11,11 @@ module.exports = function(grunt) {
     },
     browserify: {
       build: {
-        src: ['src/index.js'],
+        src: ['src/**/*.js'],
         dest: 'build/bundle.js'
       },
       release: {
-        src: ['src/index.js'],
+        src: ['src/**/*.js'],
         dest: 'release/bundle.js'
       }
     },
@@ -29,12 +29,22 @@ module.exports = function(grunt) {
     copy: {
       build: {
         files: [
-          {expand: false, src: ['src/index.html'], dest: 'build/index.html'}
+          {expand: false, src: ['src/index.html'], dest: 'build/index.html'},
+          {
+            expand: false,
+            src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
+            dest: 'build/css/bootstrap.min.css'
+          }
         ]
       },
       release: {
         files: [
-          {expand: false, src: ['src/index.html'], dest: 'release/index.html'}
+          {expand: false, src: ['src/index.html'], dest: 'release/index.html'},
+          {
+            expand: false,
+            src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
+            dest: 'release/css/bootstrap.min.css'
+          }
         ]
       }
     },
@@ -56,12 +66,18 @@ module.exports = function(grunt) {
           livereload: true
         }
       }
+    },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
     }
   });
 
-  grunt.registerTask('build', ['clean:build', 'browserify', 'copy:build']);
-  grunt.registerTask('release', ['clean:release', 'browserify', 'uglify', 'copy:release']);
+  grunt.registerTask('build', ['test', 'clean:build', 'browserify', 'copy:build']);
+  grunt.registerTask('release', ['test', 'clean:release', 'browserify', 'uglify', 'copy:release']);
   grunt.registerTask('serve', ['clean:build', 'browserify', 'copy:build', 'connect:server', 'watch:serve']);
+  grunt.registerTask('test', ['karma']);
 
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -69,4 +85,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-karma');
 };
