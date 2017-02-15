@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', ['test', 'clean:build', 'browserify', 'copy:build']);
+  grunt.registerTask('build', ['clean:build', 'browserify', 'copy:build']);
   grunt.registerTask('release', ['test', 'clean:release', 'browserify', 'uglify', 'copy:release']);
   grunt.registerTask('serve', ['clean:build', 'browserify', 'copy:build', 'connect:server', 'watch:serve']);
   grunt.registerTask('test', ['karma']);
