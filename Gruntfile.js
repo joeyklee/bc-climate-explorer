@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     copy: {
       build: {
         files: [
-          {expand: false, src: ['src/index.html'], dest: 'build/index.html'},
+          {expand: true, flatten: true, src: ['src/**/*.html'], dest: 'build/'},
           {
             expand: false,
             src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
       },
       release: {
         files: [
-          {expand: false, src: ['src/index.html'], dest: 'release/index.html'},
+          {expand: true, flatten: true, src: ['src/**/*.html'], dest: 'build/'},
           {
             expand: false,
             src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
