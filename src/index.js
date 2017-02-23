@@ -6,4 +6,4 @@ window.$ = window.jQuery = require('jquery');
 var bootstrap = require('bootstrap');
 
 locationsController.init();
-interactiveMap.init();
+// interactiveMap.init();
