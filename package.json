@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
   "devDependencies": {
+    "babel-preset-env": "^1.1.8",
+    "babelify": "^7.3.0",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.0.0",
     "grunt-contrib-clean": "^1.0.0",

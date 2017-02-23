@@ -10,6 +10,9 @@ module.exports = function(grunt) {
       }
     },
     browserify: {
+      options: {
+        transform: [["babelify"]]
+      },
       build: {
         src: ['src/**/*.js'],
         dest: 'build/bundle.js'
