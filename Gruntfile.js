@@ -37,6 +37,10 @@ module.exports = function(grunt) {
             expand: false,
             src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
             dest: 'build/css/bootstrap.min.css'
+          },
+          {expand: false,
+            src: ['src/styles.css'],
+            dest: 'build/css/styles.css'
           }
         ]
       },
@@ -47,6 +51,10 @@ module.exports = function(grunt) {
             expand: false,
             src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
             dest: 'release/css/bootstrap.min.css'
+          },
+          {expand: false,
+            src: ['src/styles.css'],
+            dest: 'release/css/styles.css'
           }
         ]
       }

@@ -1,11 +1,11 @@
-<div id="panel-locations">
+<div id="panel-locations" class="jumbotron">
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             A
             <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li>{{testTitle}}</a></li>
+        <ul class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenu1">
+            {{#list locationCodes}}{{value}}{{/list}}
         </ul>
     </div>
     <div class="dropdown">
