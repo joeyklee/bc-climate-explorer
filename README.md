@@ -7,6 +7,8 @@ This is the current working repo of the bc-climate-explorer
 - jQuery
 - Grunt
 - npm
+- Browserify
+- Babel
 - Karma/Jasmin
 
 ## Patterns
