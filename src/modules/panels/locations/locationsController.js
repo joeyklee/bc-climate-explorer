@@ -2,30 +2,25 @@
 
 var model = require('./locationsModel');
 var errorMessages = require('../../../errorMessages');
+var moduleBase = require('../../../moduleBase');
 var handlebars = require('handlebars');
+var events = require('../../../pubsub');
 var $ = require('jquery');
 
-module.exports = {
+module.exports = moduleBase.create({
   htmlMainId: 'panel-locations-index',
-  viewId: 'panel-locations',
+  viewId: 'panel-locations-module',
   htmlFilePath: './locations.html',
+
 
   init: function() {
     var locationsController = this;
-    this.$indexEl = $('#'+this.htmlMainId);
-    if(this.$indexEl.length === 0) {
-      console.error(errorMessages.addModule(this.htmlMainId));
-    }
-    else {
-      // Check if module html file exists
-      this.getModuleHtmlFile().then(function(data) {
-        locationsController.htmlModule = data;
-        locationsController.getDropdownData();
-        // locationsController.renderDropdownData();
-      }, function(err) {
-        console.error("htmlFile", err);
-      });
-    }
+    this.loadViews(this.htmlMainId, this.viewId, this.htmlFilePath).then(function(success) {
+      locationsController.getDropdownData();
+      locationsController.$indexLocationsDiv = $('#' + locationsController.htmlMainId);
+    }).catch(function(errorMsg) {
+      console.error(errorMsg);
+    });
   },
 
   getDropdownData: function() {
@@ -42,10 +37,6 @@ module.exports = {
     });
   },
 
-  getModuleHtmlFile: function() {
-    return Promise.resolve($.get(this.htmlFilePath));
-  },
-
   renderDropdownData: function(locationCodes) {
     var context = {
       locationCodes: locationCodes
@@ -59,8 +50,10 @@ module.exports = {
 
       return out;
     });
-    var template = handlebars.compile(this.htmlModule);
+    var template = handlebars.compile(this.$indexLocationsDiv.html());
     var result = template(context);
-    this.$indexEl.html(result);
+    this.$indexLocationsDiv.html(result);
+    //Bind events
+    // events.on('btnTestClicked', this.showTestText());
   }
-};
+});
