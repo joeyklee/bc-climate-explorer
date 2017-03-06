@@ -3,7 +3,7 @@
 module.exports = {
   events: {},
   keys: {
-    exampleEvent: "exampleEvent"
+    btnTestClicked: 'btnTestClicked'
   },
   on: function (eventName, fn) {
     this.events[eventName] = this.events[eventName] || [];
@@ -25,6 +25,5 @@ module.exports = {
         fn(data);
       });
     }
-    console.log(this.events);
   }
 };

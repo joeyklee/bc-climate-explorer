@@ -1,12 +1,12 @@
 'use strict';
 
-var addModule = function(moduleName) {
-  if(typeof moduleName !== 'string') {
-    return "";
-  }
-
-  return "Module \""+moduleName+"\" can't be added. " +
-    "ID \""+moduleName+"\" is missing in HTML main file"
+var idNotFound = function(id) {
+  return "Didn't found id: '"+ id +"'" ;
 };
 
-module.exports.addModule = addModule;
+var fileNotFound = function(filePath) {
+  return "File not found: '" + filePath + "'";
+};
+
+module.exports.idNotFound = idNotFound;
+module.exports.fileNotFound = fileNotFound;

@@ -1,19 +1,20 @@
 'use strict';
 
 var $ = require('jquery');
+var errorMsg = require('./errorMessages');
 
 module.exports = {
   loadViews: function(htmlMainId, viewId, htmlFilePath) {
     return new Promise(function(resolve, reject) {
       var $indexDiv = $('#' + htmlMainId);
       if($indexDiv.length === 0) {
-        reject('error');
+        reject(errorMsg.idNotFound('#' + htmlMainId));
       } else {
         $indexDiv.load(htmlFilePath, function(response, status, jqxhr) {
           if(status == 'error') {
-            reject('error file not found');
+            reject(errorMsg.fileNotFound(htmlFilePath));
           }
-          resolve('success');
+          resolve($indexDiv);
         });
       }
     });

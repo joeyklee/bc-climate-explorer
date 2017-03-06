@@ -4,7 +4,7 @@ var model = require('./locationsModel');
 var errorMessages = require('../../../errorMessages');
 var moduleBase = require('../../../moduleBase');
 var handlebars = require('handlebars');
-var events = require('../../../pubsub');
+var pubsub = require('../../../pubsub');
 var $ = require('jquery');
 
 module.exports = moduleBase.create({
@@ -15,12 +15,28 @@ module.exports = moduleBase.create({
 
   init: function() {
     var locationsController = this;
-    this.loadViews(this.htmlMainId, this.viewId, this.htmlFilePath).then(function(success) {
-      locationsController.getDropdownData();
-      locationsController.$indexLocationsDiv = $('#' + locationsController.htmlMainId);
-    }).catch(function(errorMsg) {
-      console.error(errorMsg);
-    });
+    this.loadViews(this.htmlMainId, this.viewId, this.htmlFilePath)
+      .then(function(success) {
+        locationsController.$indexInteractiveDiv = success;
+        locationsController.getDropdownData();
+        locationsController.bindEvents();
+      })
+      .catch(function(errorMsg) {
+        console.error(errorMsg);
+      });
+  },
+
+  bindEvents: function() {
+    pubsub.on(pubsub.keys.btnTestClicked, this.showText);
+  },
+
+  showText: function() {
+    var $panel = $('#panel-locations-test');
+    if($panel.is(':visible')) {
+      $panel.hide();
+    } else {
+      $panel.show();
+    }
   },
 
   getDropdownData: function() {
@@ -50,10 +66,11 @@ module.exports = moduleBase.create({
 
       return out;
     });
-    var template = handlebars.compile(this.$indexLocationsDiv.html());
+    // var $indexLocationsDiv = $('#panel-locations-index');
+    var html = this.$indexInteractiveDiv.html();
+    var template = handlebars.compile(html);
     var result = template(context);
-    this.$indexLocationsDiv.html(result);
-    //Bind events
-    // events.on('btnTestClicked', this.showTestText());
+    this.$indexInteractiveDiv.html(result);
+    this.$indexInteractiveDiv.find('#panel-locations-test').hide();
   }
 });

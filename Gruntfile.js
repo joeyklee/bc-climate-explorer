@@ -37,24 +37,16 @@ module.exports = function(grunt) {
             expand: false,
             src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
             dest: 'build/css/bootstrap.min.css'
-          },
-          {expand: false,
-            src: ['src/styles.css'],
-            dest: 'build/css/styles.css'
           }
         ]
       },
       release: {
         files: [
-          {expand: true, flatten: true, src: ['src/**/*.html'], dest: 'build/'},
+          {expand: true, flatten: true, src: ['src/**/*.html'], dest: 'release/'},
           {
             expand: false,
             src: ['./node_modules/bootstrap/dist/css/bootstrap.min.css'],
             dest: 'release/css/bootstrap.min.css'
-          },
-          {expand: false,
-            src: ['src/styles.css'],
-            dest: 'release/css/styles.css'
           }
         ]
       }
@@ -62,6 +54,18 @@ module.exports = function(grunt) {
     clean: {
       build: ['build/*'],
       release: ['release/bundle.js']
+    },
+    concat: {
+      build: {
+        files: {
+          'build/css/styles.css': ['src/**/*.css']
+        }
+      },
+      release: {
+        files: {
+          'release/css/styles.css': ['src/**/*.css']
+        }
+      }
     },
     watch: {
       serve: {
@@ -85,9 +89,9 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', ['clean:build', 'browserify', 'copy:build']);
-  grunt.registerTask('release', ['test', 'clean:release', 'browserify', 'uglify', 'copy:release']);
-  grunt.registerTask('serve', ['clean:build', 'browserify', 'copy:build', 'connect:server', 'watch:serve']);
+  grunt.registerTask('build', ['clean:build', 'browserify', 'copy:build', 'concat:build']);
+  grunt.registerTask('release', ['test', 'clean:release', 'browserify', 'concat:release', 'uglify', 'copy:release']);
+  grunt.registerTask('serve', ['clean:build', 'browserify', 'copy:build', 'connect:server', 'concat:build', 'watch:serve']);
   grunt.registerTask('test', ['karma']);
 
   grunt.loadNpmTasks('grunt-browserify');
@@ -96,5 +100,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-karma');
 };
