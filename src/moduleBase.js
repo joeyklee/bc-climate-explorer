@@ -4,15 +4,19 @@ var $ = require('jquery');
 var errorMsg = require('./errorMessages');
 
 module.exports = {
-  loadViews: function(htmlMainId, viewId, htmlFilePath) {
+  htmlIndexId: '',
+  htmlModuleId: '',
+  htmlModulePath: '',
+
+  loadViews: function(htmlIndexId, htmlModuleId, htmlModulePath) {
     return new Promise(function(resolve, reject) {
-      var $indexDiv = $('#' + htmlMainId);
+      var $indexDiv = $('#' + htmlIndexId);
       if($indexDiv.length === 0) {
-        reject(errorMsg.idNotFound('#' + htmlMainId));
+        reject(errorMsg.idNotFound('#' + htmlIndexId));
       } else {
-        $indexDiv.load(htmlFilePath, function(response, status, jqxhr) {
+        $indexDiv.load(htmlModulePath, function(response, status, jqxhr) {
           if(status == 'error') {
-            reject(errorMsg.fileNotFound(htmlFilePath));
+            reject(errorMsg.fileNotFound(htmlModulePath));
           }
           resolve($indexDiv);
         });

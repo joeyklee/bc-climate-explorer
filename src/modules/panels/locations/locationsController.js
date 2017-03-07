@@ -8,14 +8,18 @@ var pubsub = require('../../../pubsub');
 var $ = require('jquery');
 
 module.exports = moduleBase.create({
-  htmlMainId: 'panel-locations-index',
-  viewId: 'panel-locations-module',
-  htmlFilePath: './locations.html',
+  htmlIndexId: 'panel-locations-index',
+  htmlModuleId: 'panel-locations-module',
+  htmlModulePath: './locations.html',
 
 
   init: function() {
+    this.htmlIndexId = 'panel-locations-index';
+    this.htmlModuleId = 'panel-locations-module';
+    this.htmlModulePath = './locations.html';
+
     var locationsController = this;
-    this.loadViews(this.htmlMainId, this.viewId, this.htmlFilePath)
+    this.loadViews(this.htmlIndexId, this.htmlModuleId, this.htmlModulePath)
       .then(function(success) {
         locationsController.$indexInteractiveDiv = success;
         locationsController.getDropdownData();

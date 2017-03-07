@@ -5,14 +5,15 @@ var pubsub = require('../../pubsub');
 var moduleBase = require('../../moduleBase');
 
 module.exports = moduleBase.create({
-  htmlMainId: 'interactive-map-index',
-  viewId: 'interactive-map-module',
-  htmlFilePath: './interactiveMap.html',
   btnInteractiveMapId: '#interactive-map-btn-test',
 
   init: function() {
+    this.htmlIndexId = 'interactive-map-index';
+    this.htmlModuleId = 'interactive-map-module';
+    this.htmlModulePath = './interactiveMap.html';
+
     var interactiveMapController = this;
-    this.loadViews(this.htmlMainId, this.viewId, this.htmlFilePath)
+    this.loadViews(this.htmlIndexId, this.htmlModuleId, this.htmlModulePath)
       .then(function($indexInteractiveDiv) {
         interactiveMapController.$indexInteractiveDiv = $indexInteractiveDiv;
         interactiveMapController.bindClickListener();
