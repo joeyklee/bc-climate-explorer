@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('jquery');
 var errorMessages = require('../../errorMessages');
 var pubsub = require('../../pubsub');
 var moduleBase = require('../../moduleBase');
