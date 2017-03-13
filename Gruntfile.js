@@ -102,4 +102,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-karma');
+
+  grunt.log.write("serving the magic at localhost:" + 8000);
 };
