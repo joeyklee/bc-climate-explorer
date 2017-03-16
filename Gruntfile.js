@@ -93,6 +93,7 @@ module.exports = function(grunt) {
   grunt.registerTask('release', ['test', 'clean:release', 'browserify', 'concat:release', 'uglify', 'copy:release']);
   grunt.registerTask('serve', ['clean:build', 'browserify', 'copy:build', 'connect:server', 'concat:build', 'watch:serve']);
   grunt.registerTask('test', ['karma']);
+  grunt.registerTask('default', ['serve']);
 
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
