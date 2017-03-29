@@ -4,10 +4,10 @@
 Every box in the picture below is a different module. Each of them is a separate folder (see second picture). All module folders are in the [src/modules](../../src/modules) folder of the project.
 
 ### All modules in the GUI
-![wireframe image](https://octodex.github.com/images/yaktocat.png)
+![wireframe image](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/modules.png)
 
 ### All modules in the filesystem
-![filesystem image](https://octodex.github.com/images/yaktocat.png)
+![filesystem image](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/modules_directories.png)
 
 Every module for the bc-climate-explorer should contain the following files:
 
