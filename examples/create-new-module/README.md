@@ -1,7 +1,13 @@
 # How to create a new module
 
 ## What's a module in bc-climate-explorer
-Every grey box in the picture below is a different module. Each of them is a separate folder. All module folders are in the [src/modules](../../src/modules) folder of the project.
+Every box in the picture below is a different module. Each of them is a separate folder (see second picture). All module folders are in the [src/modules](../../src/modules) folder of the project.
+
+### All modules in the GUI
+![wireframe image](https://octodex.github.com/images/yaktocat.png)
+
+### All modules in the filesystem
+![filesystem image](https://octodex.github.com/images/yaktocat.png)
 
 Every module for the bc-climate-explorer should contain the following files:
 
