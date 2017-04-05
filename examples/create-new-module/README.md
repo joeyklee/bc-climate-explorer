@@ -18,12 +18,14 @@ The names of these files should contain the module name.
 
 ### Example
 In the picture below you see the file names for the location module. 
+
 ![example_folder_file_names](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/example_folder_file_names.png)
 
 
 # Roadmap for a new module (example)
-Say you want to create a new module called "**awesome**". To do so, just let the steps below guide you.
+Say you want to create a new module called "**awesome**". To do so, just let the steps below guide you through the process.
 1. Create a new folder with a fitting name for the module in the project's [src/modules](../../src/modules) folder. For the example we call it "awesome"
+
 ![roadmap_1_new_folder.png](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/roadmap_1_new_folder.png)
 
 2. Create the files mentioned above with the following naming convention:
@@ -31,4 +33,5 @@ Say you want to create a new module called "**awesome**". To do so, just let the
     - `awesome.css`
     - `awesomeController.js`
     - `awesomeModel.js`
+    
 ![roadmap_2_new_files.png](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/roadmap_2_new_files.png)
