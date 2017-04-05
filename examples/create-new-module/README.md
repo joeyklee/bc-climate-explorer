@@ -36,10 +36,10 @@ Say you want to create a new module called "**awesome**". To do so, just let the
 ![roadmap_1_new_folder.png](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/roadmap_1_new_folder.png)
 
 2. Create the files mentioned above with the following naming convention:
-    - `awesome.html`
+    - `awesomeController.js` (Click for an example of a controller file)
+    - `awesomeModel.js` (Click for an example of a model file)
+    - `awesome.html` (Click for an example of a HTML file)
     - `awesome.css`
-    - `awesomeController.js`
-    - `awesomeModel.js`
     
 ![roadmap_2_new_files.png](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/roadmap_2_new_files.png)
 
