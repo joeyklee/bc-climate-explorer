@@ -1,3 +1,10 @@
+## Table of contents
+- [What's a module in bc-climate-explorer](#whats-a-module-in-bc-climate-explorer)
+    - [All modules in the GUI](#all-modules-in-the-gui)
+    - [All modules in the project](#all-modules-in-the-project)
+    - [Example](#example)
+- [Roadmap to create a new module (example)](#roadmap-to-create-a-new-module-example)
+
 # What's a module in bc-climate-explorer
 Every box in the picture below is a different module. Each of them is a separate folder (see second picture). All module folders are in the [src/modules](../../src/modules) folder of the project.
 
@@ -22,7 +29,7 @@ In the picture below you see the file names for the location module.
 ![example_folder_file_names](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/example_folder_file_names.png)
 
 
-# Roadmap for a new module (example)
+# Roadmap to create a new module (example)
 Say you want to create a new module called "**awesome**". To do so, just let the steps below guide you through the process.
 1. Create a new folder with a fitting name for the module in the project's [src/modules](../../src/modules) folder. For the example we call it "awesome"
 
