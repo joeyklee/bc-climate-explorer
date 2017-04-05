@@ -35,3 +35,30 @@ Say you want to create a new module called "**awesome**". To do so, just let the
     - `awesomeModel.js`
     
 ![roadmap_2_new_files.png](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/images/roadmap_2_new_files.png)
+
+3. The last step is to add the module in the [src/index.js](../../src/index.js) file. The content of the file looks a bit like the one below. Just add the new `awesomeController` and the execution for the `init()` function to it. (See code between the comments with "awesome example")
+
+``` javascript
+'use strict';
+
+var interactiveMapController = require('./modules/maps/interactiveMapController');
+var locationsController = require('./modules/panels/locations/locationsController');
+var scatterplotController = require('./modules/charts/scatterplot/scatterplotController');
+var timeseriesLeftController = require('./modules/charts/timeseries-left/timeseriesLeftController');
+var timeseriesRightController = require('./modules/charts/timeseries-right/timeseriesRightController');
+//------------awesome example start------------
+var awesomeController = require('./modules/awesome/awesomeController');
+//------------awesome example end------------
+
+window.$ = window.jQuery = require('jquery');
+var bootstrap = require('bootstrap');
+
+locationsController.init();
+interactiveMapController.init();
+scatterplotController.init();
+timeseriesLeftController.init();
+timeseriesRightController.init();
+//------------awesome example start------------
+awesomeController.init();
+//------------awesome example end------------
+```
