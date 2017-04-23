@@ -13,7 +13,7 @@ Here an example of how a module should look like with the created `awesomeContro
 
 ![example_folder_file_names](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/create-new-controller/images/example_folder_file_names.png)
 
-2. Now use the following skeleton for the your new controller. (Below it's suited for the `awesomeController.js`).
+2. Now use the following skeleton for your new controller. (Below it's suited for the `awesomeController.js`).
 
 ```javascript
 'use strict';
