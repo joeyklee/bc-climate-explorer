@@ -4,9 +4,9 @@ Welcome to the example-area of the bc-climate-explorer!
  In here we want to explain what patterns we used to develop the tool. Also we show you how a new module should look like or rather the conventions it should follow.
  
  Tutorials:
- - [create-new-module](./create-new-module) -> How to create a new module
- - [create-new-controller](./create-new-controller) -> How to create a new controller
- - [create-new-event](./create-new-event) -> How to create a new event for the PubSub usage
+ - [create-new-module](./create-new-module) -> How to create a new module for the bc-climate-explorer
+ - [create-new-controller](./create-new-controller) -> How to create a new controller for the bc-climate-explorer
+ - [create-new-event](./create-new-event) -> How to create a new event for the PubSub usage for the bc-climate-explorer
 
 Patterns that we used:
 - PubSub Pattern 

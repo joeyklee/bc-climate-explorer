@@ -45,7 +45,7 @@ Say you want to create a new module called "**awesome**". To do so, just let the
 
 3. The last step is to add the module in the [src/index.js](../../src/index.js) file. The content of the file looks a bit like the one below. Just add the new `awesomeController` and the execution for the `init()` function to it. (See code between the comments with "awesome example")
 
-``` javascript
+```javascript
 'use strict';
 
 var interactiveMapController = require('./modules/maps/interactiveMapController');
