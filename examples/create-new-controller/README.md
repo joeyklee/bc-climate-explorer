@@ -25,7 +25,7 @@ Here an example of how a module should look like with the created `awesomeContro
 3. var errorMessages = require('../../../errorMessages');
 4. var moduleBase = require('../../../moduleBase');
 5.
-6..module.exports = moduleBase.create({
+6.module.exports = moduleBase.create({
 7.  init: function() {
 8.    this.htmlIndexId = 'panel-awesome-index';
 9.    this.htmlModuleId = 'panel-awesome-module';
@@ -94,7 +94,7 @@ Let us go through the skeleton code step by step.
 var errorMessages = require('../../../errorMessages');
 ```
 
-This line includes all our defined errorMessages. It is not neccesarily needed just if you need to print out some error messages. When you do so please put your messages in this module. It is located in the [src/](../../src) folder and the content looks like the one below.
+This line includes all our defined errorMessages. It is not necessarily needed just if you need to print out some error messages. When you do so please put your messages in the `errorMessages` module. It is located in the [src/](../../src) folder in the `errorMessages.js` file and the content looks like the one below.
 
 ```javascript
 'use strict';
@@ -116,6 +116,7 @@ var fileNotFound = function(filePath) {
 module.exports.idNotFound = idNotFound;
 module.exports.fileNotFound = fileNotFound;
 ```
+Just add your desired function that should look like the already containing ones with your own error message.
 
 ### Module Base
 `Line 4` from the skeleton 
@@ -177,7 +178,7 @@ this.htmlModuleId = 'panel-awesome-module';
 this.htmlModulePath = './awesome.html';
 ```
 
-The index and module ids should look like this 
+The index and module id strings should look like this 
 ```
 panel-<module-name>-<index/module>
 ``` 
