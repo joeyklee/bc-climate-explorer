@@ -25,7 +25,7 @@ Here an example of how a module should look like with the created `awesomeContro
 3. var errorMessages = require('../../../errorMessages');
 4. var moduleBase = require('../../../moduleBase');
 5.
-6.module.exports = moduleBase.create({
+6. module.exports = moduleBase.create({
 7.  init: function() {
 8.    this.htmlIndexId = 'panel-awesome-index';
 9.    this.htmlModuleId = 'panel-awesome-module';
