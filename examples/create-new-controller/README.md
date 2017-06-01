@@ -5,15 +5,15 @@
         - [Error Messages](#error-messages)
         - [Module Base](#module-base)
         - [Initialization of the ids and the path](#initialization-of-the-ids-and-the-path)
-# What's a controller in bc-climate-explorer
+# What's a controller in the bc-climate-explorer
 The controller connects the model (data) with the view. In this project it practically means the data that the controller gets from the model will be loaded into the html file. [HandlebarsJS](http://handlebarsjs.com/) is the framework that we use for that purpose.
 
 # Roadmap to create a new controller (example)
 Say you want to create a new controller called "**awesomeController**". To do so, just let the steps below guide you through the process.
 
-1. Create a file called "`<name-of-module>Controller.js`" in the appropriate module folder. The name of the controller should always start with the name of the module. Lets say we want to create one in the `awesome` module, so the file name has to be `awesomeController.js`. To do that we assume you already have created a module in the [src/modules](../../src/modules) folder. If you want to know how to do that look at the [create-new-module](../create-new-module) example.
+1. Create a file called "`<name-of-module>Controller.js`" in the appropriate module folder. The name of the controller should always start with the name of the module. Lets say we want to create one in the `awesome` module, so the file name has to be `awesomeController.js`. To do that we assume you already have created a module in the [src/modules](../../src/modules) folder. If you want to know how you can accomplish this just look at the [create-new-module](../create-new-module) example.
 
-Here an example of how a module should look like with the created `awesomeController.js` mentioned above.
+Here is an example of how a module should look like with the created `awesomeController.js` mentioned above.
 
 ![example_folder_file_names](https://github.com/joeyklee/bc-climate-explorer/blob/master/examples/create-new-controller/images/example_folder_file_names.png)
 
@@ -29,22 +29,22 @@ Here an example of how a module should look like with the created `awesomeContro
 7.  init: function() {
 8.    this.htmlIndexId = 'panel-awesome-index';
 9.    this.htmlModuleId = 'panel-awesome-module';
-10.    this.htmlModulePath = './awesome.html';
+10.   this.htmlModulePath = './awesome.html';
 11.
-12.    var locationsController = this;
-13.    this.loadViews(this.htmlIndexId, this.htmlModuleId, this.htmlModulePath)
-14.      .then(function(success) {
-15.        locationsController.$indexInteractiveDiv = success;
-16.        locationsController.bindEvents();
-17.      })
-18.      .catch(function(errorMsg) {
-19.        console.error(errorMsg);
-20.      });
-21.  },
+12.   var awesomeController = this;
+13.   this.loadViews(this.htmlIndexId, this.htmlModuleId, this.htmlModulePath)
+14.     .then(function(success) {
+15.       awesomeController.$indexInteractiveDiv = success;
+16.       awesomeController.bindEvents();
+17.     })
+18.     .catch(function(errorMsg) {
+19.       console.error(errorMsg);
+20.     });
+21. },
 22.
-23.  bindEvents: function() {
+23. bindEvents: function() {
 24.    
-25.  }
+25. }
 26.});
 ```
 
@@ -52,50 +52,43 @@ Here the version without line numbers. That way the copying will be easier ;)
 ```javascript
 'use strict';
 
-var $ = require('jquery');
-var errorMsg = require('./errorMessages');
+var errorMessages = require('../../../errorMessages');
+var moduleBase = require('../../../moduleBase');
 
-module.exports = {
-  htmlIndexId: '',
-  htmlModuleId: '',
-  htmlModulePath: '',
+module.exports = moduleBase.create({
+  init: function() {
+    this.htmlIndexId = 'panel-awesome-index';
+    this.htmlModuleId = 'panel-awesome-module';
+    this.htmlModulePath = './awesome.html';
 
-  loadViews: function(htmlIndexId, htmlModuleId, htmlModulePath) {
-    return new Promise(function(resolve, reject) {
-      var $indexDiv = $('#' + htmlIndexId);
-      if($indexDiv.length === 0) {
-        reject(errorMsg.idNotFound('#' + htmlIndexId));
-      } else {
-        $indexDiv.load(htmlModulePath, function(response, status, jqxhr) {
-          if(status == 'error') {
-            reject(errorMsg.fileNotFound(htmlModulePath));
-          }
-          resolve($indexDiv);
-        });
-      }
-    });
+    var awesomeController = this;
+    this.loadViews(this.htmlIndexId, this.htmlModuleId, this.htmlModulePath)
+     .then(function(success) {
+        awesomeController.$indexInteractiveDiv = success;
+        awesomeController.bindEvents();
+     })
+     .catch(function(errorMsg) {
+       console.error(errorMsg);
+     });
   },
 
-  create: function(values) {
-    var instance = Object.create(this);
-    Object.keys(values).forEach(function(key) {
-      instance[key] = values[key];
-    });
-    return instance;
+  bindEvents: function() {
+    
   }
-};
+});
 ```
 
 Let us go through the skeleton code step by step.
 ## Step by Step explanation skeleton
 ### Error Messages
-`Line 1` from the skeleton
+`Line 3` from the skeleton
 ```javascript
 var errorMessages = require('../../../errorMessages');
 ```
 
 This line includes all our defined errorMessages. It is not necessarily needed just if you need to print out some error messages. When you do so please put your messages in the `errorMessages` module. It is located in the [src/](../../src) folder in the `errorMessages.js` file and the content looks like the one below.
 
+File: [src/errorMessages.js](../../src/errorMessages.js)
 ```javascript
 'use strict';
 
@@ -130,8 +123,9 @@ module.exports = moduleBase.create({
 }
 ```
 
-This base module will load the views that are necessary for the new module. Here is the code of the `moduleBase.js` to get a better understanding of how it works
+This base module will load the views (html files) that are necessary for the new module. Here is the code of the `moduleBase.js` to get a better understanding of how it works
 
+File: [src/moduleBase.js](../../src/moduleBase.js)
 ```javascript
 'use strict';
 
@@ -170,7 +164,7 @@ module.exports = {
 ```
 
 ### Initialization of the ids and the path
-The initialization for the ids and the HTML file path can be found in the `lines 8-10` in the skeleton
+`lines 8-10` of the skeleton will show the initialization for the ids and the HTML file path 
 
 ```javascript
 this.htmlIndexId = 'panel-awesome-index';
@@ -182,4 +176,9 @@ The index and module id strings should look like this
 ```
 panel-<module-name>-<index/module>
 ``` 
-for all new modules. TODO describe the promise from the loadViews function
+for all new modules.
+
+### Load the views
+The function `loadViews()` of the `moduleBase.js` will load the views (HTML files). It returns a Javascript [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). Just handle the Promise like in the skeleton code `line 13-20`.
+
+TODO explain what happens when the promise was successful 
