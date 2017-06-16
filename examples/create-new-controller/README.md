@@ -34,7 +34,7 @@ Here is an example of how a module should look like with the created `awesomeCon
 12.   var awesomeController = this;
 13.   this.loadViews(this.htmlIndexId, this.htmlModuleId, this.htmlModulePath)
 14.     .then(function(success) {
-15.       awesomeController.$indexInteractiveDiv = success;
+15.       // Bind the events
 16.       awesomeController.bindEvents();
 17.     })
 18.     .catch(function(errorMsg) {
@@ -179,6 +179,4 @@ panel-<module-name>-<index/module>
 for all new modules.
 
 ### Load the views
-The function `loadViews()` of the `moduleBase.js` will load the views (HTML files). It returns a Javascript [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). Just handle the Promise like in the skeleton code `line 13-20`.
-
-TODO explain what happens when the promise was successful 
+The function `loadViews()` of the [src/moduleBase.js](../../src/moduleBase.js) will load the views (HTML files). It returns a Javascript [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). Just handle the Promise like in the skeleton code `line 13-20`. If the promise was successful execute the `bindEvents()` function. The creation and handling of events will be explained in the [create-new-event](../create-new-event) tutorial.
