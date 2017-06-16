@@ -1,5 +1,5 @@
 ## Table of contents
-- [What's a controller in bc-climate-explorer](#whats-a-controller-in-bc-climate-explorer)
+- [What's a controller in the bc-climate-explorer](#whats-a-controller-in-the-bc-climate-explorer)
 - [Roadmap to create a new controller (example)](#roadmap-to-create-a-new-controller-example)
     - [Step by Step explanation skeleton](#step-by-step-explanation-skeleton)
         - [Error Messages](#error-messages)
@@ -179,4 +179,4 @@ panel-<module-name>-<index/module>
 for all new modules.
 
 ### Load the views
-The function `loadViews()` of the [src/moduleBase.js](../../src/moduleBase.js) will load the views (HTML files). It returns a Javascript [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). Just handle the Promise like in the skeleton code `line 13-20`. If the promise was successful execute the `bindEvents()` function. The creation and handling of events will be explained in the [create-new-event](../create-new-event) tutorial.
+The function `loadViews()` of the [src/moduleBase.js](../../src/moduleBase.js) will load the views (HTML files). It returns a Javascript [promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). Just handle the promise like in the skeleton code `line 13-20`. If it was successful, execute the `bindEvents()` function. The creation and handling of events will be explained in the [create-new-event](../create-new-event) tutorial.

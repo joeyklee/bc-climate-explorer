@@ -5,7 +5,7 @@
     - [Example](#example)
 - [Roadmap to create a new module (example)](#roadmap-to-create-a-new-module-example)
 
-# What's a module in bc-climate-explorer
+# What's a module in the bc-climate-explorer
 Every box in the picture below is a different module. Each of them is a separate folder (see second picture). All module folders are in the [src/modules](../../src/modules) folder of the project.
 
 ### All modules in the GUI
