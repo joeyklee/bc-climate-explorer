@@ -103,7 +103,7 @@ var mymap;
 
       Plotly.plot(gd, [trace1, trace2], layout, { displayModeBar: true });
 
-      d3.select(window).on('resize.about', function() {
+      d3.select(window).on('resize.timeseries1', function() {
         Plotly.Plots.resize(gd)
       });
     }
@@ -129,7 +129,7 @@ var mymap;
         paper_bgcolor: 'purple',
         margin: {
           l: 50,
-          r: 20,
+          r: 40,
           b: 40,
           t: 30,
           pad: 0
@@ -176,7 +176,7 @@ var mymap;
 
       Plotly.plot(gd, [trace1, trace2], layout, { displayModeBar: true });
 
-      d3.select(window).on('resize.about', function() {
+      d3.select(window).on('resize.timeseries2', function() {
         Plotly.Plots.resize(gd)
       });
     }
@@ -202,7 +202,7 @@ var mymap;
         paper_bgcolor: 'purple',
         margin: {
           l: 50,
-          r: 20,
+          r: 40,
           b: 60,
           t: 30,
           pad: 0
@@ -249,7 +249,7 @@ var mymap;
 
       Plotly.plot(gd, [trace1, trace2], layout, { displayModeBar: true });
 
-      d3.select(window).on('resize.about', function() {
+      d3.select(window).on('resize.scatterplot1', function() {
         Plotly.Plots.resize(gd)
       });
     }
