@@ -1,0 +1,47 @@
+.controller{
+	width:100%;
+	border:2px solid $border-color;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: baseline;
+	flex-wrap:wrap;
+	background-color: $color-header-bg;
+}
+
+.controller{
+	.compare-buttons{
+		margin-top: 10px;
+		display: flex;
+		flex-direction: row;
+		align-items: baseline;
+	}
+		.compare-text{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			text-align: center;
+			margin-left:10px;
+			margin-right:10px;
+			color:white;
+		}
+
+		.log-checkbox{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin-left:5px;
+			margin-right:5px;
+			color:white;
+		}
+
+		.btn-group{
+			z-index: 2000;
+		}
+
+
+		.chosen-select::placeholder{
+			color:black
+		}
+}

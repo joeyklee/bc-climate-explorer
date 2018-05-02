@@ -80,15 +80,6 @@ main{
 }
 
 
-.chart-controls{
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	top:0;
-	left:0;
-	z-index:1000;
-	width:100%;
-}
 .chart-title{
 	position: relative;
 	width:100%;
@@ -100,14 +91,6 @@ main{
 	color:white;
 }
 
-
-
-
-
-#scatterplot-controls{
-	position: absolute;
-	display: flex;
-}
 
 .no-gutters {
   margin-right: 0;

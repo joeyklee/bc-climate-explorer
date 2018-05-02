@@ -9,3 +9,5 @@ node_modules/
 
 private/*
 .DS_Store
+
+layout/.sass-cache/

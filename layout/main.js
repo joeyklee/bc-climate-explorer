@@ -52,8 +52,8 @@ var mymap;
       let gd = gd3.node();
 
       let layout = {
-        plot_bgcolor: 'white',
-        paper_bgcolor: 'purple',
+        plot_bgcolor: '#45475E',
+        paper_bgcolor: '#45475E',
         margin: {
           l: 50,
           r: 20,
@@ -125,8 +125,8 @@ var mymap;
       let gd = gd3.node();
 
       let layout = {
-        plot_bgcolor: 'white',
-        paper_bgcolor: 'purple',
+        plot_bgcolor: '#45475E',
+        paper_bgcolor: '#45475E',
         margin: {
           l: 50,
           r: 40,
@@ -198,8 +198,8 @@ var mymap;
       let gd = gd3.node();
 
       let layout = {
-        plot_bgcolor: 'white',
-        paper_bgcolor: 'purple',
+        plot_bgcolor: '#45475E',
+        paper_bgcolor: '#45475E',
         margin: {
           l: 50,
           r: 40,
@@ -257,6 +257,8 @@ var mymap;
       init: init
     }
   })();
+
+  $(".chosen-select").chosen()
 
   Timeseries1.init();
   Timeseries2.init();

@@ -1,0 +1,39 @@
+// header
+header{
+		align-items: center;
+		margin:0px 0px 2px 0px;
+		border: 2px solid $border-color;
+	}
+header{
+	.logo{
+		display: flex;
+		flex-direction: row;
+		color:white;
+		text-shadow:2px 2px $border-color;
+	}
+
+	.logo-placeholder{
+		width:30px;
+		height: 30px;
+		border-radius: 50%;
+		background-color: $color-variable1;
+		margin-right:10px;
+		box-shadow: 2px 2px $border-color;
+	}
+
+	ul{
+	 	margin:0;
+	 	list-style: none;
+	 	display: flex;
+	 	flex-direction:row;
+	}
+	li{
+		list-style: none;	
+		margin-right:40px;
+	}
+	ul li a{
+		text-decoration: none;
+		color:white;
+		text-shadow:1px 1px $border-color;
+	}
+}
