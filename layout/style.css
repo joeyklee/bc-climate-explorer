@@ -114,7 +114,7 @@ main{
   margin-left: 0;
 }
 .col-6 {
-    padding-right: 0;
+    padding-right: 2px;
     padding-left: 0;
 }
 
@@ -141,7 +141,7 @@ main{
 #map-container{
 	width:100%;
 	height:100%;
-	position: absolute;
+	/*position: absolute;*/
 	border:2px solid black;
 }
 
@@ -257,7 +257,9 @@ main{
 #scatterplot-container{
 	width:100%;
 	height:100%;
-	position: absolute;
+	/*position: absolute;*/
+	display: flex;
+	flex-direction: column;
 	border:2px solid black;
 }
 #scatterplot-1{
