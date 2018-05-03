@@ -2,7 +2,9 @@
 .timeseries-chart-container{
 	height:100%;
 	width:100%;
-	border: 2px solid $color-header-bg;
+	display: flex;
+	flex-direction: column;
+	border:2px solid $border-color;
 }
 
 /*timeseries*/
