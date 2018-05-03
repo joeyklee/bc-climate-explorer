@@ -134,15 +134,16 @@ main #row-secondary {
 #map-container .map-controls {
   position: absolute;
   width: 100%;
-  height: 10px;
+  height: 120px;
   bottom: 0;
   z-index: 1000;
   border: 1px solid #45475E;
   background-color: #363652;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  transform: translateY(110px); }
 #map-container .map-controls.active {
-  height: 120px; }
+  transform: translateY(0px); }
 #map-container .map-controls-switch {
   align-self: center;
   margin-top: -13px;
@@ -154,6 +155,7 @@ main #row-secondary {
   justify-content: center;
   align-items: center;
   width: 50px;
+  height: 20px;
   background-color: white;
   color: black; }
 #map-container .map-controls-main {
