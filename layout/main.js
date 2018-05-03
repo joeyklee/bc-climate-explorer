@@ -19,7 +19,7 @@ var mymap;
 
     // add the tiles to the map
     Stamen_Toner.addTo(mymap);
-    L.control.zoom({ position: "bottomright" })
+    // L.control.zoom({ position: "bottomright" })
 
     //disable scroll wheel zoom 
     // mymap.scrollWheelZoom.disable();

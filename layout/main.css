@@ -81,8 +81,6 @@ header ul li a {
   color: white; }
 .controller .btn-group {
   z-index: 2000; }
-.controller .chosen-select::placeholder {
-  color: black; }
 
 main {
   width: 100%;
