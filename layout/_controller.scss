@@ -3,7 +3,7 @@
 	border:2px solid $border-color;
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: baseline;
 	flex-wrap:wrap;
 	background-color: $color-header-bg;
@@ -38,6 +38,10 @@
 
 		.btn-group{
 			z-index: 2000;
+		}
+
+		.chosen-container{
+			max-width: 150px;
 		}
 
 }
