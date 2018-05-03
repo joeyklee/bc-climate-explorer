@@ -1,0 +1,138 @@
+[
+{
+  "annual": [
+  {
+    "variable": "MAT",
+    "description": "Mean annual temperature (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "MAP",
+    "description": "Annual precipitation (mm)",
+    "logTransform": true
+  },
+  {
+    "variable": "MSP",
+    "description": "Growing season (May to September) precipitation (mm)",
+    "logTransform": true
+  },
+  {
+    "variable": "MWMT",
+    "description": "Mean warmest month temperature (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "MCMT",
+    "description": "Mean coldest month temperature (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "TD",
+    "description": "Temperature difference between MWMT and MCMT, or continentality (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "AHM",
+    "description": "Annual heat:moisture index (MAT+10)/(MAP/1000))",
+    "logTransform": true
+  },
+  {
+    "variable": "SHM",
+    "description": "Summer heat:moisture index ((MWMT)/(MSP/1000))",
+    "logTransform": true
+  },
+  {
+    "variable": "EMT",
+    "description": "Extreme minimum temperature over 30 years",
+    "logTransform": false
+  },
+  {
+    "variable": "EXT",
+    "description": "Extreme maximum temperature over 30 years",
+    "logTransform": false
+  },
+  {
+    "variable": "FFP",
+    "description": "Frost-free period",
+    "logTransform": false
+  },
+  {
+    "variable": "bFFP",
+    "description": "The Julian date on which FFP begins",
+    "logTransform": false
+  },
+  {
+    "variable": "eFFP",
+    "description": "The Julian date on which FFP ends",
+    "logTransform": false
+  }]
+},
+{
+  "nonannual": [
+  {
+    "variable": "Tave",
+    "description": "Mean temperature (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "Tmax",
+    "description": "Mean daily maximum temperature (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "Tmin",
+    "description": "Mean daily minimum temperature (&deg;C)",
+    "logTransform": false
+  },
+  {
+    "variable": "PPT",
+    "description": "Precipitation (mm)",
+    "logTransform": true
+  },
+  {
+    "variable": "DD_0",
+    "description": "Degree-days below 0&deg;C (chilling degree-days)",
+    "logTransform": true
+  },
+  {
+    "variable": "DD5",
+    "description": "Degree-days above 5&deg;C, growing degree-days",
+    "logTransform": true
+  },
+  {
+    "variable": "DD_18",
+    "description": "Degree-days below 18&deg;C (heating degree-days)",
+    "logTransform": true
+  },
+  {
+    "variable": "DD18",
+    "description": "Degree-days above 18&deg;C (cooling degree-days)",
+    "logTransform": true
+  },
+  {
+    "variable": "NFFD",
+    "description": "Number of frost-free days",
+    "logTransform": false
+  },
+  {
+    "variable": "PAS",
+    "description": "Precipitation as snow (mm)",
+    "logTransform": true
+  },
+  {
+    "variable": "Eref",
+    "description": "Hargreaves reference evaporation",
+    "logTransform": true
+  },
+  {
+    "variable": "CMD",
+    "description": "Hargreaves climatic moisture deficit",
+    "logTransform": true
+  },
+  {
+    "variable": "RH",
+    "description": "Relative humidity",
+    "logTransform": false
+  }]
+}
+]

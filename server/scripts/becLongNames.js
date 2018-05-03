@@ -30,7 +30,6 @@ function createDropdown(filteredData){
 		      ${dropdownOptionsList.join("\n")}
 		    </select>
 		  </div>
-		</div>
 	`
 
 	return dropdown;

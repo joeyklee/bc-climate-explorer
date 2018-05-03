@@ -11,3 +11,5 @@ private/*
 .DS_Store
 
 layout/.sass-cache/
+
+data/archive/*
