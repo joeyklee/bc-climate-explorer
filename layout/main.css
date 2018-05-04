@@ -111,7 +111,7 @@ main #row-secondary {
 
 #map-container .map-variable-selectors {
   margin-top: 2px;
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: center;

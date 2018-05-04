@@ -2,27 +2,93 @@ $(document).ready( function(){
 var mymap;
 
   function initMap() {
-    // initialize map container
-    mymap = L.map('map-container', { zoomControl: false, attributionControl: false }).setView([37.799289, -122.266433], 13);
 
-    // get the stamen toner-lite tiles
-    var Stamen_Toner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> — Map data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      subdomains: 'abcd',
-      minZoom: 0,
-      maxZoom: 20,
-      ext: 'png'
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9leWtsZWUiLCJhIjoiY2pncmFuZGlkMDd2aDJ6cnQydHZ6ZXV4YSJ9.rgxCsa4n54D2nNH13dNs1A';
+    var mymap = new mapboxgl.Map({
+        center:[-123.1, 52.2],
+        zoom:3,
+        minZoom:3,
+        maxZoom:10,
+        container: 'map-container',
+        style: 'mapbox://styles/mapbox/satellite-streets-v10'
     });
 
-    // var info = L.control.attribution({position:'bottomleft', collapsed:true});
-    // info.addTo(mymap);
 
-    // add the tiles to the map
-    Stamen_Toner.addTo(mymap);
-    // L.control.zoom({ position: "bottomright" })
+    mymap.on('load', function(){
+      mymap.addSource('bec-layer', {
+          "type": "vector",
+          "tiles": [
+              "http://tiles.jk-lee.com/BGCv10beta_100m/{z}/{x}/{y}.pbf"
+          ]
+      });
 
-    //disable scroll wheel zoom 
-    // mymap.scrollWheelZoom.disable();
+      var becStyle = {
+        "id": "bec-layer",
+        "source": "bec-layer",
+        "source-layer": "BGCv10beta_100m",
+        "paint": {
+            "fill-color": [
+                'match',
+                ['get', 'ZONE'],
+                'CMA', '#136400',
+                'ESSF', '#229A00',
+                'BAFA', '#B81609',
+                'MH', '#D6301D',
+                'SBS', '#D6301D',
+                'CWH', '#F84F40',
+                'MS', '#41006D',
+                'IDF', '#7B00B4',
+                'IMA', '#A53ED5',
+                'ICH', '#2E5387',
+                'PP', '#3E7BB6',
+                'BG', '#FF6600',
+                'SBPS', '#FF9900',
+                'SWB', '#FFCC00',
+                'BWBS', '#FF5C00',
+                'CDF', '#FFA300',
+                /* other */ '#ccc'
+            ]
+            // "fill-outline-color":"#FFFFFF"
+            },
+        "type": "fill"
+      }
+      mymap.addLayer(becStyle);
+
+    })
+
+    var datafill = function(obj){
+
+      return (
+        `
+        <h3>${obj.features[0].properties.MAP_LABEL}</h3>
+        <small>set as</small>
+        <div>
+        <button class="btn btn-success">Var 1</button> <button class="btn btn-warning">Var 2</button>
+        </div>
+        `
+        )
+      
+    }
+
+    // highlight
+    // https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/
+    mymap.on('click', 'bec-layer', function (e) {
+        console.log(e.features[0].properties.MAP_LABEL)
+        // 
+        fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, dd5_09 FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy`))
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(myJson) {
+              console.log(myJson);
+            })
+
+                       new mapboxgl.Popup()
+                           .setLngLat(e.lngLat)
+                           .setHTML(datafill(e))
+                           .addTo(mymap);
+                   });
+
   }
   // call initMap()
   initMap();
