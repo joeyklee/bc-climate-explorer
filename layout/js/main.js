@@ -5,13 +5,15 @@ $(document).ready(function() {
     HEIGHT_IN_PERCENT_OF_PARENT = 100;
 
 
-  const appState = {
+  let appState = {
     zone1: 'SBSdw3',
-    zone2: 'null',
+    zone2: '',
     xTime: 'Annual',
     xVar: 'MAT',
+    xData: [],
     yTime: 'Annual',
-    yVar: 'MAP'
+    yVar: 'MAP',
+    yData: []
   }
 
 
@@ -22,10 +24,39 @@ $(document).ready(function() {
     }
 
     function loadListeners(){
-      getInputState();
+      // getInputState();
+      setInputState();
       filterDropdownTemporally();
       changeMapButtons();
       monitorControlBar();
+    }
+
+    function setInputState(){
+
+      // xVar
+      let $zone1,
+          $zone2,
+          $xVarSelect,
+          $xTimeSelect,
+          $yVarSelect,
+          $yTimeSelect;
+
+      $zone1Select = $("#zone1 select");
+      $zone2Select = $("#zone2 select");
+      $xVarSelect = $("#xVar select");
+      $yVarSelect = $("#yVar select");
+      $xTimeSelect = $("#xTime select");
+      $yTimeSelect = $("#yTime select");
+
+      $zone1Select.val(appState.zone1).trigger("chosen:updated"); 
+      $zone2Select.val(appState.zone2).trigger("chosen:updated");
+
+      $xVarSelect.val(appState.xVar).trigger("chosen:updated"); 
+      $xTimeSelect.val(appState.xTime).trigger("chosen:updated"); 
+
+      $yVarSelect.val(appState.yVar).trigger("chosen:updated"); 
+      $yTimeSelect.val(appState.yTime).trigger("chosen:updated"); 
+
     }
 
     function getInputState(){
@@ -48,6 +79,8 @@ $(document).ready(function() {
       $( "select" ).change(function () {
           // get input state
           getInputState();
+
+          // filter options based on time
           filterDropdownTemporally();
 
           // update map buttons:
@@ -110,7 +143,8 @@ $(document).ready(function() {
           }
         }
       }
-
+      // finally get the input state to make sure we're synced
+      getInputState();
     }
 
     function changeMapButtons(){
