@@ -7,7 +7,7 @@
   <!-- mapbox -->
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
   <!-- chosen -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/chosen_v1.8.5/chosen.min.css">
+  <link rel="stylesheet" type="text/css" href="js/chosen_v1.8.5/chosen.min.css">
   <!-- plotly -->
   <script type="text/javascript" src="js/plotly-latest.min.js"></script>
   <!-- main styles -->
@@ -36,7 +36,7 @@
         <div class="compare-buttons">
           <div class="compare-text">Explore</div>
           <!-- Example single danger button -->
-          <div class="bec-selector-dropdown">
+          <div class="bec-selector-dropdown" id="zone1">
             <select data-placeholder="BEC Zone" class="chosen-select dropdown" tabindex="2">
               <option value=""></option>
               <option value="BAFAun">BAFAun - Undifferentiated</option>
@@ -244,7 +244,7 @@
             </select>
           </div>
           <div class="compare-text">and/or</div>
-          <div class="bec-selector-dropdown">
+          <div class="bec-selector-dropdown" id="zone2">
             <select data-placeholder="BEC Zone" class="chosen-select dropdown" tabindex="2">
               <option value=""></option>
               <option value="BAFAun">BAFAun - Undifferentiated</option>
@@ -452,10 +452,10 @@
             </select>
           </div>
         </div>
-        <div class="compare-text">for</div>
+        <div class="compare-text">for X:</div>
         <!-- variable 1 -->
         <div class="compare-buttons">
-          <div class="bec-selector-dropdown">
+          <div class="bec-selector-dropdown" id="xTime">
             <select data-placeholder="Time" class="chosen-select dropdown" tabindex="2">
               <option value=""></option>
               <option value="Annual">Annual</option>
@@ -477,7 +477,7 @@
               <option value="December">December</option>
             </select>
           </div>
-          <div class="bec-selector-dropdown">
+          <div class="bec-selector-dropdown" id="xVar">
             <select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
               <option value=""></option>
               <option label="annual" value="MAT">MAT - Mean annual temperature (&deg;C)</option>
@@ -513,10 +513,10 @@
             <small>log</small>
           </div>
         </div>
-        <div class="compare-text">and</div>
+        <div class="compare-text">and Y:</div>
         <!-- variable 2 -->
         <div class="compare-buttons">
-          <div class="bec-selector-dropdown">
+          <div class="bec-selector-dropdown" id="yTime">
             <select data-placeholder="Time" class="chosen-select dropdown" tabindex="2">
               <option value=""></option>
               <option value="Annual">Annual</option>
@@ -538,7 +538,7 @@
               <option value="December">December</option>
             </select>
           </div>
-          <div class="bec-selector-dropdown">
+          <div class="bec-selector-dropdown" id="yVar">
             <select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
               <option value=""></option>
               <option label="annual" value="MAT">MAT - Mean annual temperature (&deg;C)</option>
@@ -590,10 +590,10 @@
                 <br>ZONE</div>
               <div class="map-control-button">BEC
                 <br>UNIT</div>
-              <div class="map-control-button variable1">ANNUAL
-                <br>PRECIPITATION</div>
-              <div class="map-control-button variable2">WINTER
-                <br>MEAN TEMPERATURE</div>
+              <div class="map-control-button" id="map-xVar-button"><span id="map-xTime"></span>
+                <br><span id="map-xVar"></span></div>
+              <div class="map-control-button" id="map-xVar-button"><span id="map-yTime"></span>
+                <br><span id="map-yVar"></span></div>
             </div>
             <div class="map-controls active">
               <!-- zoomers -->
