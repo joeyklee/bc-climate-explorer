@@ -15,6 +15,7 @@ var mymap;
 
 
     mymap.on('load', function(){
+
       mymap.addSource('bec-layer', {
           "type": "vector",
           "tiles": [
@@ -54,44 +55,53 @@ var mymap;
       }
       mymap.addLayer(becStyle);
 
+
+      var datafill = function(obj){
+
+        return (
+          `
+          <h3>${obj.features[0].properties.MAP_LABEL}</h3>
+          <small>set as</small>
+          <div>
+          <button class="btn btn-success">Zone A</button> <button class="btn btn-warning">Zone B</button>
+          </div>
+          `
+          )
+        
+      }
+
+      // highlight
+      // https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/
+      mymap.on('click', 'bec-layer', function (e) {
+          console.log(e.features[0].properties)
+          // 
+          // fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, dd5_09 FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy`))
+          //     .then(function(response) {
+          //       return response.json();
+          //     })
+          //     .then(function(myJson) {
+          //       console.log(myJson);
+          //     })
+
+          // get features
+            // var features = mymap.querySourceFeatures('bec-layer');
+            var features = mymap.queryRenderedFeatures({layers:['bec-layer'], filter:["==", "MAP_LABEL", "SBSdw3"]});
+            console.log("the features", features)
+
+
+                         new mapboxgl.Popup()
+                             .setLngLat(e.lngLat)
+                             .setHTML(datafill(e))
+                             .addTo(mymap);
+           });
     })
 
-    var datafill = function(obj){
 
-      return (
-        `
-        <h3>${obj.features[0].properties.MAP_LABEL}</h3>
-        <small>set as</small>
-        <div>
-        <button class="btn btn-success">Var 1</button> <button class="btn btn-warning">Var 2</button>
-        </div>
-        `
-        )
-      
-    }
-
-    // highlight
-    // https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/
-    mymap.on('click', 'bec-layer', function (e) {
-        console.log(e.features[0].properties.MAP_LABEL)
-        // 
-        fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, dd5_09 FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy`))
-            .then(function(response) {
-              return response.json();
-            })
-            .then(function(myJson) {
-              console.log(myJson);
-            })
-
-                       new mapboxgl.Popup()
-                           .setLngLat(e.lngLat)
-                           .setHTML(datafill(e))
-                           .addTo(mymap);
-                   });
 
   }
   // call initMap()
   initMap();
+
 
 
 
@@ -324,6 +334,10 @@ var mymap;
     }
   })();
 
+
+
+
+  // dropdown menus
   $(".chosen-select").chosen()
 
   Timeseries1.init();
