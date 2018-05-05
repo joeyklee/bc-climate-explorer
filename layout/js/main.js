@@ -7,13 +7,15 @@ $(document).ready(function() {
 
   let appState = {
     zone1: 'SBSdw3',
-    zone2: '',
+    zone2: 'BGxh2',
     xTime: 'Annual',
     xVar: 'MAT',
-    xData: [],
+    xDataScatterPlot: [],
+    xDataTimeseries: [],
     yTime: 'Annual',
     yVar: 'MAP',
-    yData: []
+    yDataScatterPlot: [],
+    yDataTimeseries: []
   }
 
 
@@ -71,7 +73,7 @@ $(document).ready(function() {
       appState.xVar = changed[3]
       appState.yTime = changed[4]
       appState.yVar = changed[5]
-      console.log(appState)
+      // console.log(appState)
     }
 
     function monitorControlBar(){
@@ -85,7 +87,20 @@ $(document).ready(function() {
 
           // update map buttons:
           changeMapButtons();
+
+          // update charts
+          updateCharts()
+
         })
+    }
+
+    function updateCharts(){
+      // update all the charts:
+      // getInputState();
+      console.log(appState)
+      Timeseries1.init();
+      Timeseries2.init();
+      Scatterplot1.init();
     }
 
     // filter options of variables based on selected time
@@ -256,7 +271,7 @@ $(document).ready(function() {
       mymap.on('click', 'bec-layer', function(e) {
         console.log(e.features[0].properties)
         // 
-        fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, dd5_09 FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label='${e.features[0].properties.MAP_LABEL}'`))
+        fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT * FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label='${e.features[0].properties.MAP_LABEL}'`))
             .then(function(response) {
               return response.json();
             })
@@ -292,21 +307,55 @@ $(document).ready(function() {
 
   })()
 
+  var months = [
+    {"month":"January", "number":"01"},
+    {"month":"February", "number":"02"},
+    {"month":"March", "number":"03"},
+    {"month":"April", "number":"04"},
+    {"month":"May", "number":"05"},
+    {"month":"June", "number":"06"},
+    {"month":"July", "number":"07"},
+    {"month":"August", "number":"08"},
+    {"month":"September", "number":"09"},
+    {"month":"October", "number":"10"},
+    {"month":"November", "number":"11"},
+    {"month":"December", "number":"12"}
+  ]
+
+  var seasons = [
+    {"season":"Winter", "abbv":"wt"},
+    {"season":"Fall", "abbv":"at"},
+    {"season":"Spring", "abbv":"sp"},
+    {"season":"Summer", "abbv":"sm"}
+  ]
+
+  function formatReqVariable(climateVar,stateTime){
+    var climate_selected = null;
+    let timevar;
+
+    if (stateTime.toLowerCase() == 'annual'){
+         climate_selected = climateVar;
+    } else if ( seasons.filter( i => ( i.season === stateTime)).length > 0 ) {
+        timevar = seasons.filter( i => ( i.season === stateTime))[0].abbv
+        console.log(timevar)
+        climate_selected = climateVar + '_' + timevar; // for seasonal variables
+    } else{
+        timevar = months.filter( i => ( i.month === stateTime))[0].number
+        console.log(timevar)
+        
+        if(climateVar.startsWith("dd_0")){
+          climate_selected = climateVar + "_" + timevar; // for jan - dec  
+        } else{
+          climate_selected = climateVar + timevar; // for jan - dec  
+        }
+        
+    }
+    return climate_selected.toLowerCase()
+    
+  }
 
 
-  // timeseries charts
-  const Timeseries1 = (function() {
-
-    const init = function() {
-      buildChart();
-    };
-
-    var buildChart = function() {
-
-      let gd3 = d3.select('#timeseries-1')
-      let gd = gd3.node();
-
-      let layout = {
+  let chartLayout = {
         plot_bgcolor: '#45475E',
         paper_bgcolor: '#45475E',
         margin: {
@@ -319,126 +368,127 @@ $(document).ready(function() {
         xaxis: {
           autotick: true,
           showgrid: false,
-          // range: [1, 12],
           ticks: "inside",
-          rangemode: 'tozero',
           color: "#ffffff",
-          zeroline: true,
-          zerolinecolor: '#FFFFFF',
-          zerolinewidth: 1,
-          showline: true,
-          autotick: false,
+          // zerolinewidth: 1,
+          // showline: true,
+          autotick: true,
         },
         yaxis: {
           showticklabels: true,
           autotick: true,
           showgrid: false,
           ticks: "inside",
-          rangemode: 'tozero',
           color: "#ffffff",
-          zeroline: false,
-          zerolinecolor: '#FFFFFF',
           zerolinewidth: 1,
-          showline: true
+          zeroline: true
+          // showline: true
         }
       };
 
 
-      var trace1 = {
-        x: [1, 2, 3, 4],
-        y: [10, 15, 13, 17],
-        type: 'scatter'
-      };
+  // var trace1 = {
+  //   x: [1, 2, 3, 4],
+  //   y: [10, 15, 13, 17],
+  //   type: 'scatter'
+  // };
 
-      var trace2 = {
-        x: [1, 2, 3, 4],
-        y: [16, 5, 11, 9],
-        type: 'scatter'
-      };
+  // var trace2 = {
+  //   x: [1, 2, 3, 4],
+  //   y: [16, 5, 11, 9],
+  //   type: 'scatter'
+  // };
 
-      Plotly.plot(gd, [trace1, trace2], layout, { displayModeBar: true });
+  function buildTimeSeries(containerId, resizeId, trace1, trace2, childId){
+    d3.select(`#${childId}`).remove();
+    let gd3 = d3.select(containerId).append('div')
+                .attr('id', childId)
+                .style("width", "100%")
+                .style("height", "100%")
+    let gd = gd3.node();   
 
-      d3.select(window).on('resize.timeseries1', function() {
-        Plotly.Plots.resize(gd)
-      });
-    }
-    return {
-      init: init
-    }
-  })();
+    Plotly.plot(gd, [trace1, trace2], chartLayout, { displayModeBar: true });
+
+    d3.select(window).on(resizeId, function() {
+      Plotly.Plots.resize(gd)
+    });
+  }
 
 
-  const Timeseries2 = (function() {
+  // timeseries charts
+  const Timeseries1 = (function(containerId, resizeId) {
 
     const init = function() {
       buildChart();
     };
 
+    
+    // encodeURI(`SELECT DISTINCT id2, year, mat FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = SBSdw3 OR id2 = SBSdw3) AND year >= 1901 AND year <=2014`)
+    // `https://becexplorer.cartodb.com/api/v2/sql?q=${encodeURI(`SELECT DISTINCT id2, year, mat FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = 'SBSdw3' OR id2 = 'SBSdw3') AND year >= 1901 AND year <=2014`)}`
     var buildChart = function() {
+      let xSelection = formatReqVariable(appState.xVar, appState.xTime)
+      var query = encodeURI(`SELECT DISTINCT id2, year, ${xSelection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${appState.zone1}' OR id2 = '${appState.zone2}') AND year >= 1901 AND year <=2014`)
+      $.getJSON(`https://becexplorer.cartodb.com/api/v2/sql?q=${query}`)
+        .done(data => {
+          console.log("Timeseries1", xSelection)
+          console.log("Timeseries1", data);
+          let series1 = {
+            x: data.rows.map(obj => (obj.year)),
+            y:data.rows.map(obj => { if(obj.id2 == appState.zone1) return obj[xSelection] }),
+            type: 'scatter'
+          }
+          let series2 = {
+            x:data.rows.map(obj => (obj.year)),
+            y:data.rows.map(obj => { if(obj.id2 == appState.zone2) return obj[xSelection] }),
+            type: 'scatter'
+          }
 
-      let gd3 = d3.select('#timeseries-2')
-      let gd = gd3.node();
+          buildTimeSeries(containerId, resizeId, series1, series2, "ts1-child")  
+        })
+      
+    }
 
-      let layout = {
-        plot_bgcolor: '#45475E',
-        paper_bgcolor: '#45475E',
-        margin: {
-          l: 50,
-          r: 40,
-          b: 40,
-          t: 30,
-          pad: 0
-        },
-        xaxis: {
-          autotick: true,
-          showgrid: false,
-          // range: [1, 12],
-          ticks: "inside",
-          rangemode: 'tozero',
-          color: "#ffffff",
-          zeroline: true,
-          zerolinecolor: '#FFFFFF',
-          zerolinewidth: 1,
-          showline: true,
-          autotick: false,
-        },
-        yaxis: {
-          showticklabels: true,
-          autotick: true,
-          showgrid: false,
-          ticks: "inside",
-          rangemode: 'tozero',
-          color: "#ffffff",
-          zeroline: false,
-          zerolinecolor: '#FFFFFF',
-          zerolinewidth: 1,
-          showline: true
-        }
-      };
+    return {
+      init: init
+    }
+  })("#timeseries-1", "resize.timeseries1");
+
+  // timeseries charts
+  const Timeseries2 = (function(containerId, resizeId) {
+
+    const init = function() {
+      buildChart();
+    };
 
 
-      var trace1 = {
-        x: [1, 2, 3, 4],
-        y: [10, 15, 13, 17],
-        type: 'scatter'
-      };
+    
 
-      var trace2 = {
-        x: [1, 2, 3, 4],
-        y: [16, 5, 11, 9],
-        type: 'scatter'
-      };
+    var buildChart = function() {
+      let ySelection = formatReqVariable(appState.yVar, appState.yTime)
+      var query = encodeURI(`SELECT DISTINCT id2, year, ${ySelection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${appState.zone1}' OR id2 = '${appState.zone2}') AND year >= 1901 AND year <=2014`)
+      $.getJSON(`https://becexplorer.cartodb.com/api/v2/sql?q=${query}`)
+        .done(data => {
+          console.log("Timeseries2", ySelection)
+          console.log("Timeseries2", data);
+          let series1 = {
+            x: data.rows.map(obj => (obj.year)),
+            y:data.rows.map(obj => { if(obj.id2 == appState.zone1) return obj[ySelection] }),
+            type: 'scatter'
+          }
+          let series2 = {
+            x:data.rows.map(obj => (obj.year)),
+            y:data.rows.map(obj => { if(obj.id2 == appState.zone2) return obj[ySelection] }),
+            type: 'scatter'
+          }
 
-      Plotly.plot(gd, [trace1, trace2], layout, { displayModeBar: true });
-
-      d3.select(window).on('resize.timeseries2', function() {
-        Plotly.Plots.resize(gd)
-      });
+          buildTimeSeries(containerId, resizeId, series1, series2, "ts2-child")  
+        })
+      
     }
     return {
       init: init
     }
-  })();
+  })("#timeseries-2", "resize.timeseries2");
 
 
   const Scatterplot1 = (function() {
@@ -447,66 +497,48 @@ $(document).ready(function() {
       buildChart();
     };
 
-    var buildChart = function() {
+    
 
-      let gd3 = d3.select('#scatterplot-1')
+    var buildChart = function() {
+      d3.select("#scatter-child").remove();
+      let gd3 = d3.select('#scatterplot-1').append('div')
+                .attr('id', 'scatter-child')
+                .style("width", "100%")
+                .style("height", "100%")
+
       let gd = gd3.node();
 
-      let layout = {
-        plot_bgcolor: '#45475E',
-        paper_bgcolor: '#45475E',
-        margin: {
-          l: 50,
-          r: 40,
-          b: 60,
-          t: 30,
-          pad: 0
-        },
-        xaxis: {
-          autotick: true,
-          showgrid: false,
-          // range: [1, 12],
-          ticks: "inside",
-          rangemode: 'tozero',
-          color: "#ffffff",
-          zeroline: true,
-          zerolinecolor: '#FFFFFF',
-          zerolinewidth: 1,
-          showline: true,
-          autotick: false,
-        },
-        yaxis: {
-          showticklabels: true,
-          autotick: true,
-          showgrid: false,
-          ticks: "inside",
-          rangemode: 'tozero',
-          color: "#ffffff",
-          zeroline: false,
-          zerolinecolor: '#FFFFFF',
-          zerolinewidth: 1,
-          showline: true
-        }
-      };
+      // "SELECT DISTINCT map_label, " + el.xSelector + ", + " + el.ySelector + " FROM  " + el.dataset_selected + " WHERE map_label IS NOT NULL AND " + el.xSelector + " IS NOT NULL AND " + el.ySelector + " IS NOT NULL";
+      // "SELECT DISTINCT map_label, " + el.xSelector + ", + " + el.ySelector + " FROM  " + el.dataset_selected + " WHERE map_label IS NOT NULL AND " + el.xSelector + " IS NOT NULL AND " + el.ySelector + " IS NOT NULL";
+      let xSelection = formatReqVariable(appState.xVar, appState.xTime)
+      let ySelection = formatReqVariable(appState.yVar, appState.yTime)
+      var query = `https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, ${xSelection}, ${ySelection} FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label IS NOT NULL AND '${xSelection}' IS NOT NULL AND '${ySelection}' IS NOT NULL`
+      $.getJSON(encodeURI(query))
+        .done(data => {
+
+          let series1 = {
+            x: data.rows.map(obj => {  return obj[xSelection] }),
+            y: data.rows.map(obj => {  return obj[ySelection] }),
+            type: 'scatter',
+            mode: 'markers'
+          }
+          // let series2 = {
+          //   x:data.rows.map(obj => (obj.year)),
+          //   y:data.rows.map(obj => { if(obj.map_label == appState.zone2) return obj[appState.yVar.toLowerCase()] }),
+          //   type: 'scatter',
+          //   mode: 'markers'
+          // }
+
+          Plotly.plot(gd, [series1], chartLayout, { displayModeBar: true });
+
+          d3.select(window).on('resize.scatterplot1', function() {
+            Plotly.Plots.resize(gd)
+          });
+
+        })
 
 
-      var trace1 = {
-        x: [1, 2, 3, 4],
-        y: [10, 15, 13, 17],
-        type: 'scatter'
-      };
-
-      var trace2 = {
-        x: [1, 2, 3, 4],
-        y: [16, 5, 11, 9],
-        type: 'scatter'
-      };
-
-      Plotly.plot(gd, [trace1, trace2], layout, { displayModeBar: true });
-
-      d3.select(window).on('resize.scatterplot1', function() {
-        Plotly.Plots.resize(gd)
-      });
+      
     }
     return {
       init: init
