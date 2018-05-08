@@ -1,6 +1,7 @@
 $(document).ready(function() {
   let mymap;
-  const d3 = Plotly.d3;
+  // no longer needed since we load d3 anyways
+  // const d3 = Plotly.d3;  
   const WIDTH_IN_PERCENT_OF_PARENT = 100,
     HEIGHT_IN_PERCENT_OF_PARENT = 100;
 
@@ -576,17 +577,61 @@ $(document).ready(function() {
         '#ccc'])
       })
     }
+
+    let colorPalettes = {
+      precip: ['white', 'steelblue'],
+      temp: [ 'steelblue', 'brown']
+    }
+
+    function selectPalette(climateVariable,colorPalettes){
+      let precipVariables = ["MAP","MSP","AHM","SHM","FFP","PPT","NFFD","PAS","Eref","CMD","RH"];
+
+      if(precipVariables.includes(climateVariable)){
+        return colorPalettes.precip;
+      } else{
+        return colorPalettes.temp;
+      }
+    }
+
     function changeMapX(){
       $('#map-xVar-button').click(function(){
-        console.log("Map X Variable", {data: appState.xDataScatterPlot, zone: appState.xDataScatterPlotZones})
-        mymap.setPaintProperty('bec-layer', 'fill-color', "#AHHHHH")
+        let selected = Object.assign({colorsObject:['match', ['get', 'MAP_LABEL']]}, {data: appState.xDataScatterPlot, zone: appState.xDataScatterPlotZones, sel: appState.xVar} )
+        console.log("Map X Variable", selected)
+
+        let extent = d3.extent(selected.data)
+
+        // TODO need to 
+        let color = d3.scaleLinear()
+            .domain(extent)
+            .range( selectPalette(selected.sel, colorPalettes) );
+
+        selected.data.forEach((item, i, arr) => {
+            selected.colorsObject.push(selected.zone[i] , color(item) )
+          })
+        selected.colorsObject.push("#ccc")
+
+        mymap.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
       })
     }
 
     function changeMapY(){
       $('#map-yVar-button').click(function(){
-        console.log("Map y Variable", {data: appState.yDataScatterPlot, zone: appState.yDataScatterPlotZones})
-        mymap.setPaintProperty('bec-layer', 'fill-color', "#FFF222")
+        let selected = Object.assign({colorsObject:['match', ['get', 'MAP_LABEL']]}, {data: appState.yDataScatterPlot, zone: appState.yDataScatterPlotZones, sel: appState.yVar} )
+        console.log("Map y Variable", selected)
+
+        let extent = d3.extent(selected.data)
+
+        // TODO need to 
+        let color = d3.scaleLinear()
+            .domain(extent)
+            .range( selectPalette(selected.sel, colorPalettes) );
+
+        selected.data.forEach((item, i, arr) => {
+            selected.colorsObject.push(selected.zone[i] , color(item) )
+          })
+        selected.colorsObject.push("#ccc")
+
+        mymap.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
       })
     }
 
