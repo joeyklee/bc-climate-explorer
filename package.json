@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "generateBecLongNames": "node generateBecLongNames.js",
-    "generateClimateVariableNames": "node generateClimateVariableNames.js"
+    "generateClimateVariableNames": "node generateClimateVariableNames.js",
+    "generateBecUnitColors": "nodemon generateBecUnitColors.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
   "dependencies": {
-    "csv2json": "^1.4.2"
+    "csv2json": "^1.4.2",
+    "hex-to-hsl": "^1.0.2",
+    "hsl-to-hex": "^1.0.0"
   }
 }
