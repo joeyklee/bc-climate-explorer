@@ -183,6 +183,14 @@ main #row-secondary {
   align-items: center;
   background-color: white; }
 
+/* set focal and comparison */
+#map-focal-button {
+  background-color: #F85416; }
+
+#map-comparison-button {
+  background-color: #007BFF;
+  color: white; }
+
 /*scatterplot*/
 #scatterplot-container {
   width: 100%;

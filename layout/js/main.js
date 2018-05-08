@@ -185,9 +185,12 @@ $(document).ready(function() {
         if ( sel === "yVar"){
           console.log("yVar changed")
           $("#map-yVar-button").click()
-        } else {
+        } else if (sel == "xVar") {
           console.log("xVar changed")
           $("#map-xVar-button").click()
+        } else {
+          // don't change the map when you change focal/comparison unit
+          // $("#map-bec-zone").click()
         }
       })
     }
@@ -268,13 +271,25 @@ $(document).ready(function() {
               'CDF', '#397262',
               /* other */
               '#ccc'
-            ]
-            // "fill-outline-color":"#FFFFFF"
+            ],
+            "fill-opacity": 1,
           },
           "type": "fill"
         }
         mymap.addLayer(becStyle);
 
+
+        /*add highlight layer */
+        // mymap.addLayer({
+        //         "id": "bec-layer-clicked",
+        //         "type": "fill",
+        //         "source": "bec-layer",
+        //         "source-layer": "BGCv10beta_100m",
+        //         "paint": {
+        //             "fill-outline-color":"#FFFFFF"
+        //         },
+        //         "filter": ["in", "MAP_LABEL", ""]
+        //   });
       })
     }
 
@@ -285,7 +300,7 @@ $(document).ready(function() {
         <h3>${obj.features[0].properties.MAP_LABEL}</h3>
         <small>set as</small>
         <div>
-        <button class="btn btn-success">Zone A</button> <button class="btn btn-warning">Zone B</button>
+        <button class="btn" id="map-focal-button">Focal Unit</button> <button class="btn" id="map-comparison-button">Comparison Unit</button>
         </div>
         `
       )
@@ -298,13 +313,13 @@ $(document).ready(function() {
       mymap.on('click', 'bec-layer', function(e) {
         console.log(e.features[0].properties)
         // 
-        fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT * FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label='${e.features[0].properties.MAP_LABEL}'`))
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(myJson) {
-            console.log(myJson);
-          })
+        // fetch(encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT * FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label='${e.features[0].properties.MAP_LABEL}'`))
+        //   .then(function(response) {
+        //     return response.json();
+        //   })
+        //   .then(function(myJson) {
+        //     console.log(myJson);
+        //   })
 
         // get features
         // var features = mymap.querySourceFeatures('bec-layer');
@@ -690,11 +705,9 @@ $(document).ready(function() {
       climate_selected = climateVar;
     } else if (seasons.filter(i => (i.season === stateTime)).length > 0) {
       timevar = seasons.filter(i => (i.season === stateTime))[0].abbv
-      console.log(timevar)
       climate_selected = climateVar + '_' + timevar; // for seasonal variables
     } else {
       timevar = months.filter(i => (i.month === stateTime))[0].number
-      console.log(timevar)
 
       if (climateVar.startsWith("dd_0")) {
         climate_selected = climateVar + "_" + timevar; // for jan - dec  
@@ -848,13 +861,12 @@ $(document).ready(function() {
   })("#timeseries-2", "resize.timeseries2");
 
 
+  // TODO: Add map highlight on hover
   const Scatterplot1 = (function() {
 
     const init = function() {
       buildChart();
     };
-
-
 
     var buildChart = function() {
       d3.select("#scatter-child").remove();
@@ -873,6 +885,8 @@ $(document).ready(function() {
       $.getJSON(encodeURI(query))
         .done(data => {
 
+          let maplabel = data.rows.map(obj => { return obj.map_label})
+          console.log(maplabel)
           appState.xDataScatterPlot = data.rows.map(obj => { return obj[xSelection] })
           appState.xDataScatterPlotZones = data.rows.map(obj => { return obj.map_label })
           
@@ -882,6 +896,7 @@ $(document).ready(function() {
           let series1 = {
             x: appState.xDataScatterPlot,
             y: appState.yDataScatterPlot,
+            label: maplabel,
             type: 'scatter',
             mode: 'markers'
           }
@@ -892,8 +907,60 @@ $(document).ready(function() {
             Plotly.Plots.resize(gd)
           });
 
+          gd.on('plotly_click', function(selectedPoint){
+              // alert('You clicked this Plotly chart!');
+              
+              let idx = selectedPoint.points[0].pointIndex
+              let selectedLabel = selectedPoint.points[0].data.label[idx]
+              let features = mymap.querySourceFeatures('bec-layer', { 
+                sourceLayer: 'BGCv10beta_100m', 
+                filter: ["in", "MAP_LABEL", selectedLabel] });
 
-        })
+              let centroid = getCentroid(features).geometry.coordinates
+
+                mymap.flyTo({
+                       center: centroid,
+                       zoom: 6
+                   });
+
+                // TODO: persist filtering on click
+                // create array of last 2 clicked items
+                // for now, just open popup
+                // mymap.setFilter('bec-layer-clicked', ['in', 'MAP_LABEL', selectedLabel]);
+                console.log(centroid)
+                 mymap.fire('click', {lngLat: [centroid[0], centroid[1] - 0.3] } );
+          });
+
+
+          function getCentroid(featureArray){
+            let jsons = [];
+            featureArray.forEach(feat => {
+              jsons.push(feat.toJSON())
+            })
+
+            let collection = turf.featureCollection(jsons);
+            return turf.centerOfMass(collection)
+
+          }
+
+
+          /*hover items*/
+          gd.on('plotly_hover', function(selectedPoint){
+              // alert('You clicked this Plotly chart!');
+              
+              let idx = selectedPoint.points[0].pointIndex
+              let selectedLabel = selectedPoint.points[0].data.label[idx]
+
+              console.log(selectedLabel)
+              mymap.setFilter('bec-layer', ['in', 'MAP_LABEL', selectedLabel]);
+              
+          });
+
+          gd.on('plotly_unhover', function(){
+            mymap.setFilter('bec-layer', ['!in', 'MAP_LABEL', '']);
+          })
+
+        }) // end get request
 
 
     }
