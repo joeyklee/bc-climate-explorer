@@ -36,6 +36,7 @@ $(document).ready(function() {
       filterDropdownTemporally();
       changeMapButtons();
       monitorControlBar();
+      clickMapButtonOfChanged()
     }
 
     function setInputState() {
@@ -67,6 +68,7 @@ $(document).ready(function() {
     }
 
     function getInputState() {
+      // TODO: be more specific here since using array index can change
       let changed = [];
       $("select option:selected").each(function() {
         changed.push($(this).val())
@@ -78,7 +80,6 @@ $(document).ready(function() {
       appState.xVar = changed[3]
       appState.yTime = changed[4]
       appState.yVar = changed[5]
-      // console.log(appState)
     }
 
     function monitorControlBar() {
@@ -172,6 +173,23 @@ $(document).ready(function() {
       $("#map-xVar").text(appState.xVar)
       $("#map-yTime").text(appState.yTime)
       $("#map-yVar").text(appState.yVar)
+    }
+
+    function clickMapButtonOfChanged(){
+      // when a controller button is changed, 
+      // update the map according to what was changed
+      // TODO: update button clicked
+      $(".bec-selector-dropdown").change(function() {
+        // console.log(this);
+        let sel = $(this).attr("id")
+        if ( sel === "yVar"){
+          console.log("yVar changed")
+          $("#map-yVar-button").click()
+        } else {
+          console.log("xVar changed")
+          $("#map-xVar-button").click()
+        }
+      })
     }
 
 
@@ -600,7 +618,7 @@ $(document).ready(function() {
 
         let extent = d3.extent(selected.data)
 
-        // TODO need to 
+        // TODO: on variable change, call change map x or y
         let color = d3.scaleLinear()
             .domain(extent)
             .range( selectPalette(selected.sel, colorPalettes) );
@@ -621,7 +639,7 @@ $(document).ready(function() {
 
         let extent = d3.extent(selected.data)
 
-        // TODO need to 
+        // TODO: on variable change, call change map x or y
         let color = d3.scaleLinear()
             .domain(extent)
             .range( selectPalette(selected.sel, colorPalettes) );
