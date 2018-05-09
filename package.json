@@ -4,6 +4,9 @@
   "description": "This is the current working repo of the bc-climate-explorer",
   "main": "index.js",
   "scripts": {
+    "start-dev": "http-server -p 4000",
+    "build-css": "node-sass --include-path scss src/stylesheets/scss/main.scss src/stylesheets/css/main.css",
+    "watch-css": "nodemon -e scss -x 'npm run build-css'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generateBecLongNames": "node generateBecLongNames.js",
     "generateClimateVariableNames": "node generateClimateVariableNames.js",
@@ -19,9 +22,12 @@
     "url": "https://github.com/joeyklee/bc-climate-explorer/issues"
   },
   "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
-  "dependencies": {
-    "csv2json": "^1.4.2",
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.4",
     "hex-to-hsl": "^1.0.2",
-    "hsl-to-hex": "^1.0.0"
+    "hsl-to-hex": "^1.0.0",
+    "http-server": "^0.11.1"
   }
 }

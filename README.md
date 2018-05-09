@@ -1,20 +1,20 @@
 # bc-climate-explorer
 This is the current working repo of the bc-climate-explorer
 
-## Used technologies
-- Bootstrap
-- JavaScript
-- jQuery
-- Grunt
-- npm
-- Browserify
-- Babel
-- Karma/Jasmin
+## Development
 
-## Patterns
-A combination of:
-- Model View Controller (MVC) pattern
-- Pub/Sub pattern
+```
+# install the dependencies
+npm install
 
-##Development
-- Test driven development
+# in terminal window 1
+## run sass watch
+npm run watch-css
+
+# in terminal window 2
+## run the development server
+npm run start-dev
+
+# see: localhost:4000
+```
+

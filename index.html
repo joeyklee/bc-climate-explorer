@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BC Climate Explorer - App</title>
+  <!-- meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph data -->
+  <meta property="og:title" content="bc-climate-explorer" />
+  <meta property="og:url" content="'bc-climate-explorer'" />
+  <meta property="og:image" content="#" />
+  <meta property="og:description" content="climate data explorer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="bc-climate-explorer" />
+  <!-- mapbox -->
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+  <!-- chosen -->
+  <link rel="stylesheet" type="text/css" href="src/js/chosen_v1.8.5/chosen.min.css">
+  <!-- plotly -->
+  <script type="text/javascript" src="src/js/plotly-latest.min.js"></script>
+  <!-- main styles -->
+  <link rel="stylesheet" type="text/css" href="src/stylesheets/css/main.css">
+</head>
+
+<body>
+  <!--[if lt IE 10]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div class="App">
+    <!-- header -->
+    <header id="Header">
+      <!-- logo -->
+      <div id="Logo">
+        <div>LOGO</div>
+        <div>BC Climate Explorer</div>
+      </div>
+      <!-- nav -->
+      <nav>
+        <ul>
+          <li><a href="#">about</a></li>
+          <li><a href="#">data</a></li>
+          <li><a href="#">help</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- controller -->
+    <div id="Controller">
+      <!-- focal unit selectors -->
+      <div>
+        <!-- focal unit A -->
+        <div id="Focal-Unit-A-Selector" class="dropdown-selector"></div>
+        <!-- focal unit B -->
+        <div id="Focal-Unit-B-Selector" class="dropdown-selector"></div>
+      </div>
+      <!-- map variable selectors -->
+      <div>
+        <!-- variable x -->
+        <div id="Variable-X-Selector">
+          <!-- timescale selector -->
+          <div class="dropdown-selector"></div>
+          <!-- variable selector -->
+          <div class="dropdown-selector"></div>
+          <!-- log transformer -->
+          <div class="log-checkbox"></div>
+        </div>
+        <!-- variable y -->
+        <div id="Variable-Y-Selector">
+          <!-- timescale selector -->
+          <div class="dropdown-selector"></div>
+          <!-- variable selector -->
+          <div class="dropdown-selector"></div>
+          <!-- log transformer -->
+          <div class="log-checkbox"></div>
+        </div>
+      </div>
+    </div>
+    <!-- main -->
+    <main id="Charts">
+      <!-- row 1 -->
+      <div class="row">
+        <!-- map -->
+        <div class="chart">
+          <div class="chart-title">BEC Zones, Units, and Climate</div>
+          <div id="Geo"></div>
+        </div>
+        <!-- scatterplot -->
+        <div class="chart">
+          <div class="chart-title">Climate Normals: <span class="variable-x-title">X Variable</span> & <span class="variable-y-title">Y Variable</span></div>
+          <div id="Scatterplot"></div>
+        </div>
+      </div>
+      <!-- row 2 -->
+      <div class="row">
+        <!-- timeseries X -->
+        <div class="chart">
+          <div class="chart-title">Timeseries: <span class="variable-x-title">X Variable</span></div>
+          <div id="TimeseriesX"></div>
+        </div>
+        <!-- timeseries Y -->
+        <div class="chart">
+          <div class="chart-title">Timeseries: <span class="variable-y-title">Y Variable</span> </div>
+          <div id="TimeseriesY"></div>
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <footer id="Footer"></footer>
+  </div>
+  <!--end .App-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <!-- mapbox -->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+  <!-- chosen -->
+  <script type="text/javascript" src="src/js/chosen_v1.8.5/chosen.jquery.min.js"></script>
+  <!-- d3 color -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <!-- turfjs -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
+  <!-- modules -->
+  <script type="text/javascript" src="src/js/main.js"></script>
+</body>
+
+</html>
