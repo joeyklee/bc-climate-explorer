@@ -1,138 +1,158 @@
 [
-{
-  "annual": [
   {
     "variable": "MAT",
     "description": "Mean annual temperature (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "MAP",
     "description": "Annual precipitation (mm)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"annual"
   },
   {
     "variable": "MSP",
     "description": "Growing season (May to September) precipitation (mm)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"annual"
   },
   {
     "variable": "MWMT",
     "description": "Mean warmest month temperature (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "MCMT",
     "description": "Mean coldest month temperature (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "TD",
     "description": "Temperature difference between MWMT and MCMT, or continentality (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "AHM",
     "description": "Annual heat:moisture index (MAT+10)/(MAP/1000))",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"annual"
   },
   {
     "variable": "SHM",
     "description": "Summer heat:moisture index ((MWMT)/(MSP/1000))",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"annual"
   },
   {
     "variable": "EMT",
     "description": "Extreme minimum temperature over 30 years",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "EXT",
     "description": "Extreme maximum temperature over 30 years",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "FFP",
     "description": "Frost-free period",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "bFFP",
     "description": "The Julian date on which FFP begins",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"annual"
   },
   {
     "variable": "eFFP",
     "description": "The Julian date on which FFP ends",
-    "logTransform": false
-  }]
-},
-{
-  "nonannual": [
+    "logTransform": false,
+    "timeScale":"annual"
+  },
   {
     "variable": "Tave",
     "description": "Mean temperature (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"nonannual"
   },
   {
     "variable": "Tmax",
     "description": "Mean daily maximum temperature (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"nonannual"
   },
   {
     "variable": "Tmin",
     "description": "Mean daily minimum temperature (&deg;C)",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"nonannual"
   },
   {
     "variable": "PPT",
     "description": "Precipitation (mm)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "DD_0",
     "description": "Degree-days below 0&deg;C (chilling degree-days)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "DD5",
     "description": "Degree-days above 5&deg;C, growing degree-days",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "DD_18",
     "description": "Degree-days below 18&deg;C (heating degree-days)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "DD18",
     "description": "Degree-days above 18&deg;C (cooling degree-days)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "NFFD",
     "description": "Number of frost-free days",
-    "logTransform": false
+    "logTransform": false,
+    "timeScale":"nonannual"
   },
   {
     "variable": "PAS",
     "description": "Precipitation as snow (mm)",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "Eref",
     "description": "Hargreaves reference evaporation",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "CMD",
     "description": "Hargreaves climatic moisture deficit",
-    "logTransform": true
+    "logTransform": true,
+    "timeScale":"nonannual"
   },
   {
     "variable": "RH",
     "description": "Relative humidity",
-    "logTransform": false
-  }]
-}
+    "logTransform": false,
+    "timeScale":"nonannual"
+  }
 ]

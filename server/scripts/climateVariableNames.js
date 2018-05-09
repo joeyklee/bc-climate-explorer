@@ -1,19 +1,24 @@
 const fs = require('fs');
+const path = require('path');
+const dataDir = path.resolve(process.cwd() + '/data/');
+let data = JSON.parse(fs.readFileSync( dataDir + '/climate-variables-master/climate-variables-list.json'))
 
-let data = JSON.parse(fs.readFileSync('/Users/joeyklee/Code/src/github/joeyklee/bc-climate-explorer/data/climate-variables-master/climate-variables-list.json'))
 
+/*write the dropdown out to file*/
+fs.writeFile(dataDir + '/climate-variables-master/climate-variables-list.html', createDropdown(data), function(err, data){
+	if (err) console.log(err);
+	console.log("finished!")
+})
 
-
+/* 
+@createDropdown()
+@@ params: the dataset */
 function createDropdown(filteredData){
 	let dropdownOptionsList = [];
 
-	filteredData.forEach( function(i){
-		let k = Object.keys(i)[0];
-
-		i[k].forEach(function(d){
-			let dropdownOption = `<option label="${k}" value="${d.variable}">${d.variable} - ${d.description}</option>`
-			dropdownOptionsList.push(dropdownOption)
-		})
+	filteredData.forEach( function(d){
+		let dropdownOption = `<option label="${d.timeScale}" data-timescale="${d.timeScale}" data-logtransform="${d.logTransform}" value="${d.variable}">${d.variable} - ${d.description}</option>`
+		dropdownOptionsList.push(dropdownOption)
 	})
 
 
@@ -27,13 +32,3 @@ function createDropdown(filteredData){
 	`
 	return dropdown;
 }
-createDropdown(data)
-
-let output = createDropdown(data)
-console.log(output)
-
-fs.writeFile('/Users/joeyklee/Code/src/github/joeyklee/bc-climate-explorer/data/climate-variables-master/climate-variables-list.html', output, function(err, data){
-	if (err) console.log(err);
-
-	console.log("finished!")
-})
