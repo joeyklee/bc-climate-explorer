@@ -1,0 +1,10 @@
+footer{
+	@extend %flex-row;
+	@extend %outer-margin;
+	justify-content:center;
+	padding:2px;
+
+	small{
+		font-size: 8px;
+	}
+}

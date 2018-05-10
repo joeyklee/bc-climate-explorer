@@ -32,7 +32,7 @@
     <header id="Header">
       <!-- logo -->
       <div id="Logo">
-        <div>LOGO</div>
+        <div class="logo-placeholder"></div>
         <div>BC Climate Explorer</div>
       </div>
       <!-- nav -->
@@ -47,29 +47,63 @@
     <!-- controller -->
     <div id="Controller">
       <!-- focal unit selectors -->
-      <div>
+      <div id="Focal-Unit-Selectors" class="selector-container">
+      	<div>Explore</div>
         <!-- focal unit A -->
-        <div id="Focal-Unit-A-Selector" class="dropdown-selector"></div>
+        <div id="Focal-Unit-A-Selector" class="dropdown-selector">
+          <div>
+            <label>Focal Unit A</label>
+          </div>
+          <div>placeholder</div>
+        </div>
+        <div>&amp;</div>
         <!-- focal unit B -->
-        <div id="Focal-Unit-B-Selector" class="dropdown-selector"></div>
+        <div id="Focal-Unit-B-Selector" class="dropdown-selector">
+          <div>
+            <label>Focal Unit B</label>
+          </div>
+          <div>placeholder</div>
+        </div>
       </div>
       <!-- map variable selectors -->
-      <div>
+      <div id="Variable-Selectors" class="selector-container">
+      	<div>for</div>
         <!-- variable x -->
-        <div id="Variable-X-Selector">
+        <div id="Variable-X-Selector" class="selector-container">
           <!-- timescale selector -->
-          <div class="dropdown-selector"></div>
+          <div class="dropdown-selector">
+            <div>
+              <label>Timescale</label>
+            </div>
+            <div>placeholder</div>
+          </div>
           <!-- variable selector -->
-          <div class="dropdown-selector"></div>
+          <div class="dropdown-selector">
+            <div>
+              <label>X Variable</label>
+            </div>
+            <div>placeholder</div>
+          </div>
           <!-- log transformer -->
           <div class="log-checkbox"></div>
         </div>
+        <div>&amp;</div>
         <!-- variable y -->
-        <div id="Variable-Y-Selector">
+        <div id="Variable-Y-Selector" class="selector-container">
           <!-- timescale selector -->
-          <div class="dropdown-selector"></div>
+          <div class="dropdown-selector">
+            <div>
+              <label>Timescale</label>
+            </div>
+            <div>placeholder</div>
+          </div>
           <!-- variable selector -->
-          <div class="dropdown-selector"></div>
+          <div class="dropdown-selector">
+            <div>
+              <label>X Variable</label>
+            </div>
+            <div>placeholder</div>
+          </div>
           <!-- log transformer -->
           <div class="log-checkbox"></div>
         </div>
@@ -78,34 +112,61 @@
     <!-- main -->
     <main id="Charts">
       <!-- row 1 -->
-      <div class="row">
+      <div class="row1">
         <!-- map -->
         <div class="chart">
-          <div class="chart-title">BEC Zones, Units, and Climate</div>
-          <div id="Geo"></div>
+          <div class="chart-title"><label>BEC Zones, Units, and Climate</label></div>
+          <div id="Geo">
+          	<!-- top buttons -->
+          	<div id="Geo-Controls">
+          		<div class="btn">BEC ZONES</div>
+          		<div class="btn">BEC UNITS</div>
+          		<div class="btn">
+          			<span class="x-timescale-title">ts</span>
+          			<span class="variable-x-title">x</span>
+          		</div>
+          		<div class="btn">
+          			<span class="y-timescale-title">ts</span>
+          			<span class="variable-y-title">y</span>
+          		</div>
+          	</div>
+          	<!-- geo menu -->
+          	<div id="Geo-Menu" class="active">
+          		<div class="geo-menu-toggle">menu</div>
+          		<div class="geo-menu-content">
+          			<div class="map-legend">
+                  <div></div>
+                </div>
+                <!-- basemap switcher -->
+                <div class="map-basemap-switcher">
+                  <div>AERIAL</div>
+                </div>
+          		</div>
+          	</div>
+          </div>
         </div>
         <!-- scatterplot -->
         <div class="chart">
-          <div class="chart-title">Climate Normals: <span class="variable-x-title">X Variable</span> & <span class="variable-y-title">Y Variable</span></div>
+          <div class="chart-title"><label>Climate Normals: <span class="variable-x-title">X Variable</span> & <span class="variable-y-title">Y Variable</span></label></div>
           <div id="Scatterplot"></div>
         </div>
       </div>
       <!-- row 2 -->
-      <div class="row">
+      <div class="row2">
         <!-- timeseries X -->
         <div class="chart">
-          <div class="chart-title">Timeseries: <span class="variable-x-title">X Variable</span></div>
+          <div class="chart-title"><label>Timeseries: <span class="variable-x-title">X Variable</span></label></div>
           <div id="TimeseriesX"></div>
         </div>
         <!-- timeseries Y -->
         <div class="chart">
-          <div class="chart-title">Timeseries: <span class="variable-y-title">Y Variable</span> </div>
+          <div class="chart-title"><label>Timeseries: <span class="variable-y-title">Y Variable</span> </label></div>
           <div id="TimeseriesY"></div>
         </div>
       </div>
     </main>
     <!-- footer -->
-    <footer id="Footer"></footer>
+    <footer id="Footer"><small></small></footer>
   </div>
   <!--end .App-->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
