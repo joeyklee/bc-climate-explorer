@@ -54,7 +54,6 @@
           <div>
             <label>Focal Unit A</label>
           </div>
-          <div>placeholder</div>
         </div>
         <div>&amp;</div>
         <!-- focal unit B -->
@@ -62,7 +61,6 @@
           <div>
             <label>Focal Unit B</label>
           </div>
-          <div>placeholder</div>
         </div>
       </div>
       <!-- map variable selectors -->
@@ -71,18 +69,16 @@
         <!-- variable x -->
         <div id="Variable-X-Selector" class="selector-container">
           <!-- timescale selector -->
-          <div class="dropdown-selector">
+          <div id="X-Time-Dropdown" class="dropdown-selector">
             <div>
               <label>Timescale</label>
             </div>
-            <div>placeholder</div>
           </div>
           <!-- variable selector -->
-          <div class="dropdown-selector">
+          <div id="X-Variable-Dropdown" class="dropdown-selector">
             <div>
               <label>X Variable</label>
             </div>
-            <div>placeholder</div>
           </div>
           <!-- log transformer -->
           <div class="log-checkbox"></div>
@@ -91,18 +87,16 @@
         <!-- variable y -->
         <div id="Variable-Y-Selector" class="selector-container">
           <!-- timescale selector -->
-          <div class="dropdown-selector">
+          <div id="Y-Time-Dropdown" class="dropdown-selector">
             <div>
               <label>Timescale</label>
             </div>
-            <div>placeholder</div>
           </div>
           <!-- variable selector -->
-          <div class="dropdown-selector">
+          <div id="Y-Variable-Dropdown" class="dropdown-selector">
             <div>
-              <label>X Variable</label>
+              <label>Y Variable</label>
             </div>
-            <div>placeholder</div>
           </div>
           <!-- log transformer -->
           <div class="log-checkbox"></div>
@@ -119,13 +113,13 @@
           <div id="Geo">
           	<!-- top buttons -->
           	<div id="Geo-Controls">
-          		<div class="btn">BEC ZONES</div>
-          		<div class="btn">BEC UNITS</div>
-          		<div class="btn">
+          		<div id="Geo-Zone-Button" class="btn">BEC ZONES</div>
+          		<div id="Geo-Unit-Button" class="btn">BEC UNITS</div>
+          		<div id="Geo-X-Button" class="btn">
           			<span class="x-timescale-title">ts</span>
           			<span class="variable-x-title">x</span>
           		</div>
-          		<div class="btn">
+          		<div id="Geo-Y-Button" class="btn">
           			<span class="y-timescale-title">ts</span>
           			<span class="variable-y-title">y</span>
           		</div>
@@ -178,8 +172,12 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
   <!-- turfjs -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
+  <!-- pubsub -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pubsub-js/1.6.0/pubsub.js"></script>
   <!-- modules -->
-  <script type="text/javascript" src="src/js/main.js"></script>
+  <script type="text/javascript" src="src/js/index.js"></script>
+  <script type="text/javascript" src="src/js/setup.js"></script>
+  <script type="text/javascript" src="src/js/geo.js"></script>
 </body>
 
 </html>

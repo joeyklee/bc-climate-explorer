@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "generateBecLongNames": "node generateBecLongNames.js",
     "generateClimateVariableNames": "node generateClimateVariableNames.js",
-    "generateBecUnitColors": "nodemon generateBecUnitColors.js"
+    "generateBecUnitColors": "node generateBecUnitColors.js"
   },
   "repository": {
     "type": "git",

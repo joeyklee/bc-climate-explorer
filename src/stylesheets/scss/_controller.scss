@@ -4,7 +4,7 @@
 	padding:10px;
 	@extend %flex-row;
 	@extend %outer-margin;
-	justify-content:center;
+	justify-content:flex-start;
 	flex-wrap:wrap;
 	background-color:white;
 	border:2px solid $mint;
@@ -26,6 +26,7 @@
 	.dropdown-selector{
 		@extend %flex-column;
 		justify-content:flex-start;
+		max-width:200px;
 
 		label{
 			font-size: 10px;
