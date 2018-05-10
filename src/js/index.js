@@ -30,7 +30,12 @@ app.main = (function() {
     			b:[]
     		}
     	},
-    	geo: {},
+    	geo: {
+    		basemap:{
+    			satellite:"satellite-streets-v10",
+    			light:"light-v9"
+    		}
+    	},
     	selectors:{},
     	colors:{}
     };

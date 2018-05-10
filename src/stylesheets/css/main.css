@@ -166,7 +166,15 @@ header {
         z-index: 1000;
         background-color: white;
         display: flex;
-        flex-direction: row; }
+        flex-direction: row;
+        flex-wrap: wrap; }
+        #Geo #Geo-Menu .geo-menu-content .map-legend .hidden {
+          padding: 10px;
+          display: flex;
+          visibility: hidden;
+          z-index: 3000; }
+        #Geo #Geo-Menu .geo-menu-content .map-legend div:hover .hidden {
+          visibility: visible; }
       #Geo #Geo-Menu .geo-menu-content .map-basemap-switcher {
         margin-left: 5px;
         width: 20%;
@@ -176,7 +184,10 @@ header {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: white; }
+        background-color: white;
+        text-align: center;
+        flex-wrap: wrap;
+        font-size: 12px; }
   #Geo #Geo-Menu.active {
     transform: translateY(0px); }
 

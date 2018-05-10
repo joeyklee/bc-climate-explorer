@@ -60,38 +60,86 @@ app.geo = (function() {
   @ Param: style should be el.colors.zoneStyles
   @
   */
-  function changeMapZone(style){
-    console.log("clicked!")
+  function changeMapZone(style, zoneLevel){
     el.geo.setPaintProperty('bec-layer', 'fill-color', style['fill-color'])
+    // publish changes
+    renderMapStyleChange(style, zoneLevel)
+  }
+
+
+  /**
+  @ make/change legend
+  @
+  */
+  function changeLegend(msg, switched){
+    
+    let $mapLegend = $(".map-legend")
+    let legendItems = '';
+
+    // clear the dom
+    $mapLegend.html('')
+    // loop through
+    switched.style['fill-color'].forEach( (item, idx, arr) => {      
+      if( idx > 1 && idx < arr.length - 1 && item.startsWith("#")){
+        legendItems += `<div style="width:10px;height:10px;background-color:${item}"><div class="hidden">${arr[idx-1]}</div></div>\n`
+      }
+    })
+
+    $mapLegend.html(legendItems)
+
+    console.log(el);
+  }
+
+
+  /**
+  @ toggle aerial/light basemap
+  @ TODO: issues here // https://github.com/mapbox/mapbox-gl-js/issues/2267
+  @ DISABLED FOR NOW
+  */
+  function toggleBaseMap(msg, data){
+    let current = el.geo.getStyle().metadata["mapbox:origin"];
+    if(current === "light-v9"){
+      el.geo.setStyle('mapbox://styles/mapbox/satellite-streets-v10')
+    } else{
+      el.geo.setStyle('mapbox://styles/mapbox/light-v9')
+    }
   }
 
 
   /***
-  @
-  @
-  @
+  @ Bind Module events
   */
   function bindEvents(){
-    el.selectors.geoZone.on('click', changeMapZone.bind(this, el.colors.zoneStyles.paint) )
-    el.selectors.geoUnit.on('click', changeMapZone.bind(this, el.colors.unitStyles.paint))
+    el.selectors.geoZone.on('click', changeMapZone.bind(this, el.colors.zoneStyles.paint, 'zones') )
+    el.selectors.geoUnit.on('click', changeMapZone.bind(this, el.colors.unitStyles.paint, 'units'))
+
+    // @ DISABLED FOR NOW
+    // el.selectors.basemap.on('click', toggleBaseMap)
   }
 
 
-  function render(){
-    PubSub.publish("mapStyleChanged", people);
+  function renderMapStyleChange(style, zoneLevel){
+    PubSub.publish("mapStyleChanged", {style: style, feature: zoneLevel})
   }
+
 
 
   var init = function() {
     el = app.main.el;
+    
     initMap();
 
+    PubSub.subscribe("mapStyleChanged", changeLegend)
+    // PubSub.subscribe("mapBasemapChanged", toggleBaseMap)
     loadStyles()
       .then(addSources)
       .then(function() {
         // bind events
         bindEvents()
-        render();
+        changeLegend();
+        renderMapStyleChange();
+
+        
       })
   };
 

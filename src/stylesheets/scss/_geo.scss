@@ -67,6 +67,18 @@
 				// border:1px solid black;
 				display: flex;
 				flex-direction: row;
+				flex-wrap:wrap;
+
+				.hidden{
+					// border: 1px solid black;
+					padding: 10px;
+					display: flex;
+					visibility: hidden;
+					z-index: 3000;
+				}
+				div:hover .hidden{
+					visibility:visible;
+				}
 			}
 
 			.map-basemap-switcher{
@@ -80,6 +92,9 @@
 				justify-content: center;
 				align-items: center;
 				background-color: white;
+				text-align: center;
+				flex-wrap:wrap;
+				font-size: 12px;
 			}
 		}
 

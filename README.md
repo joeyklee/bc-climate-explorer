@@ -23,3 +23,10 @@ npm run start-dev
 ## PubSubs:
 
 ### mapStyleChanged
+checks changes to map style. relevant for:
+
+* publishers:
+    - el.selectors.geoZone
+    - el.selectors.geoZone
+* subscribers:
+    - map legend
