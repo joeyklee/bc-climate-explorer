@@ -31,7 +31,7 @@ app.geo = (function() {
       el.geo.addSource('bec-layer', {
         "type": "vector",
         "tiles": [
-          "http://tiles.jk-lee.com/BGCv10beta_100m/{z}/{x}/{y}.pbf"
+          "https://tiles.jk-lee.com/BGCv10beta_100m/{z}/{x}/{y}.pbf"
         ]
       });      
 
