@@ -115,7 +115,6 @@ app.main = (function() {
 
       }
     
-      console.log(climate_selected)
       return climate_selected.toLowerCase()
     }
 

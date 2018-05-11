@@ -108,6 +108,9 @@ app.geo = (function() {
     el.selectors.geoZone.on('click', changeMapZone.bind(this, el.colors.zoneStyles.paint, 'zones') )
     el.selectors.geoUnit.on('click', changeMapZone.bind(this, el.colors.unitStyles.paint, 'units'))
 
+    el.selectors.geoX.on('click', changeMapX)
+    el.selectors.geoY.on('click', changeMapY)
+
     // @ DISABLED FOR NOW
     // el.selectors.basemap.on('click', toggleBaseMap)
   }
@@ -135,6 +138,62 @@ app.geo = (function() {
     el.selectors.geoY.find(".y-variable-title").html(data.data)
   }
 
+
+  /***
+  @ Update map with climate variables on button click
+  @*/
+  let colorPalettes = {
+    precip: ['white', 'steelblue'],
+    temp: [ 'steelblue', 'brown']
+  }
+
+  function selectPalette(climateVariable,colorPalettes){
+    let precipVariables = ["MAP","MSP","AHM","SHM","FFP","PPT","NFFD","PAS","Eref","CMD","RH"];
+
+    if(precipVariables.includes(climateVariable)){
+      return colorPalettes.precip;
+    } else{
+      return colorPalettes.temp;
+    }
+  }
+
+  function changeMapX(){
+      let selected = Object.assign({colorsObject:['match', ['get', 'MAP_LABEL']]}, {data: el.x.scatterplot.data, zone: el.x.scatterplot.zones, sel: el.x.variable } )
+      console.log("Map X Variable", selected)
+
+      let extent = d3.extent(selected.data)
+
+      // TODO: on variable change, call change map x or y
+      let color = d3.scaleLinear()
+          .domain(extent)
+          .range( selectPalette(selected.sel, colorPalettes) );
+
+      selected.data.forEach((item, i, arr) => {
+          selected.colorsObject.push(selected.zone[i] , color(item) )
+        })
+      selected.colorsObject.push("#ccc")
+
+      el.geo.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
+  }
+
+  function changeMapY(){
+      let selected = Object.assign({colorsObject:['match', ['get', 'MAP_LABEL']]}, {data: el.y.scatterplot.data, zone: el.y.scatterplot.zones, sel: el.y.variable } )
+      console.log("Map y Variable", selected)
+
+      let extent = d3.extent(selected.data)
+
+      // TODO: on variable change, call change map x or y
+      let color = d3.scaleLinear()
+          .domain(extent)
+          .range( selectPalette(selected.sel, colorPalettes) );
+
+      selected.data.forEach((item, i, arr) => {
+          selected.colorsObject.push(selected.zone[i] , color(item) )
+        })
+      selected.colorsObject.push("#ccc")
+
+      el.geo.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
+  }
 
 
   var init = function() {
