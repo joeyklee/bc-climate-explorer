@@ -58,7 +58,37 @@ app.main = (function() {
     		  { "season": "Fall", "abbv": "at" },
     		  { "season": "Spring", "abbv": "sp" },
     		  { "season": "Summer", "abbv": "sm" }
-    		]
+    		],
+    		chartLayout: {
+    		    plot_bgcolor: '#FFFFFF',
+    		    paper_bgcolor: '#FFFFFF',
+    		    margin: {
+    		      l: 50,
+    		      r: 20,
+    		      b: 40,
+    		      t: 30,
+    		      pad: 0
+    		    },
+    		    xaxis: {
+    		      autotick: true,
+    		      showgrid: false,
+    		      ticks: "inside",
+    		      color: "#000000",
+    		      // zerolinewidth: 1,
+    		      // showline: true,
+    		      autotick: true,
+    		    },
+    		    yaxis: {
+    		      showticklabels: true,
+    		      autotick: true,
+    		      showgrid: false,
+    		      ticks: "inside",
+    		      color: "#000000",
+    		      zerolinewidth: 1,
+    		      zeroline: true
+    		      // showline: true
+    		    }
+    		  }
     	}
     };
 
@@ -76,7 +106,7 @@ app.main = (function() {
       } else {
         timevar = el.helpers.months.filter(i => (i.month === stateTime))[0].number
 
-        if (climateVar.startsWith("dd_0")) {
+        if (climateVar.startsWith("dd_0" || climateVar.startsWith("dd_18"))) {
           climate_selected = climateVar + "_" + timevar; // for jan - dec  
         } else {
           climate_selected = climateVar + timevar; // for jan - dec  

@@ -4,25 +4,42 @@ app.scatterplot = (function(){
 	console.log("hello from scatterplot")
 	let el = null;
 
+	const WIDTH_IN_PERCENT_OF_PARENT = 100,
+	  HEIGHT_IN_PERCENT_OF_PARENT = 100;
 
+	function buildChart(){
+		console.log("scatterplot called")
+		let gd3, gd, series1;
 
-	// function buildChart(){
-	// 	let gd3, gd;
-
-	// 	d3.select("#scatter-child").remove();
+		d3.select("#scatter-child").remove();
     
- //    gd3 = d3.select('#Scatterplot').append('div')
- //      .attr('id', 'scatter-child')
- //      .style("width", "100%")
- //      .style("height", "100%")
+    gd3 = d3.select('#Scatterplot').append('div')
+      .attr('id', 'scatter-child')
+      .style("width", "100%")
+      .style("height", "100%")
 
- //    gd = gd3.node();
+    gd = gd3.node();
 
-	// }
+    series1 = {
+      x: el.x.scatterplot.data,
+      y: el.y.scatterplot.data,
+      label: el.x.scatterplot.zone,
+      type: 'scatter',
+      mode: 'markers'
+    }
+
+    Plotly.plot(gd, [series1], el.helpers.chartLayout, { displayModeBar: true });
+
+    d3.select(window).on('resize.scatterplot1', function() {
+      Plotly.Plots.resize(gd)
+    });
+
+	}
 
 	var init = function() {
 	  el = app.main.el;
-	  
+	  PubSub.subscribe("scatterDataLoaded", buildChart)
+	  PubSub.subscribe("temporalSelectionChanged", buildChart)
 	};
 
 
