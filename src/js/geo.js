@@ -16,10 +16,6 @@ app.geo = (function() {
       container: 'Geo',
       style: 'mapbox://styles/mapbox/light-v9'
     });
-    // satellite-streets-v10
-    // streets-v10
-    // light-v9
-
 
   }
 
@@ -41,6 +37,7 @@ app.geo = (function() {
 
       // add the layer to be worked on with the default zone style
       el.geo.addLayer(el.colors.zoneStyles)
+      renderMapStyleChange(el.colors.zoneStyles.paint, 'zones')
 
     })
   }
@@ -72,7 +69,7 @@ app.geo = (function() {
   @
   */
   function changeLegend(msg, switched){
-    
+    console.log('legend changed')
     let $mapLegend = $(".map-legend")
     let legendItems = '';
 
@@ -152,17 +149,18 @@ app.geo = (function() {
     PubSub.subscribe("yTimescaleChanged", updateYTimescaleButton)
     PubSub.subscribe("yVariableChanged", updateYVariableButton)
 
-
+    
     // PubSub.subscribe("mapBasemapChanged", toggleBaseMap)
     loadStyles()
       .then(addSources)
       .then(function() {
         // bind events
         bindEvents()
-        changeLegend();
-        renderMapStyleChange();
-
-
+        // changeLegend();
+        
+        changeLegend(el.colors.zoneStyles.paint);
+        renderMapStyleChange.bind( el.colors.zoneStyles.paint, 'zones');
+        // TODO: publish change to trigger legend on 
         
       })
   };

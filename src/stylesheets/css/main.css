@@ -117,6 +117,14 @@ header {
       position: relative;
       width: 100%;
       height: 100%; }
+    #Charts .chart #TimeseriesX {
+      position: relative;
+      width: 100%;
+      height: 100%; }
+    #Charts .chart #TimeseriesY {
+      position: relative;
+      width: 100%;
+      height: 100%; }
 
 #Geo {
   position: relative; }

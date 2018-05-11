@@ -15,7 +15,8 @@ app.main = (function() {
     		},
     		timeseries:{
     			a:[],
-    			b:[]
+    			b:[],
+                years:[]
     		}
     	},
     	y:{
@@ -27,7 +28,8 @@ app.main = (function() {
     		},
     		timeseries:{
     			a:[],
-    			b:[]
+    			b:[],
+                years:[]
     		}
     	},
     	geo: {
@@ -94,6 +96,7 @@ app.main = (function() {
     let formatClimateName = function(climateVar, stateTime) {
       let climate_selected = null;
       let timevar;
+      let specials = ["DD_0", "DD0", "DD_18", "DD18", "DD5", "DD_18"];
 
       if (stateTime.toLowerCase() == 'annual') {
         climate_selected = climateVar;
@@ -103,14 +106,16 @@ app.main = (function() {
       } else {
         timevar = el.helpers.months.filter(i => (i.month === stateTime))[0].number
 
-        if (climateVar.startsWith("dd_0" || climateVar.startsWith("dd_18"))) {
+        // climateVar.startsWith("DD_0") || climateVar.startsWith("DD_18")
+        if (specials.includes(climateVar) === true) {
           climate_selected = climateVar + "_" + timevar; // for jan - dec  
         } else {
           climate_selected = climateVar + timevar; // for jan - dec  
         }
 
       }
-      
+    
+      console.log(climate_selected)
       return climate_selected.toLowerCase()
     }
 
@@ -126,10 +131,12 @@ app.main = (function() {
 window.addEventListener('DOMContentLoaded', function() {
     // app.<modulename>.init();
     app.setup.init()
-    	.then(function(){
+    	.then((data) => {
+            console.log(data);
     		app.controllers.init();
-    		app.geo.init();	 	
-    		app.scatterplot.init();		
+    		app.geo.init();
+    		app.scatterplot.init();
+            app.timeseries.init();
     	});
     
     

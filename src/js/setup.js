@@ -147,14 +147,12 @@ app.setup = (function() {
 
   var init = function() {
     el = app.main.el;
-
     // Load up all the components
     return loadTimescales()
       .then(loadClimateVariables)
         .then(loadFocalUnits)
         .then(loadSelectors)
         .then(initChosen)
-        
   };
 
   // TODO: Return a promise
@@ -164,8 +162,7 @@ app.setup = (function() {
   return {
     init: init
   }
-  // return new Promise( (resolve, reject) => {
-  //   resolve({init:init})
-  // })
+
+
 
 })();

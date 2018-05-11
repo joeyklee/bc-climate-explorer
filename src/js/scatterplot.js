@@ -8,7 +8,6 @@ app.scatterplot = (function(){
 	  HEIGHT_IN_PERCENT_OF_PARENT = 100;
 
 	function buildChart(){
-		console.log("scatterplot called")
 		let gd3, gd, series1;
 
 		d3.select("#scatter-child").remove();
@@ -32,8 +31,6 @@ app.scatterplot = (function(){
     // add in your axis titles
     scatterplotLayout.xaxis.title = `${el.x.variable}`
 		scatterplotLayout.yaxis.title = `${el.y.variable}`
-		console.log(scatterplotLayout)
-
 
     Plotly.plot(gd, [series1], scatterplotLayout, { displayModeBar: true });
 
