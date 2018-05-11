@@ -10,12 +10,15 @@ app.controllers = (function(){
 		el.selectors.focalUnitA.on("change", updateFocalUnitA)
 		el.selectors.focalUnitB.on("change", updateFocalUnitB)
 
+		// timescale changes
 		el.selectors.xTimescale.on("change", updateXTimescale)
 		el.selectors.yTimescale.on("change", updateYTimescale)
+		el.selectors.xTimescale.on("change", filterDropdownTemporally.bind(this, el.selectors.xVariable))
+		el.selectors.yTimescale.on("change", filterDropdownTemporally.bind(this, el.selectors.yVariable))
 
+		// x & y variable changes
 		el.selectors.xVariable.on("change", updateXVariable)
 		el.selectors.yVariable.on("change", updateYVariable)
-
 		el.selectors.xVariable.on("change", loadClimateNormalData)
 		el.selectors.yVariable.on("change", loadClimateNormalData)
 
@@ -86,6 +89,10 @@ app.controllers = (function(){
 		el.selectors.geoX.find(".x-variable-title").html(el.x.variable)
 		el.selectors.geoY.find(".y-timescale-title").html(el.y.timescale)
 		el.selectors.geoY.find(".y-variable-title").html(el.y.variable)
+
+
+		filterDropdownTemporally(el.selectors.xVariable)
+		filterDropdownTemporally(el.selectors.yVariable)
 	}
 
 	/***
@@ -98,7 +105,6 @@ app.controllers = (function(){
 		let query = `https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, ${xSelection}, ${ySelection} FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label IS NOT NULL AND '${xSelection}' IS NOT NULL AND '${ySelection}' IS NOT NULL`
 		let data = await $.getJSON(encodeURI(query))
 
-		// let maplabel = data.rows.map(obj => { return obj.map_label})
 		el.x.scatterplot.data = data.rows.map(obj => { return obj[xSelection] })
 		el.x.scatterplot.zones = data.rows.map(obj => { return obj.map_label })
 		
@@ -108,6 +114,23 @@ app.controllers = (function(){
 		PubSub.publish("scatterDataLoaded", {x: el.x.scatterplot, y: el.y.scatterplot})
 		console.log(el)
 	}
+
+	/***
+	@ filterDropdownTemporally
+	@*/
+	function filterDropdownTemporally($varSelector){
+		if( el.x.timescale === "Annual"){
+			$varSelector.find("option[label=nonannual]").prop("disabled", true)
+			$varSelector.find("option[label=annual]").prop("disabled", false)
+		} else {
+			$varSelector.find("option[label=nonannual]").prop("disabled", false)
+			$varSelector.find("option[label=annual]").prop("disabled", true)
+		}
+
+		$varSelector.trigger("chosen:updated");
+		PubSub.publish("temporalSelectionChanged", {x: el.x.timescale, y: el.y.timescale})
+	}
+
 
 
 	var init = function() {
@@ -125,4 +148,6 @@ app.controllers = (function(){
 	  init: init
 	}
 })();
+
+
 
