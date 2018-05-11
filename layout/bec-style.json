@@ -1,0 +1,28 @@
+{
+    "version": 8,
+    "sources": {
+        "tilehut": {
+            "type": "vector",
+            "tiles": [
+                "http://tiles.jk-lee.com/BGCv10beta_100m/{z}/{x}/{y}.pbf"
+            ],
+            "maxzoom": 13
+        }
+    },
+    "layers": [{
+        "id": "background",
+        "paint": {
+            "background-color": "#000000"
+        },
+        "type": "background"
+    }, {
+        "id": "becStyle",
+        "source": "tilehut",
+        "source-layer": "BGCv10beta_100m",
+        "paint": {
+            "fill-color": "#15a29a",
+            "fill-outline-color":"#FFFFFF"
+            },
+        "type": "fill"
+    }]
+}

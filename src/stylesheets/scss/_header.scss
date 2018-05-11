@@ -1,0 +1,57 @@
+header{
+	display: flex;
+	flex-direction:row;
+	align-items:center;
+	padding:10px;
+	@extend %outer-margin;
+	background-image: url(../../../src/assets/header-bg-1.svg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	color: black;
+	text-shadow: 0.5px 0.5px white;
+	border-radius: 8px;
+
+	// container 1
+	#Logo{
+		display: flex;
+		flex-direction:row;
+		align-items:center;
+
+		.logo-placeholder{
+			width:30px;
+			height: 30px;
+			border-radius: 50%;
+			background-color: $mint;
+			margin-right:10px;
+			box-shadow: 2px 2px $papaya;
+		}
+	}
+
+	// container 2
+	nav{
+		margin-left:40px;
+
+		ul{
+			display: flex;
+			flex-direction:row;
+			margin:0;
+			padding:0;
+			list-style: none;
+
+			li{
+				list-style: none;
+				margin-right:10px;
+
+				a{
+					text-decoration: none;
+					color:black;
+				} // end a
+
+			} // end li
+
+		} // end ul
+
+	} // end nav
+
+} // end header

@@ -1,0 +1,118 @@
+/* map stuffs*/
+#map-container{
+	width:100%;
+	height:100%;
+	border:2px solid $color-header-bg;
+}
+
+#map-container{
+
+	.map-variable-selectors{
+		margin-top: 2px;
+		position: absolute;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height:auto;
+		width:100%;
+		z-index: 1000;
+		text-align:center;
+	}
+	.map-control-button{
+		padding:5px;
+		border:2px solid $color-body-bg;
+		margin-right:5px;
+		background-color: $color-header-bg;
+		cursor: pointer;
+		min-width: 120px;
+		font-size: 10px;
+		color:white;
+	}
+
+	// .map-control-button.variable1{
+	// 	background-color: $color-variable1;
+	// }
+
+	// .map-control-button.variable2{
+	// 	 background-color: $color-variable2;
+	// }
+
+
+	.map-control-button:hover{
+		background-color: tomato;
+	}
+
+	.map-controls{
+		position: absolute;
+		width: 100%;
+		height:120px;
+		bottom:0;
+		z-index: 1000;
+		border:1px solid $color-body-bg;
+		background-color: $color-header-bg;
+		display: flex;
+		flex-direction: column;
+		transform:translateY(110px);
+	}
+	.map-controls.active{
+		transform:translateY(0px);
+	}
+
+	.map-controls-switch{
+		align-self:center;
+		margin-top: -13px;
+		margin-bottom:2px;
+		border: 2px solid $color-header-bg;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width:50px;
+		height:20px;
+		background-color: white;
+		color:black;
+	}
+
+	.map-controls-main{
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+	}
+	.map-legend{
+		width:80%;
+		height: 100px;
+		z-index: 1000;
+		background-color: $color-body-bg;
+		border:1px solid $color-header-bg;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.map-basemap-switcher{
+		margin-left:5px;
+		width:20%;
+		height:100px;
+		z-index: 1000;
+		border:1px solid $color-body-bg;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: white;
+	}
+
+}
+
+
+/* set focal and comparison */
+#map-focal-button{
+	background-color: #F85416;
+}
+#map-comparison-button{
+	background-color: #007BFF;
+	color:white;
+}

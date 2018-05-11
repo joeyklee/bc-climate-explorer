@@ -1,0 +1,19 @@
+[
+{"timeUnit":"Annual", "timeScale":"annual"},
+{"timeUnit":"Winter", "timeScale":"nonannual"},
+{"timeUnit":"Spring", "timeScale":"nonannual"},
+{"timeUnit":"Summer", "timeScale":"nonannual"},
+{"timeUnit":"Fall", "timeScale":"nonannual"},
+{"timeUnit":"January", "timeScale":"nonannual"},
+{"timeUnit":"February", "timeScale":"nonannual"},
+{"timeUnit":"March", "timeScale":"nonannual"},
+{"timeUnit":"April", "timeScale":"nonannual"},
+{"timeUnit":"May", "timeScale":"nonannual"},
+{"timeUnit":"June", "timeScale":"nonannual"},
+{"timeUnit":"July", "timeScale":"nonannual"},
+{"timeUnit":"August", "timeScale":"nonannual"},
+{"timeUnit":"September", "timeScale":"nonannual"},
+{"timeUnit":"October", "timeScale":"nonannual"},
+{"timeUnit":"November", "timeScale":"nonannual"},
+{"timeUnit":"December", "timeScale":"nonannual"}
+]

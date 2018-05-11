@@ -1,0 +1,232 @@
+.pad {
+  padding: 10px 10px 5px 10px; }
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0; }
+
+.col-6 {
+  padding-right: 2px;
+  padding-left: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #45475E; }
+
+.App {
+  padding: 10px 30px 10px 30px; }
+
+header {
+  align-items: center;
+  margin: 0px 0px 2px 0px;
+  border: 2px solid #363652; }
+
+header .logo {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  text-shadow: 2px 2px #363652; }
+header .logo-placeholder {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #F85416;
+  margin-right: 10px;
+  box-shadow: 2px 2px #363652; }
+header ul {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row; }
+header li {
+  list-style: none;
+  margin-right: 40px; }
+header ul li a {
+  text-decoration: none;
+  color: white;
+  text-shadow: 1px 1px #363652; }
+
+.controller {
+  width: 100%;
+  border: 2px solid #363652;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  background-color: #363652; }
+
+.controller .compare-buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline; }
+.controller .compare-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white; }
+.controller .log-checkbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: white; }
+.controller .btn-group {
+  z-index: 2000; }
+.controller .chosen-container {
+  max-width: 150px; }
+
+main {
+  width: 100%;
+  height: 80vh; }
+
+main .chart-title {
+  position: relative;
+  width: 100%;
+  padding: 2px 5px 2px 5px;
+  background-color: #363652;
+  z-index: 1000;
+  font-size: 10px;
+  color: white; }
+main #row-primary {
+  margin-top: 2px;
+  height: 60%; }
+main #row-secondary {
+  margin-top: 2px;
+  height: 40%; }
+
+/* map stuffs*/
+#map-container {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #363652; }
+
+#map-container .map-variable-selectors {
+  margin-top: 2px;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  z-index: 1000;
+  text-align: center; }
+#map-container .map-control-button {
+  padding: 5px;
+  border: 2px solid #45475E;
+  margin-right: 5px;
+  background-color: #363652;
+  cursor: pointer;
+  min-width: 120px;
+  font-size: 10px;
+  color: white; }
+#map-container .map-control-button:hover {
+  background-color: tomato; }
+#map-container .map-controls {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  bottom: 0;
+  z-index: 1000;
+  border: 1px solid #45475E;
+  background-color: #363652;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(110px); }
+#map-container .map-controls.active {
+  transform: translateY(0px); }
+#map-container .map-controls-switch {
+  align-self: center;
+  margin-top: -13px;
+  margin-bottom: 2px;
+  border: 2px solid #363652;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 20px;
+  background-color: white;
+  color: black; }
+#map-container .map-controls-main {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+#map-container .map-legend {
+  width: 80%;
+  height: 100px;
+  z-index: 1000;
+  background-color: #45475E;
+  border: 1px solid #363652;
+  display: flex;
+  flex-direction: row; }
+#map-container .map-basemap-switcher {
+  margin-left: 5px;
+  width: 20%;
+  height: 100px;
+  z-index: 1000;
+  border: 1px solid #45475E;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white; }
+
+/* set focal and comparison */
+#map-focal-button {
+  background-color: #F85416; }
+
+#map-comparison-button {
+  background-color: #007BFF;
+  color: white; }
+
+/*scatterplot*/
+#scatterplot-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #363652; }
+
+#scatterplot-1 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.timeseries-chart-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #363652; }
+
+/*timeseries*/
+#timeseries-1 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+/*timeseries*/
+#timeseries-2 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+/*# sourceMappingURL=main.css.map */

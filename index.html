@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BC Climate Explorer - App</title>
+  <!-- meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph data -->
+  <meta property="og:title" content="bc-climate-explorer" />
+  <meta property="og:url" content="'bc-climate-explorer'" />
+  <meta property="og:image" content="#" />
+  <meta property="og:description" content="climate data explorer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="bc-climate-explorer" />
+  <!-- mapbox -->
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+  <!-- chosen -->
+  <link rel="stylesheet" type="text/css" href="src/js/chosen_v1.8.5/chosen.min.css">
+  <!-- plotly -->
+  <script type="text/javascript" src="src/js/plotly-latest.min.js"></script>
+  <!-- main styles -->
+  <link rel="stylesheet" type="text/css" href="src/stylesheets/css/main.css">
+</head>
+
+<body>
+  <!--[if lt IE 10]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div class="App">
+    <!-- header -->
+    <header id="Header">
+      <!-- logo -->
+      <div id="Logo">
+        <div class="logo-placeholder"></div>
+        <div>BC Climate Explorer</div>
+      </div>
+      <!-- nav -->
+      <nav>
+        <ul>
+          <li><a href="#">about</a></li>
+          <li><a href="#">data</a></li>
+          <li><a href="#">help</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- controller -->
+    <div id="Controller">
+      <!-- focal unit selectors -->
+      <div id="Focal-Unit-Selectors" class="selector-container">
+      	<div>Explore</div>
+        <!-- focal unit A -->
+        <div id="Focal-Unit-A-Selector" class="dropdown-selector">
+          <div>
+            <label>Focal Unit A</label>
+          </div>
+        </div>
+        <div>&amp;</div>
+        <!-- focal unit B -->
+        <div id="Focal-Unit-B-Selector" class="dropdown-selector">
+          <div>
+            <label>Focal Unit B</label>
+          </div>
+        </div>
+      </div>
+      <!-- map variable selectors -->
+      <div id="Variable-Selectors" class="selector-container">
+      	<div>for</div>
+        <!-- variable x -->
+        <div id="Variable-X-Selector" class="selector-container">
+          <!-- timescale selector -->
+          <div id="X-Time-Dropdown" class="dropdown-selector">
+            <div>
+              <label>Timescale</label>
+            </div>
+          </div>
+          <!-- variable selector -->
+          <div id="X-Variable-Dropdown" class="dropdown-selector">
+            <div>
+              <label>X Variable</label>
+            </div>
+          </div>
+          <!-- log transformer -->
+          <div class="log-checkbox"></div>
+        </div>
+        <div>&amp;</div>
+        <!-- variable y -->
+        <div id="Variable-Y-Selector" class="selector-container">
+          <!-- timescale selector -->
+          <div id="Y-Time-Dropdown" class="dropdown-selector">
+            <div>
+              <label>Timescale</label>
+            </div>
+          </div>
+          <!-- variable selector -->
+          <div id="Y-Variable-Dropdown" class="dropdown-selector">
+            <div>
+              <label>Y Variable</label>
+            </div>
+          </div>
+          <!-- log transformer -->
+          <div class="log-checkbox"></div>
+        </div>
+      </div>
+    </div>
+    <!-- main -->
+    <main id="Charts">
+      <!-- row 1 -->
+      <div class="row1">
+        <!-- map -->
+        <div class="chart">
+          <div class="chart-title"><label>BEC Zones, Units, and Climate</label></div>
+          <div id="Geo">
+          	<!-- top buttons -->
+          	<div id="Geo-Controls">
+          		<div id="Geo-Zone-Button" class="btn">BEC ZONES</div>
+          		<div id="Geo-Unit-Button" class="btn">BEC UNITS</div>
+          		<div id="Geo-X-Button" class="btn">
+          			<span class="x-timescale-title">ts</span>
+          			<span class="x-variable-title">x</span>
+          		</div>
+          		<div id="Geo-Y-Button" class="btn">
+          			<span class="y-timescale-title">ts</span>
+          			<span class="y-variable-title">y</span>
+          		</div>
+          	</div>
+          	<!-- geo menu -->
+          	<div id="Geo-Menu" class="active">
+          		<div class="geo-menu-toggle">menu</div>
+          		<div class="geo-menu-content">
+          			<div class="map-legend">
+                  <div></div>
+                </div>
+                <!-- basemap switcher -->
+                <div class="map-basemap-switcher">
+                  <div>Switch Basemap</div>
+                </div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+        <!-- scatterplot -->
+        <div class="chart">
+          <div class="chart-title"><label>Climate Normals: 1981-2010</label></div>
+          <div id="Scatterplot"></div>
+        </div>
+      </div>
+      <!-- row 2 -->
+      <div class="row2">
+        <!-- timeseries X -->
+        <div class="chart">
+          <div class="chart-title"><label>Timeseries: <span class="x-variable-title">X Variable</span></label></div>
+          <div id="TimeseriesX"></div>
+        </div>
+        <!-- timeseries Y -->
+        <div class="chart">
+          <div class="chart-title"><label>Timeseries: <span class="y-variable-title">Y Variable</span> </label></div>
+          <div id="TimeseriesY"></div>
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <footer id="Footer"><small></small></footer>
+  </div>
+  <!--end .App-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <!-- mapbox -->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+  <!-- chosen -->
+  <script type="text/javascript" src="src/js/chosen_v1.8.5/chosen.jquery.min.js"></script>
+  <!-- d3 color -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <!-- turfjs -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
+  <!-- pubsub -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pubsub-js/1.6.0/pubsub.js"></script>
+  <!-- modules -->
+  <script type="text/javascript" src="src/js/index.js"></script>
+  <script type="text/javascript" src="src/js/setup.js"></script>
+  <script type="text/javascript" src="src/js/controllers.js"></script>
+  <script type="text/javascript" src="src/js/geo.js"></script>
+  <script type="text/javascript" src="src/js/scatterplot.js"></script>
+  <script type="text/javascript" src="src/js/timeseries.js"></script>
+</body>
+
+</html>

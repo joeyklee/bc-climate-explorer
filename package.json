@@ -1,44 +1,33 @@
 {
   "name": "bc-climate-explorer",
-  "version": "1.0.0",
-  "description": "a web application to explore the biogeoclimate ecosystem classification zones",
-  "main": "src/server.js",
+  "version": "0.1.0",
+  "description": "This is the current working repo of the bc-climate-explorer",
+  "main": "index.js",
   "scripts": {
-    "start": "grunt serve",
-    "test": "grunt test"
+    "start-dev": "http-server -p 4000",
+    "build-css": "node-sass --include-path scss src/stylesheets/scss/main.scss src/stylesheets/css/main.css",
+    "watch-css": "nodemon -e scss -x 'npm run build-css'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generateBecLongNames": "node generateBecLongNames.js",
+    "generateClimateVariableNames": "node generateClimateVariableNames.js",
+    "generateBecUnitColors": "node generateBecUnitColors.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joeyklee/bc-climate-explorer.git"
   },
-  "author": "@joeyklee and @kevinkl",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/joeyklee/bc-climate-explorer/issues"
   },
   "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
+  "dependencies": {},
   "devDependencies": {
-    "babel-preset-env": "^1.1.8",
-    "babelify": "^7.3.0",
-    "grunt": "^1.0.1",
-    "grunt-browserify": "^5.0.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-karma": "^2.0.0",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.4.1",
-    "karma-browserify": "^5.1.1",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.1.0"
-  },
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "chart.js": "^2.5.0",
-    "handlebars": "^4.0.6",
-    "jquery": "^3.1.1"
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.4",
+    "hex-to-hsl": "^1.0.2",
+    "hsl-to-hex": "^1.0.0",
+    "http-server": "^0.11.1"
   }
 }

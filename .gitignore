@@ -9,3 +9,9 @@ node_modules/
 
 private/*
 .DS_Store
+
+layout/.sass-cache/
+
+data/archive/*
+
+data/spatialData/*
