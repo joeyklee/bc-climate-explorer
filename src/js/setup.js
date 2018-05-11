@@ -9,7 +9,7 @@ app.setup = (function() {
   * @ Loads the climate normal variables from a json and appends them to the page
   **/
   async function loadClimateVariables() {
-    let data = await $.getJSON("../../data/climate-variables-master/climate-variables-list.json")
+    let data = await $.getJSON("data/climate-variables-master/climate-variables-list.json")
     let dropdownMenu = createClimateVariablesDropdown(data);
 
     $("#X-Variable-Dropdown").append(dropdownMenu);
@@ -44,7 +44,7 @@ app.setup = (function() {
   * @ Loads the timescale units from a json and appends them to the page
   * @ */
   async function loadTimescales() {
-    let data = await $.getJSON("../../data/timescale-list/timescale-list.json")
+    let data = await $.getJSON("data/timescale-list/timescale-list.json")
     let dropdownMenu = createTimescaleDropdown(data);
     
     $("#X-Time-Dropdown").append(dropdownMenu);
@@ -76,7 +76,7 @@ app.setup = (function() {
   * @ Loads the focal units from a json and appends them to the page
   */
   async function loadFocalUnits() {
-    let data = await $.getJSON("../../data/bec-names-list/BGCunits_Ver10_2017.json")
+    let data = await $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json")
     let dropdownMenu = createFocalUnitDropdown(data);
     $("#Focal-Unit-A-Selector").append(dropdownMenu);
     $("#Focal-Unit-B-Selector").append(dropdownMenu);
