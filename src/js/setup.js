@@ -129,6 +129,7 @@ app.setup = (function() {
     el.selectors.geoX = ChartSelectors.find("#Geo-X-Button")
     el.selectors.geoY = ChartSelectors.find("#Geo-Y-Button")
     el.selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
+    el.selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
 
     // return a promise in order to use chaining
     return new Promise( (resolve, reject) => {

@@ -18,15 +18,15 @@ app.controllers = (function() {
     el.selectors.xTimescale.on("change", loadClimateNormalData)
     el.selectors.yTimescale.on("change", loadClimateNormalData)
 
-    // loadTimeSeriesX
-		// loadTimeSeriesY
-
     // x & y variable changes
     el.selectors.xVariable.on("change", updateXVariable)
     el.selectors.yVariable.on("change", updateYVariable)
     el.selectors.xVariable.on("change", loadClimateNormalData)
     el.selectors.yVariable.on("change", loadClimateNormalData)
 
+
+    // geo menu clicked
+    el.selectors.geoMenu.on("click", toggleGeoMenu)
   }
 
   /***
@@ -71,10 +71,6 @@ app.controllers = (function() {
     el.y.variable = $(this).find("option:selected").val();
     PubSub.publish("yVariableChanged", { data: el.y.variable })
   }
-
-  /***
-  @
-  @*/
 
 
   /*
@@ -217,6 +213,12 @@ app.controllers = (function() {
     PubSub.publish("temporalSelectionChanged", { x: el.x.timescale, y: el.y.timescale })
   }
 
+  /***
+  @ Toggle Geo Menu
+  @*/
+  function toggleGeoMenu(){
+  	el.selectors.geoMenu.toggleClass("active");
+  }
 
 
   var init = function() {
@@ -229,7 +231,7 @@ app.controllers = (function() {
 
     PubSub.subscribe("xTimescaleChanged", loadTimeSeriesX)
     PubSub.subscribe("xVariableChanged", loadTimeSeriesX)
-    
+
     PubSub.subscribe("yTimescaleChanged", loadTimeSeriesY)
     PubSub.subscribe("yVariableChanged", loadTimeSeriesY)
 
