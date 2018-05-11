@@ -101,27 +101,33 @@ app.controllers = (function() {
   @*/
   async function loadClimateNormalData() {
 
-    let xSelection = formatClimateName(el.x.variable, el.x.timescale)
-    let ySelection = formatClimateName(el.y.variable, el.y.timescale)
+  	try{
+  		let xSelection = formatClimateName(el.x.variable, el.x.timescale)
+  		let ySelection = formatClimateName(el.y.variable, el.y.timescale)
 
-    let query = `https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, ${xSelection}, ${ySelection} FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label IS NOT NULL AND '${xSelection}' IS NOT NULL AND '${ySelection}' IS NOT NULL`
-    // console.log(encodeURI(query))
-    let data = await $.getJSON(encodeURI(query))
+  		let query = `https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, ${xSelection}, ${ySelection} FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label IS NOT NULL AND '${xSelection}' IS NOT NULL AND '${ySelection}' IS NOT NULL`
+  		// console.log(encodeURI(query))
+  		let data = await $.getJSON(encodeURI(query))
 
 
-    el.x.scatterplot.data = data.rows.map(obj => { return obj[xSelection] })
-    el.x.scatterplot.zones = data.rows.map(obj => { return obj.map_label })
+  		el.x.scatterplot.data = data.rows.map(obj => { return obj[xSelection] })
+  		el.x.scatterplot.zones = data.rows.map(obj => { return obj.map_label })
 
-    el.y.scatterplot.data = data.rows.map(obj => { return obj[ySelection] })
-    el.y.scatterplot.zones = data.rows.map(obj => { return obj.map_label })
+  		el.y.scatterplot.data = data.rows.map(obj => { return obj[ySelection] })
+  		el.y.scatterplot.zones = data.rows.map(obj => { return obj.map_label })
 
-    PubSub.publish("scatterDataLoaded", { x: el.x.scatterplot, y: el.y.scatterplot })
+  		PubSub.publish("scatterDataLoaded", { x: el.x.scatterplot, y: el.y.scatterplot })
+  	} catch{
+  		console.log("no cliamte data loaded")
+  	}
+    
   }
 
   /***
   @get timeseries data
   @*/
   async function loadTimeSeriesX() {
+
     let xSelection = formatClimateName(el.x.variable, el.x.timescale)
 
     try{

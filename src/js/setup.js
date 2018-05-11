@@ -9,14 +9,16 @@ app.setup = (function() {
   * @ Loads the climate normal variables from a json and appends them to the page
   **/
   async function loadClimateVariables() {
-    let data = await $.getJSON("data/climate-variables-master/climate-variables-list.json")
-    let dropdownMenu = createClimateVariablesDropdown(data);
+    try{
+      let data = await $.getJSON("data/climate-variables-master/climate-variables-list.json")
+      let dropdownMenu = createClimateVariablesDropdown(data);
 
-    $("#X-Variable-Dropdown").append(dropdownMenu);
-    $("#Y-Variable-Dropdown").append(dropdownMenu);
-
-    // return new Promise((resolve, reject) => (resolve(true)) )
-
+      $("#X-Variable-Dropdown").append(dropdownMenu);
+      $("#Y-Variable-Dropdown").append(dropdownMenu);
+    } catch {
+      console.log("no climate-variables-list found")
+    }
+    
   }
 
   function createClimateVariablesDropdown(json) {
@@ -44,12 +46,16 @@ app.setup = (function() {
   * @ Loads the timescale units from a json and appends them to the page
   * @ */
   async function loadTimescales() {
-    let data = await $.getJSON("data/timescale-list/timescale-list.json")
-    let dropdownMenu = createTimescaleDropdown(data);
+    try{
+      let data = await $.getJSON("data/timescale-list/timescale-list.json")
+      let dropdownMenu = createTimescaleDropdown(data);
+      
+      $("#X-Time-Dropdown").append(dropdownMenu);
+      $("#Y-Time-Dropdown").append(dropdownMenu);
+    } catch {
+      console.log("no timescale-list found")
+    }
     
-    $("#X-Time-Dropdown").append(dropdownMenu);
-    $("#Y-Time-Dropdown").append(dropdownMenu);
-    // return new Promise((resolve, reject) => (resolve(true)) )
   }
 
   function createTimescaleDropdown(json) {
@@ -76,11 +82,16 @@ app.setup = (function() {
   * @ Loads the focal units from a json and appends them to the page
   */
   async function loadFocalUnits() {
-    let data = await $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json")
-    let dropdownMenu = createFocalUnitDropdown(data);
-    $("#Focal-Unit-A-Selector").append(dropdownMenu);
-    $("#Focal-Unit-B-Selector").append(dropdownMenu);
-    // return new Promise((resolve, reject) => (resolve(true)) )
+    
+    try{
+      let data = await $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json")
+      let dropdownMenu = createFocalUnitDropdown(data);
+      $("#Focal-Unit-A-Selector").append(dropdownMenu);
+      $("#Focal-Unit-B-Selector").append(dropdownMenu);
+    } catch{
+      console.log("no focal units found")
+    }
+    
   }
 
   function createFocalUnitDropdown(json) {
