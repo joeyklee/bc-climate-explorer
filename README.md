@@ -30,3 +30,23 @@ checks changes to map style. relevant for:
     - el.selectors.geoZone
 * subscribers:
     - map legend
+
+
+### focalUnitAChanged
+
+
+### focalUnitBChanged
+
+
+### xTimescaleChanged
+
+
+### yTimescaleChanged
+
+
+### xVariableChanged
+
+
+### yVariableChanged
+
+

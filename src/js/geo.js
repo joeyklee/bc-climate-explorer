@@ -86,8 +86,6 @@ app.geo = (function() {
     })
 
     $mapLegend.html(legendItems)
-
-    console.log(el);
   }
 
 
@@ -123,6 +121,24 @@ app.geo = (function() {
   }
 
 
+  /***
+  @ update climate map buttons
+  */
+  function updateXTimescaleButton(msg, data){
+    el.selectors.geoX.find(".x-timescale-title").html(data.data)
+  }
+  function updateXVariableButton(msg, data){
+    el.selectors.geoX.find(".x-variable-title").html(data.data)
+  }
+  
+  function updateYTimescaleButton(msg, data){
+    el.selectors.geoY.find(".y-timescale-title").html(data.data)
+  }
+  function updateYVariableButton(msg, data){
+    el.selectors.geoY.find(".y-variable-title").html(data.data)
+  }
+
+
 
   var init = function() {
     el = app.main.el;
@@ -130,6 +146,13 @@ app.geo = (function() {
     initMap();
 
     PubSub.subscribe("mapStyleChanged", changeLegend)
+    PubSub.subscribe("xTimescaleChanged", updateXTimescaleButton)
+    PubSub.subscribe("xVariableChanged", updateXVariableButton)
+
+    PubSub.subscribe("yTimescaleChanged", updateYTimescaleButton)
+    PubSub.subscribe("yVariableChanged", updateYVariableButton)
+
+
     // PubSub.subscribe("mapBasemapChanged", toggleBaseMap)
     loadStyles()
       .then(addSources)
@@ -138,6 +161,7 @@ app.geo = (function() {
         bindEvents()
         changeLegend();
         renderMapStyleChange();
+
 
         
       })

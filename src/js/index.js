@@ -52,7 +52,9 @@ window.addEventListener('DOMContentLoaded', function() {
     // app.<modulename>.init();
     app.setup.init()
     	.then(function(){
-    		app.geo.init();		
+    		app.controllers.init();
+    		app.geo.init();	 	
+    		app.scatterplot.init();		
     	});
     
     
