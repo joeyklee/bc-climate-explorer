@@ -36,12 +36,20 @@ app.timeseries = (function() {
     let series1 = {
       x: el.x.timeseries.years,
       y: el.x.timeseries.a,
-      type: 'scatter'
+      mode: 'lines',
+        line: {
+          color: '#FE7452',
+          width: 1
+        }
     }
     let series2 = {
       x: el.x.timeseries.years,
       y: el.x.timeseries.b,
-      type: 'scatter'
+      mode: 'lines',
+      line: {
+        color: '#7BCBB4',
+        width: 1
+      }
     }
 
     buildTimeSeries("#TimeseriesX", "resize.timeseriesX", series1, series2, "tsX-child", el.x.variable)
@@ -56,12 +64,20 @@ app.timeseries = (function() {
     let series1 = {
       x: el.y.timeseries.years,
       y: el.y.timeseries.a,
-      type: 'scatter'
+      mode: 'lines',
+        line: {
+          color: '#FE7452',
+          width: 1
+        }
     }
     let series2 = {
       x: el.y.timeseries.years,
       y: el.y.timeseries.b,
-      type: 'scatter'
+      mode: 'lines',
+        line: {
+          color: '#7BCBB4',
+          width: 1
+        }
     }
 
     buildTimeSeries("#TimeseriesY", "resize.timeseriesY", series1, series2, "tsY-child", el.y.variable)

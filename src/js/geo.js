@@ -70,7 +70,6 @@ app.geo = (function() {
   */
   function changeLegend(msg, switched){
     console.log('legend changed')
-    console.log(switched)
     let $mapLegend = $(".map-legend")
     let legendItems = '';
 
@@ -142,6 +141,7 @@ app.geo = (function() {
 
   /***
   @ Update map with climate variables on button click
+  @ TODO: sort legend descending
   @*/
   let colorPalettes = {
     precip: ['white', 'steelblue'],
@@ -176,13 +176,11 @@ app.geo = (function() {
       el.geo.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
 
       let currentStyle = {"fill-color": selected.colorsObject};
-      console.log(currentStyle)
       PubSub.publish("mapXButtonClicked", {style: currentStyle, feature: 'units'})
   }
 
   function changeMapY(){
       let selected = Object.assign({colorsObject:['match', ['get', 'MAP_LABEL']]}, {data: el.y.scatterplot.data, zone: el.y.scatterplot.zones, sel: el.y.variable } )
-      console.log("Map y Variable", selected)
 
       let extent = d3.extent(selected.data)
 
@@ -199,7 +197,6 @@ app.geo = (function() {
       el.geo.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
 
       let currentStyle = {"fill-color": selected.colorsObject};
-      console.log(currentStyle)
       PubSub.publish("mapYButtonClicked", {style: currentStyle, feature: 'units'})
   }
 
