@@ -10,7 +10,7 @@ app.setup = (function() {
   **/
   async function loadClimateVariables() {
     try{
-      let data = await $.getJSON("/data/climate-variables-master/climate-variables-list.json")
+      let data = await $.getJSON("/bc-climate-explorer/data/climate-variables-master/climate-variables-list.json")
       let dropdownMenu = createClimateVariablesDropdown(data);
 
       $("#X-Variable-Dropdown").append(dropdownMenu);
@@ -47,7 +47,7 @@ app.setup = (function() {
   * @ */
   async function loadTimescales() {
     try{
-      let data = await $.getJSON("/data/timescale-list/timescale-list.json")
+      let data = await $.getJSON("/bc-climate-explorer/data/timescale-list/timescale-list.json")
       let dropdownMenu = createTimescaleDropdown(data);
       
       $("#X-Time-Dropdown").append(dropdownMenu);
@@ -84,7 +84,7 @@ app.setup = (function() {
   async function loadFocalUnits() {
     
     try{
-      let data = await $.getJSON("/data/bec-names-list/BGCunits_Ver10_2017.json")
+      let data = await $.getJSON("/bc-climate-explorer/data/bec-names-list/BGCunits_Ver10_2017.json")
       let dropdownMenu = createFocalUnitDropdown(data);
       $("#Focal-Unit-A-Selector").append(dropdownMenu);
       $("#Focal-Unit-B-Selector").append(dropdownMenu);
