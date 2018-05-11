@@ -27,8 +27,15 @@ app.scatterplot = (function(){
       type: 'scatter',
       mode: 'markers'
     }
+    // get a copy of the default chart layout
+    let scatterplotLayout = Object.assign({}, el.helpers.chartLayout)
+    // add in your axis titles
+    scatterplotLayout.xaxis.title = `${el.x.variable}`
+		scatterplotLayout.yaxis.title = `${el.y.variable}`
+		console.log(scatterplotLayout)
 
-    Plotly.plot(gd, [series1], el.helpers.chartLayout, { displayModeBar: true });
+
+    Plotly.plot(gd, [series1], scatterplotLayout, { displayModeBar: true });
 
     d3.select(window).on('resize.scatterplot1', function() {
       Plotly.Plots.resize(gd)

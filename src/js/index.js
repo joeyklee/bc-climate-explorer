@@ -74,8 +74,6 @@ app.main = (function() {
     		      showgrid: false,
     		      ticks: "inside",
     		      color: "#000000",
-    		      // zerolinewidth: 1,
-    		      // showline: true,
     		      autotick: true,
     		    },
     		    yaxis: {
@@ -86,7 +84,6 @@ app.main = (function() {
     		      color: "#000000",
     		      zerolinewidth: 1,
     		      zeroline: true
-    		      // showline: true
     		    }
     		  }
     	}
