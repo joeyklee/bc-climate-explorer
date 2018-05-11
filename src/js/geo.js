@@ -47,8 +47,13 @@ app.geo = (function() {
   @ 
   */
   async function loadStyles(){
-    el.colors.zoneStyles = await $.getJSON("../../data/bec-colors/bec-zone-colors.json")
-    el.colors.unitStyles = await $.getJSON("../../data/bec-colors/bec-unit-colors.json")
+    try{
+      el.colors.zoneStyles = await $.getJSON("src/data/bec-colors/bec-zone-colors.json")
+      el.colors.unitStyles = await $.getJSON("src/data/bec-colors/bec-unit-colors.json")  
+    } catch{
+      console.log('no bec styles')
+    }
+    
   }
 
 
