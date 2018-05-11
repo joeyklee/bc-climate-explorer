@@ -70,6 +70,7 @@ app.geo = (function() {
   */
   function changeLegend(msg, switched){
     console.log('legend changed')
+    console.log(switched)
     let $mapLegend = $(".map-legend")
     let legendItems = '';
 
@@ -159,7 +160,6 @@ app.geo = (function() {
 
   function changeMapX(){
       let selected = Object.assign({colorsObject:['match', ['get', 'MAP_LABEL']]}, {data: el.x.scatterplot.data, zone: el.x.scatterplot.zones, sel: el.x.variable } )
-      console.log("Map X Variable", selected)
 
       let extent = d3.extent(selected.data)
 
@@ -169,11 +169,15 @@ app.geo = (function() {
           .range( selectPalette(selected.sel, colorPalettes) );
 
       selected.data.forEach((item, i, arr) => {
-          selected.colorsObject.push(selected.zone[i] , color(item) )
+          selected.colorsObject.push(selected.zone[i] , d3.color(color(item)).hex() )
         })
       selected.colorsObject.push("#ccc")
 
       el.geo.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
+
+      let currentStyle = {"fill-color": selected.colorsObject};
+      console.log(currentStyle)
+      PubSub.publish("mapXButtonClicked", {style: currentStyle, feature: 'units'})
   }
 
   function changeMapY(){
@@ -188,11 +192,15 @@ app.geo = (function() {
           .range( selectPalette(selected.sel, colorPalettes) );
 
       selected.data.forEach((item, i, arr) => {
-          selected.colorsObject.push(selected.zone[i] , color(item) )
+          selected.colorsObject.push(selected.zone[i] , d3.color(color(item)).hex() )
         })
       selected.colorsObject.push("#ccc")
 
       el.geo.setPaintProperty('bec-layer', 'fill-color', selected.colorsObject)
+
+      let currentStyle = {"fill-color": selected.colorsObject};
+      console.log(currentStyle)
+      PubSub.publish("mapYButtonClicked", {style: currentStyle, feature: 'units'})
   }
 
 
@@ -207,6 +215,9 @@ app.geo = (function() {
 
     PubSub.subscribe("yTimescaleChanged", updateYTimescaleButton)
     PubSub.subscribe("yVariableChanged", updateYVariableButton)
+
+    PubSub.subscribe("mapXButtonClicked", changeLegend)
+    PubSub.subscribe("mapYButtonClicked", changeLegend)
 
     
     // PubSub.subscribe("mapBasemapChanged", toggleBaseMap)
