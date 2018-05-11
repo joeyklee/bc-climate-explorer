@@ -1,11 +1,6 @@
-build/
-release/
 node_modules/
 
 *.log
-
-#IDEA IDE
-.idea/
 
 private/*
 .DS_Store
