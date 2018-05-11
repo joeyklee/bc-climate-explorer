@@ -37,11 +37,59 @@ app.main = (function() {
     		}
     	},
     	selectors:{},
-    	colors:{}
+    	colors:{},
+    	helpers:{
+    		months: [
+    		  { "month": "January", "number": "01" },
+    		  { "month": "February", "number": "02" },
+    		  { "month": "March", "number": "03" },
+    		  { "month": "April", "number": "04" },
+    		  { "month": "May", "number": "05" },
+    		  { "month": "June", "number": "06" },
+    		  { "month": "July", "number": "07" },
+    		  { "month": "August", "number": "08" },
+    		  { "month": "September", "number": "09" },
+    		  { "month": "October", "number": "10" },
+    		  { "month": "November", "number": "11" },
+    		  { "month": "December", "number": "12" }
+    		],
+    		seasons:[
+    		  { "season": "Winter", "abbv": "wt" },
+    		  { "season": "Fall", "abbv": "at" },
+    		  { "season": "Spring", "abbv": "sp" },
+    		  { "season": "Summer", "abbv": "sm" }
+    		]
+    	}
     };
 
+
+
+    let formatClimateName = function(climateVar, stateTime) {
+      let climate_selected = null;
+      let timevar;
+
+      if (stateTime.toLowerCase() == 'annual') {
+        climate_selected = climateVar;
+      } else if (el.helpers.seasons.filter(i => (i.season === stateTime)).length > 0) {
+        timevar = el.helpers.seasons.filter(i => (i.season === stateTime))[0].abbv
+        climate_selected = climateVar + '_' + timevar; // for seasonal variables
+      } else {
+        timevar = el.helpers.months.filter(i => (i.month === stateTime))[0].number
+
+        if (climateVar.startsWith("dd_0")) {
+          climate_selected = climateVar + "_" + timevar; // for jan - dec  
+        } else {
+          climate_selected = climateVar + timevar; // for jan - dec  
+        }
+
+      }
+      
+      return climate_selected.toLowerCase()
+    }
+
     return {
-        el: el
+        el: el,
+        formatClimateName: formatClimateName
     };
 
 
