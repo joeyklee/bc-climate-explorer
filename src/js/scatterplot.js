@@ -27,39 +27,88 @@ app.scatterplot = (function(){
       mode: 'markers',
       marker: {
         color: '#F1BD53',
-        size: 6,
+        size: 4,
         line: {
             color: '#f7ab13',
             width: 1
         }
-      }
+      },
+      name:""
     }
 
     projectedA45 = {
       x: rollingAverage(el.x.timeseries.a_rcp45),
       y: rollingAverage(el.y.timeseries.a_rcp45),
       type: 'scatter',
-      mode: 'markers+lines'
+      mode: 'markers+lines',
+      marker: {
+        color:'#FE7452',
+        size:6,
+        line:{
+          color:"#ffffff",
+          width:0.5
+        }
+      },
+      line:{
+        width:1
+      },
+      name:"RCP4.5"
     }
 
     projectedA85 = {
       x: rollingAverage(el.x.timeseries.a_rcp85),
       y: rollingAverage(el.y.timeseries.a_rcp85),
       type: 'scatter',
-      mode: 'markers+lines'
+      mode: 'markers+lines',
+      marker: {
+        color:'#FE7452',
+        size:6,
+        line:{
+          color:"#ffffff",
+          width:0.5
+        }
+      },
+      line:{
+        width:2
+      },
+      name:"RCP8.5"
     }
 
     projectedB45 = {
       x: rollingAverage(el.x.timeseries.b_rcp45),
       y: rollingAverage(el.y.timeseries.b_rcp45),
       type: 'scatter',
-      mode: 'markers+lines'
+      mode: 'markers+lines',
+      marker: {
+        color:'#7BCBB4',
+        size:6,
+        line:{
+          color:"#ffffff",
+          width:0.5
+        }
+      },
+      line:{
+        width:1
+      },
+      name:"RCP4.5"
     }
     projectedB85 = {
       x: rollingAverage(el.x.timeseries.b_rcp85),
       y: rollingAverage(el.y.timeseries.b_rcp85),
       type: 'scatter',
-      mode: 'markers+lines'
+      mode: 'markers+lines',
+      marker: {
+        color:'#7BCBB4',
+        size:6,
+        line:{
+          color:"#ffffff",
+          width:0.5
+        }
+      },
+      line:{
+        width:2
+      },
+      name:"RCP8.5"
     }
 
 
