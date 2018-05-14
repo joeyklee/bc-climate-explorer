@@ -7,7 +7,7 @@ app.timeseries = (function() {
   const WIDTH_IN_PERCENT_OF_PARENT = 100,
     HEIGHT_IN_PERCENT_OF_PARENT = 100;
 
-  function buildTimeSeries(containerId, resizeId, trace1, trace2, childId, selectedVariableName) {
+  function buildTimeSeries(containerId, resizeId, dataArr, childId, selectedVariableName) {
     d3.select(`#${childId}`).remove();
     let gd3 = d3.select(containerId).append('div')
       .attr('id', childId)
@@ -21,86 +21,104 @@ app.timeseries = (function() {
     timeseriesPlotLayout.xaxis.title = 'years'
     timeseriesPlotLayout.yaxis.title = selectedVariableName
 
-    Plotly.plot(gd, [trace1, trace2], timeseriesPlotLayout, { displayModeBar: true });
+    Plotly.plot(gd, dataArr, timeseriesPlotLayout, { displayModeBar: true });
 
     d3.select(window).on(resizeId, function() {
       Plotly.Plots.resize(gd)
     });
   }
 
-  // timeseries charts
-  function timeseriesX() {
-    // el.x.timeseries.a
-    // el.x.timeseries.b
-
+  function makeChart(select){
+    // let select = 'y'
+    let selectedTimeseries = el[select].timeseries
     let series1 = {
-      x: el.x.timeseries.years,
-      y: el.x.timeseries.a,
+      x: selectedTimeseries.years,
+      y: selectedTimeseries.a,
       mode: 'lines',
         line: {
           color: '#FE7452',
           width: 1
-        }
+        },
+        name: el.focalUnitA
     }
     let series2 = {
-      x: el.x.timeseries.years,
-      y: el.x.timeseries.b,
-      mode: 'lines',
-      line: {
-        color: '#7BCBB4',
-        width: 1
-      }
-    }
-
-    buildTimeSeries("#TimeseriesX", "resize.timeseriesX", series1, series2, "tsX-child", el.x.variable)
-    console.log(el.x.variable)
-  };
-
-  // timeseries charts
-  function timeseriesY() {
-    // el.x.timeseries.a
-    // el.x.timeseries.b
-
-    let series1 = {
-      x: el.y.timeseries.years,
-      y: el.y.timeseries.a,
-      mode: 'lines',
-        line: {
-          color: '#FE7452',
-          width: 1
-        }
-    }
-    let series2 = {
-      x: el.y.timeseries.years,
-      y: el.y.timeseries.b,
+      x: selectedTimeseries.years,
+      y: selectedTimeseries.b,
       mode: 'lines',
         line: {
           color: '#7BCBB4',
           width: 1
-        }
+        },
+        name: el.focalUnitB
     }
 
-    buildTimeSeries("#TimeseriesY", "resize.timeseriesY", series1, series2, "tsY-child", el.y.variable)
-    console.log(el.y.variable)
+    let a_rcp45 = {
+      x: selectedTimeseries.years_projected,
+      y: selectedTimeseries.a_rcp45,
+      mode: 'lines',
+      line: {
+        color: '#FE7452',
+        width: 2
+      },
+      name: `RCP4.5`
+    }
+
+    let a_rcp85 = {
+      x: selectedTimeseries.years_projected,
+      y: selectedTimeseries.a_rcp85,
+      mode: 'lines',
+      line: {
+        color: '#FE7452',
+        width: 2
+      },
+      name: `RCP8.5`
+    }
+
+    let b_rcp45 = {
+      x: selectedTimeseries.years_projected,
+      y: selectedTimeseries.b_rcp45,
+      mode: 'lines',
+      line: {
+        color: '#7BCBB4',
+        width: 2
+      },
+      name: `RCP4.5`
+    }
+
+    let b_rcp85 = {
+      x: selectedTimeseries.years_projected,
+      y: selectedTimeseries.b_rcp85,
+      mode: 'lines',
+      line: {
+        color: '#7BCBB4',
+        width: 2
+      },
+      name: `RCP8.5`
+    }
+
+    let letter = select.toUpperCase();
+    buildTimeSeries(`#Timeseries${letter}`, `resize.timeseries${letter}`, [series1, a_rcp45, a_rcp85, series2, b_rcp45, b_rcp85], `ts${letter}Child`, el[select].variable)
   };
-
-
 
 
   var init = function() {
     el = app.main.el;
 
-    PubSub.subscribe("timeseriesXLoaded", timeseriesX)
-    PubSub.subscribe("xTimescaleChanged", timeseriesX)
-    PubSub.subscribe("focalUnitAChanged", timeseriesX)
-    PubSub.subscribe("focalUnitBChanged", timeseriesX)
-    PubSub.subscribe("xVariableChanged", timeseriesX)
+    ['timeseriesXLoaded',
+    'xTimescaleChanged',
+    'focalUnitAChanged',
+    'focalUnitBChanged',
+    'xVariableChanged'].forEach( (msg) => {
+      PubSub.subscribe(msg, makeChart.bind(this, 'x'))
+    });
 
-    PubSub.subscribe("timeseriesYLoaded", timeseriesY)
-    PubSub.subscribe("yTimescaleChanged", timeseriesY)
-    PubSub.subscribe("focalUnitAChanged", timeseriesY)
-    PubSub.subscribe("focalUnitBChanged", timeseriesY)
-    PubSub.subscribe("yVariableChanged", timeseriesY)
+    ['timeseriesYLoaded',
+    'yTimescaleChanged',
+    'focalUnitAChanged',
+    'focalUnitBChanged',
+    'yVariableChanged'].forEach( (msg) => {
+      PubSub.subscribe(msg, makeChart.bind(this, 'y'))
+    });
 
   };
 

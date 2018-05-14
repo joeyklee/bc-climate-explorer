@@ -23,6 +23,10 @@ app.controllers = (function() {
     el.selectors.yVariable.on("change", updateYVariable)
     el.selectors.xVariable.on("change", loadClimateNormalData)
     el.selectors.yVariable.on("change", loadClimateNormalData)
+    el.selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'))
+    el.selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'))
+    el.selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'))
+    el.selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'))
 
 
     // geo menu clicked
@@ -123,47 +127,33 @@ app.controllers = (function() {
     
   }
 
+
   /***
-  @get timeseries data
+  @ load timeSeries
   @*/
-  async function loadTimeSeriesX() {
-
-    let xSelection = formatClimateName(el.x.variable, el.x.timescale)
-
+  async function loadTimeSeries(selected){
+    let selection = formatClimateName(el[selected].variable, el[selected].timescale)
     try{
-    	var query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${xSelection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${el.focalUnitA}' OR id2 = '${el.focalUnitB}') AND year >= 1901 AND year <=2014`)
-    	let data = await $.getJSON(query)
+      let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${selection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${el.focalUnitA}' OR id2 = '${el.focalUnitB}') AND year >= 1901 AND year <=2014`)
+      let data = await $.getJSON(query)
 
-    	el.x.timeseries.years = data.rows.map(obj => (obj.year))
-    	el.x.timeseries.a = data.rows.map(obj => { if (obj.id2 == el.focalUnitA) return obj[xSelection] })
-    	el.x.timeseries.b = data.rows.map(obj => { if (obj.id2 == el.focalUnitB) return obj[xSelection] })
+      let dataA, dataB;
+      dataA = data.rows.filter(obj => {return obj.id2 === el.focalUnitA })
+      dataB = data.rows.filter(obj => {return obj.id2 === el.focalUnitB })
+      
+      el[selected].timeseries.years  = [...new Set(data.rows.map(item => item.year))];
+      el[selected].timeseries.a = dataA.map(obj => { if (obj.id2 == el.focalUnitA) return obj[selection] })
+      el[selected].timeseries.b = dataB.map(obj => { if (obj.id2 == el.focalUnitB) return obj[selection] })
 
-    	PubSub.publish("timeseriesXLoaded", el.x.timeseries)
-    } catch {
-    	console.log("timeseriesX: nothing loaded yet)")
-    }
-    
-  }
-
-  async function loadTimeSeriesY() {
-    let ySelection = formatClimateName(el.y.variable, el.y.timescale)
-
-    try{
-    	var query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${ySelection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${el.focalUnitA}' OR id2 = '${el.focalUnitB}') AND year >= 1901 AND year <=2014`)
-    	let data = await $.getJSON(query)
-
-    	el.y.timeseries.years = data.rows.map(obj => (obj.year))
-    	el.y.timeseries.a = data.rows.map(obj => { if (obj.id2 == el.focalUnitA) return obj[ySelection] })
-    	el.y.timeseries.b = data.rows.map(obj => { if (obj.id2 == el.focalUnitB) return obj[ySelection] })
-
-    	PubSub.publish("timeseriesYLoaded", el.y.timeseries)
+      PubSub.publish(`timeseries${selected.toUpperCase()}Loaded`, el[selected].timeseries)
 
     } catch {
-    	console.log("timeseriesY: nothing loaded yet)")
+      console.log("timeseriesY: nothing loaded yet)")
     }
-    
-    // console.log(el.y.timeseries)
+
   }
+
+
 
 
   /***
@@ -229,10 +219,11 @@ app.controllers = (function() {
   async function loadClimateProjections(dataSrc, rcpArr){
     let xSelection = formatClimateName(el.x.variable, el.x.timescale)
     let ySelection = formatClimateName(el.y.variable, el.y.timescale)
-    let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${xSelection}, ${ySelection} FROM ${dataSrc} WHERE id2 IS NOT NULL AND (id2='${el.focalUnitA}' OR id2='${el.focalUnitB}') AND (year > 2070 AND year <=2100)`)
+    let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${xSelection}, ${ySelection} FROM ${dataSrc} WHERE id2 IS NOT NULL AND (id2='${el.focalUnitA}' OR id2='${el.focalUnitB}') AND (year > 2010 AND year <=2100)`)
 
     try {
       let data = await $.getJSON(query)
+
       // console.log(data);
       let dataA, dataB;
       dataA = data.rows.filter(obj => {return obj.id2 === el.focalUnitA })
@@ -246,8 +237,7 @@ app.controllers = (function() {
       el.y.timeseries[`a_${rcpArr}`] = dataA.map(obj => (obj[ySelection]))
       el.y.timeseries[`b_${rcpArr}`] = dataB.map(obj => (obj[ySelection]))
 
-      console.log(el.x.timeseries);
-      PubSub.publish("projectedDataLoaded", {x: el.x.timeseries, y:el.x.timeseries})
+      PubSub.publish("projectedDataLoaded", {x: el.x.timeseries, y: el.y.timeseries})
 
     } catch{
       console.log("climate Projections data not loaded yet")
@@ -271,36 +261,33 @@ app.controllers = (function() {
     formatClimateName = app.main.formatClimateName;
 
     PubSub.subscribe("temporalSelectionChanged", loadClimateNormalData)
-    PubSub.subscribe("focalUnitAChanged", loadTimeSeriesX)
-    PubSub.subscribe("focalUnitAChanged", loadTimeSeriesY)
-    PubSub.subscribe("focalUnitBChanged", loadTimeSeriesX)
-    PubSub.subscribe("focalUnitBChanged", loadTimeSeriesY)
 
-    PubSub.subscribe("xTimescaleChanged", loadTimeSeriesX)
-    PubSub.subscribe("xVariableChanged", loadTimeSeriesX)
+    //TODO: get projections with var changes
+    let subscriptionMessages = [
+    'focalUnitAChanged',
+    'focalUnitBChanged',
+    'xTimescaleChanged',
+    'xVariableChanged',
+    'yTimescaleChanged',
+    'yVariableChanged'
+    ];
+    subscriptionMessages.forEach( msg => {
+      PubSub.subscribe( msg, loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45') );
+      PubSub.subscribe( msg, loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85') );
+      PubSub.subscribe(msg, loadTimeSeries.bind(this, 'x'));
+      PubSub.subscribe(msg, loadTimeSeries.bind(this, 'y'));
+    })
 
-    PubSub.subscribe("yTimescaleChanged", loadTimeSeriesY)
-    PubSub.subscribe("yVariableChanged", loadTimeSeriesY)
-
-    // get projections with var changes
-    // PubSub.subscribe("focalUnitAChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("focalUnitAChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("focalUnitBChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("focalUnitBChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("xTimescaleChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("xVariableChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("yTimescaleChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-    // PubSub.subscribe("yVariableChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
-
-
+    
     
     bindEvents();
     setInitialControllerState();
 
     loadClimateNormalData();
-    loadTimeSeriesX();
-    loadTimeSeriesY();
-    loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45');
+    loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45')
+    loadClimateProjections('bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85')
+    loadTimeSeries('x');
+    loadTimeSeries('y');
     
   };
 
