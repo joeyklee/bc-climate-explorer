@@ -148,6 +148,8 @@ app.scatterplot = (function(){
 	  el = app.main.el;
 	  PubSub.subscribe("scatterDataLoaded", buildChart)
 	  PubSub.subscribe("temporalSelectionChanged", buildChart)
+    PubSub.subscribe("focalUnitAChanged", buildChart)
+    PubSub.subscribe("focalUnitBChanged", buildChart)
 	};
 
 
