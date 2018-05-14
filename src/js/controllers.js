@@ -219,6 +219,45 @@ app.controllers = (function() {
     PubSub.publish("temporalSelectionChanged", { x: el.x.timescale, y: el.y.timescale })
   }
 
+
+  /*
+  @ Load Projections Data
+  @ var query_45 = "SELECT DISTINCT id2, year," + el.xSelector + ", + " + el.ySelector + " FROM " + 'bec10centroid_ensemblemean_rcp45_2011_2100msyt' + " WHERE id2 IS NOT NULL AND (id2 = '" + el.focal_name + "' OR id2 = '" + el.comparison_name + "') AND (year > " + 2070 + " AND year <=2100)";
+  @ var query_85 = "SELECT DISTINCT id2, year," + el.xSelector + ", + " + el.ySelector + " FROM " + 'bec10centroid_ensemblemean_rcp85_2011_2100msyt' + " WHERE id2 IS NOT NULL AND (id2 = '" + el.focal_name + "' OR id2 = '" + el.comparison_name + "') AND (year > " + 2070 + " AND year <=2100)";
+  @ */
+
+  async function loadClimateProjections(dataSrc, rcpArr){
+    let xSelection = formatClimateName(el.x.variable, el.x.timescale)
+    let ySelection = formatClimateName(el.y.variable, el.y.timescale)
+    let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${xSelection}, ${ySelection} FROM ${dataSrc} WHERE id2 IS NOT NULL AND (id2='${el.focalUnitA}' OR id2='${el.focalUnitB}') AND (year > 2070 AND year <=2100)`)
+
+    try {
+      let data = await $.getJSON(query)
+      // console.log(data);
+      let dataA, dataB;
+      dataA = data.rows.filter(obj => {return obj.id2 === el.focalUnitA })
+      dataB = data.rows.filter(obj => {return obj.id2 === el.focalUnitB })
+      // years
+      el.x.timeseries.years_projected = dataA.map(obj => (obj.year))
+      el.y.timeseries.years_projected = dataB.map(obj => (obj.year))
+      // fill projected arrays
+      el.x.timeseries[`a_${rcpArr}`] = dataA.map(obj => (obj[xSelection]))
+      el.x.timeseries[`b_${rcpArr}`] = dataB.map(obj => (obj[xSelection]))
+      el.y.timeseries[`a_${rcpArr}`] = dataA.map(obj => (obj[ySelection]))
+      el.y.timeseries[`b_${rcpArr}`] = dataB.map(obj => (obj[ySelection]))
+
+      console.log(el.x.timeseries);
+      PubSub.publish("projectedDataLoaded", {x: el.x.timeseries, y:el.x.timeseries})
+
+    } catch{
+      console.log("climate Projections data not loaded yet")
+    }
+
+  }
+
+
+
+
   /***
   @ Toggle Geo Menu
   @*/
@@ -229,6 +268,8 @@ app.controllers = (function() {
 
   var init = function() {
     el = app.main.el;
+    formatClimateName = app.main.formatClimateName;
+
     PubSub.subscribe("temporalSelectionChanged", loadClimateNormalData)
     PubSub.subscribe("focalUnitAChanged", loadTimeSeriesX)
     PubSub.subscribe("focalUnitAChanged", loadTimeSeriesY)
@@ -241,14 +282,26 @@ app.controllers = (function() {
     PubSub.subscribe("yTimescaleChanged", loadTimeSeriesY)
     PubSub.subscribe("yVariableChanged", loadTimeSeriesY)
 
+    // get projections with var changes
+    // PubSub.subscribe("focalUnitAChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("focalUnitAChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("focalUnitBChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("focalUnitBChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("xTimescaleChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("xVariableChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("yTimescaleChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
+    // PubSub.subscribe("yVariableChanged", loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt'))
 
-    formatClimateName = app.main.formatClimateName;
+
+    
     bindEvents();
     setInitialControllerState();
 
     loadClimateNormalData();
     loadTimeSeriesX();
     loadTimeSeriesY();
+    loadClimateProjections('bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45');
+    
   };
 
 

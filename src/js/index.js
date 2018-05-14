@@ -15,8 +15,13 @@ app.main = (function() {
     		},
     		timeseries:{
     			a:[],
+                a_rcp45:[],
+                a_rcp85:[],
     			b:[],
-                years:[]
+                b_rcp45:[],
+                b_rcp85:[],
+                years:[],
+                years_projected:[]
     		}
     	},
     	y:{
@@ -28,8 +33,13 @@ app.main = (function() {
     		},
     		timeseries:{
     			a:[],
+                a_rcp45:[],
+                a_rcp85:[],
     			b:[],
-                years:[]
+                b_rcp45:[],
+                b_rcp85:[],
+                years:[],
+                years_projected:[]
     		}
     	},
     	geo: {

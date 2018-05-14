@@ -112,7 +112,6 @@ app.setup = (function() {
   }
 
 
-
   /**
   * @ Get all the selectors
   * @ #Controller, #Charts
