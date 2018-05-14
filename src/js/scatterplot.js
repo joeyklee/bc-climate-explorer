@@ -8,7 +8,7 @@ app.scatterplot = (function(){
 	  HEIGHT_IN_PERCENT_OF_PARENT = 100;
 
 	function buildChart(){
-		let gd3, gd, series1;
+		let gd3, gd, series1, projectedA, projectedB;
 
 		d3.select("#scatter-child").remove();
     
@@ -29,24 +29,71 @@ app.scatterplot = (function(){
         color: '#F1BD53',
         size: 6,
         line: {
-              color: '#f7ab13',
-              width: 1
+            color: '#f7ab13',
+            width: 1
         }
       }
     }
+
+    projectedA45 = {
+      x: rollingAverage(el.x.timeseries.a_rcp45),
+      y: rollingAverage(el.y.timeseries.a_rcp45),
+      type: 'scatter',
+      mode: 'markers+lines'
+    }
+
+    projectedA85 = {
+      x: rollingAverage(el.x.timeseries.a_rcp85),
+      y: rollingAverage(el.y.timeseries.a_rcp85),
+      type: 'scatter',
+      mode: 'markers+lines'
+    }
+
+    projectedB45 = {
+      x: rollingAverage(el.x.timeseries.b_rcp45),
+      y: rollingAverage(el.y.timeseries.b_rcp45),
+      type: 'scatter',
+      mode: 'markers+lines'
+    }
+    projectedB85 = {
+      x: rollingAverage(el.x.timeseries.b_rcp85),
+      y: rollingAverage(el.y.timeseries.b_rcp85),
+      type: 'scatter',
+      mode: 'markers+lines'
+    }
+
+
     // get a copy of the default chart layout
     let scatterplotLayout = Object.assign({}, el.helpers.chartLayout)
     // add in your axis titles
     scatterplotLayout.xaxis.title = `${el.x.variable}`
 		scatterplotLayout.yaxis.title = `${el.y.variable}`
 
-    Plotly.plot(gd, [series1], scatterplotLayout, { displayModeBar: true });
+    Plotly.plot(gd, [series1, projectedA45,projectedA85, projectedB45,projectedB85], scatterplotLayout, { displayModeBar: true });
+    // Plotly.plot(gd, [series1, projectedA45], scatterplotLayout, { displayModeBar: true });
 
     d3.select(window).on('resize.scatterplot1', function() {
       Plotly.Plots.resize(gd)
     });
 
 	}
+
+  function rollingAverage(myArr){
+    let chunkyArray = createGroupedArray(myArr, 10);
+
+    let output = chunkyArray.map(arr => (d3.mean(arr)) );
+    return output;
+  }
+
+  function createGroupedArray(arr, chunkSize) {
+      var groups = [], i;
+      for (i = 0; i < arr.length; i += chunkSize) {
+          groups.push(arr.slice(i, i + chunkSize));
+      }
+      return groups;
+  }
+
+
 
 	var init = function() {
 	  el = app.main.el;
