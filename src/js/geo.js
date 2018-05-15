@@ -233,9 +233,10 @@ app.geo = (function() {
   /***
   @ Update map with climate variables on button click
   @ TODO: sort legend descending
+  @ TODO: get min, med, max & style accordingly
   @*/
   let colorPalettes = {
-    precip: ['white', 'steelblue'],
+    precip: ['brown', 'steelblue'],
     temp: [ 'steelblue', 'brown']
   }
 
