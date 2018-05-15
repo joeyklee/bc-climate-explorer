@@ -119,7 +119,6 @@ app.scatterplot = (function(){
 		scatterplotLayout.yaxis.title = `${el.y.variable}`
 
     Plotly.plot(gd, [series1, projectedA45,projectedA85, projectedB45,projectedB85], scatterplotLayout, { displayModeBar: true });
-    // Plotly.plot(gd, [series1, projectedA45], scatterplotLayout, { displayModeBar: true });
 
     d3.select(window).on('resize.scatterplot1', function() {
       Plotly.Plots.resize(gd)
@@ -150,6 +149,8 @@ app.scatterplot = (function(){
 	  PubSub.subscribe("temporalSelectionChanged", buildChart)
     PubSub.subscribe("focalUnitAChanged", buildChart)
     PubSub.subscribe("focalUnitBChanged", buildChart)
+    PubSub.subscribe("yTimescaleChanged", buildChart)
+    PubSub.subscribe("xTimescaleChanged", buildChart)
 	};
 
 
