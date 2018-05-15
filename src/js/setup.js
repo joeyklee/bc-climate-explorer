@@ -141,6 +141,11 @@ app.setup = (function() {
     el.selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
     el.selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
 
+    // geopopup
+    // el.selectors.geoPopup = $("#geo-popup")
+    el.selectors.geoPopupSelectA = null;
+    el.selectors.geoPopupSelectB = null;
+
     // return a promise in order to use chaining
     return new Promise( (resolve, reject) => {
       resolve(true)

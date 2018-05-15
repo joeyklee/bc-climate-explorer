@@ -3,7 +3,7 @@ var app = app || {};
 app.geo = (function() {
   console.log("hello from geo")
   var el = null;
-
+  let myPopUp = new mapboxgl.Popup();
 
   function initMap() {
     mapboxgl.accessToken = 'pk.eyJ1Ijoiam9leWtsZWUiLCJhIjoiY2pncmFuZGlkMDd2aDJ6cnQydHZ6ZXV4YSJ9.rgxCsa4n54D2nNH13dNs1A';
@@ -69,7 +69,62 @@ app.geo = (function() {
       el.geo.addLayer(highlightStyleA)
       el.geo.addLayer(highlightStyleB)
 
+
+      // add map click events
+      el.geo.on('click', 'bec-layer', function(e) {
+
+        // Remove existing popup on click since we need to update which
+        // focal unit is binded to each click event
+        myPopUp.remove();
+        myPopUp = new mapboxgl.Popup();
+
+        myPopUp
+          .setLngLat(e.lngLat)
+          .setHTML(datafill(e))
+          .addTo(el.geo);
+
+        el.selectors.geoPopupSelectA = $("#geo-focal-button-a")
+        el.selectors.geoPopupSelectB = $("#geo-focal-button-b")
+
+        el.selectors.geoPopupSelectA.on('click', updateFocalUnitA.bind(this, e.features[0].properties.MAP_LABEL))
+        el.selectors.geoPopupSelectB.on('click', updateFocalUnitB.bind(this, e.features[0].properties.MAP_LABEL))
+
+      });
+
     })
+  }
+
+  let datafill = function(obj) {
+    
+    let geoPopup = 
+      `
+      <div id="geo-popup">
+        <h4>${obj.features[0].properties.MAP_LABEL}</h4>
+        <small>set as</small>
+        <div>
+          <button class="btn" id="geo-focal-button-a">Focal Unit A</button>
+          <button class="btn" id="geo-focal-button-b">Focal Unit B</button>
+        </div>
+      </div>
+      `;
+      return geoPopup
+  }
+
+  /***
+  @ updateFocalUnitA
+  */
+  function updateFocalUnitA(val) {
+    el.focalUnitA = val;
+    el.selectors.focalUnitA.val(el.focalUnitA).trigger("chosen:updated")
+    PubSub.publish("focalUnitAChanged", { data: el.focalUnitA })
+  }
+  /***
+  @ updateFocalUnitB
+  */
+  function updateFocalUnitB(val) {
+    el.focalUnitB = val;
+    el.selectors.focalUnitB.val(el.focalUnitB).trigger("chosen:updated")
+    PubSub.publish("focalUnitBChanged", { data: el.focalUnitB })
   }
 
   /***
@@ -148,6 +203,7 @@ app.geo = (function() {
 
     // @ DISABLED FOR NOW
     // el.selectors.basemap.on('click', toggleBaseMap)
+
   }
 
 
@@ -235,37 +291,12 @@ app.geo = (function() {
       PubSub.publish("mapYButtonClicked", {style: currentStyle, feature: 'units'})
   }
 
+  /*
+  @ change focal unit highlight
+  @*/
   function changeFocalUnitHighlight(){
-    // add highlight layer:
-    // let focalUnitSelection = el[`focalUnit${select}`];
-
-    // console.log(el.geo)
     el.geo.setFilter('bec-layer-highlight-a', ['in', 'MAP_LABEL', el.focalUnitA]);
     el.geo.setFilter('bec-layer-highlight-b', ['in', 'MAP_LABEL', el.focalUnitB]);
-    // let focalA = el.geo.querySourceFeatures('bec-layer', { 
-    //   sourceLayer: 'BGCv10beta_100m', 
-    //   filter: ["in", "MAP_LABEL", el.focalUnitA] });
-    // let focalB = el.geo.querySourceFeatures('bec-layer', { 
-    //   sourceLayer: 'BGCv10beta_100m', 
-    //   filter: ["in", "MAP_LABEL", el.focalUnitB] });
-    
-    // if(select =="A"){
-      
-    // }else{
-
-    // }
-    
-    // function toFeatureCollection(features){
-    //   let jsons = [];
-    //   features.forEach(feat => {
-    //     jsons.push(feat.toJSON())
-    //   })
-    //   let collection = turf.featureCollection(jsons);
-    //   return collection
-    // }
-    // let fc = toFeatureCollection(features)
-    // el.geo.getSource('bec-layer-highlight').setData(fc);
-
   }
 
 
@@ -301,6 +332,7 @@ app.geo = (function() {
         changeLegend(el.colors.zoneStyles.paint);
         renderMapStyleChange.bind( el.colors.zoneStyles.paint, 'zones');
         changeFocalUnitHighlight();
+        // focalUnitPopUp()
 
         // TODO: publish change to trigger legend on 
         

@@ -48,7 +48,7 @@
     <div id="Controller">
       <!-- focal unit selectors -->
       <div id="Focal-Unit-Selectors" class="selector-container">
-      	<div>Explore</div>
+        <div>Explore</div>
         <!-- focal unit A -->
         <div id="Focal-Unit-A-Selector" class="dropdown-selector">
           <div>
@@ -65,7 +65,7 @@
       </div>
       <!-- map variable selectors -->
       <div id="Variable-Selectors" class="selector-container">
-      	<div>for</div>
+        <div>for</div>
         <!-- variable x -->
         <div id="Variable-X-Selector" class="selector-container">
           <!-- timescale selector -->
@@ -109,39 +109,43 @@
       <div class="row1">
         <!-- map -->
         <div class="chart">
-          <div class="chart-title"><label>BEC Zones, Units, and Climate</label></div>
+          <div class="chart-title">
+            <label>BEC Zones, Units, and Climate</label>
+          </div>
           <div id="Geo">
-          	<!-- top buttons -->
-          	<div id="Geo-Controls">
-          		<div id="Geo-Zone-Button" class="btn">BEC ZONES</div>
-          		<div id="Geo-Unit-Button" class="btn">BEC UNITS</div>
-          		<div id="Geo-X-Button" class="btn">
-          			<span class="x-timescale-title">ts</span>
-          			<span class="x-variable-title">x</span>
-          		</div>
-          		<div id="Geo-Y-Button" class="btn">
-          			<span class="y-timescale-title">ts</span>
-          			<span class="y-variable-title">y</span>
-          		</div>
-          	</div>
-          	<!-- geo menu -->
-          	<div id="Geo-Menu" class="active">
-          		<div class="geo-menu-toggle">menu</div>
-          		<div class="geo-menu-content">
-          			<div class="map-legend">
+            <!-- top buttons -->
+            <div id="Geo-Controls">
+              <div id="Geo-Zone-Button" class="btn">BEC ZONES</div>
+              <div id="Geo-Unit-Button" class="btn">BEC UNITS</div>
+              <div id="Geo-X-Button" class="btn">
+                <span class="x-timescale-title">ts</span>
+                <span class="x-variable-title">x</span>
+              </div>
+              <div id="Geo-Y-Button" class="btn">
+                <span class="y-timescale-title">ts</span>
+                <span class="y-variable-title">y</span>
+              </div>
+            </div>
+            <!-- geo menu -->
+            <div id="Geo-Menu" class="active">
+              <div class="geo-menu-toggle">menu</div>
+              <div class="geo-menu-content">
+                <div class="map-legend">
                   <div></div>
                 </div>
                 <!-- basemap switcher -->
                 <div class="map-basemap-switcher">
                   <div>Switch Basemap</div>
                 </div>
-          		</div>
-          	</div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- scatterplot -->
         <div class="chart">
-          <div class="chart-title"><label>Climate Normals: 1981-2010</label></div>
+          <div class="chart-title">
+            <label>Climate Normals: 1981-2010</label>
+          </div>
           <div id="Scatterplot"></div>
         </div>
       </div>
@@ -149,12 +153,16 @@
       <div class="row2">
         <!-- timeseries X -->
         <div class="chart">
-          <div class="chart-title"><label>Timeseries: <span class="x-variable-title">X Variable</span></label></div>
+          <div class="chart-title">
+            <label>Timeseries: <span class="x-variable-title">X Variable</span></label>
+          </div>
           <div id="TimeseriesX"></div>
         </div>
         <!-- timeseries Y -->
         <div class="chart">
-          <div class="chart-title"><label>Timeseries: <span class="y-variable-title">Y Variable</span> </label></div>
+          <div class="chart-title">
+            <label>Timeseries: <span class="y-variable-title">Y Variable</span> </label>
+          </div>
           <div id="TimeseriesY"></div>
         </div>
       </div>
@@ -174,7 +182,7 @@
   <!-- turfjs -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
   <!-- pubsub -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pubsub-js/1.6.0/pubsub.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pubsub-js/1.6.0/pubsub.js"></script>
   <!-- modules -->
   <script type="text/javascript" src="src/js/index.js"></script>
   <script type="text/javascript" src="src/js/setup.js"></script>
