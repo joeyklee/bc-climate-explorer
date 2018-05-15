@@ -101,9 +101,9 @@ app.geo = (function() {
       <div id="geo-popup">
         <h4>${obj.features[0].properties.MAP_LABEL}</h4>
         <small>set as</small>
-        <div>
-          <button class="btn" id="geo-focal-button-a">Focal Unit A</button>
-          <button class="btn" id="geo-focal-button-b">Focal Unit B</button>
+        <div id="geo-popup-row">
+          <div class="btn" id="geo-focal-button-a">Focal Unit A</div>
+          <div class="btn" id="geo-focal-button-b">Focal Unit B</div>
         </div>
       </div>
       `;

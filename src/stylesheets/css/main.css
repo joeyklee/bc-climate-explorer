@@ -7,11 +7,11 @@
 header, #Controller, #Charts, footer {
   margin: 1px 6px 4px 6px; }
 
-#Controller, #Controller .selector-container, #Charts .row1, #Charts .row2, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, footer {
+#Controller, #Controller .selector-container, #Charts .row1, #Charts .row2, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
   display: flex;
   flex-direction: row; }
 
-#Controller .dropdown-selector, #Charts, #Charts .chart, #Geo, #Geo #Geo-Menu {
+#Controller .dropdown-selector, #Charts, #Charts .chart, #Geo, #Geo #Geo-Menu, #geo-popup {
   display: flex;
   flex-direction: column; }
 
@@ -138,14 +138,14 @@ header {
     text-align: center;
     flex-wrap: wrap; }
     #Geo #Geo-Controls .btn {
-      padding: 4px;
-      border: 2px solid white;
+      padding: 2px;
+      border: 1px solid #7BCBB4;
       margin-right: 5px;
-      background-color: #7BCBB4;
+      background-color: white;
       cursor: pointer;
       min-width: 80px;
       font-size: 10px;
-      color: white; }
+      color: black; }
   #Geo #Geo-Menu {
     position: absolute;
     width: 100%;
@@ -158,7 +158,7 @@ header {
       align-self: center;
       margin-top: -13px;
       margin-bottom: 2px;
-      border: 2px solid black;
+      border: 1px solid #7BCBB4;
       text-align: center;
       justify-content: center;
       align-items: center;
@@ -201,6 +201,27 @@ header {
         font-size: 12px; }
   #Geo #Geo-Menu.active {
     transform: translateY(0px); }
+
+#geo-popup {
+  justify-content: center;
+  align-items: center;
+  text-align: center; }
+  #geo-popup h4 {
+    margin: 0;
+    padding: 4px; }
+  #geo-popup #geo-popup-row {
+    justify-content: center;
+    align-items: center; }
+    #geo-popup #geo-popup-row .btn {
+      max-width: 60px;
+      padding: 4px;
+      cursor: pointer;
+      margin: 2px;
+      font-size: 10px; }
+    #geo-popup #geo-popup-row #geo-focal-button-a {
+      background-color: #FE7452; }
+    #geo-popup #geo-popup-row #geo-focal-button-b {
+      background-color: #7BCBB4; }
 
 footer {
   justify-content: center;

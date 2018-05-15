@@ -16,14 +16,14 @@
 		flex-wrap:wrap;
 
 		.btn{
-			padding:4px;
-			border:2px solid white;
+			padding:2px;
+			border:1px solid $mint;
 			margin-right:5px;
-			background-color: $mint;
+			background-color: white;
 			cursor: pointer;
 			min-width: 80px;
 			font-size: 10px;
-			color:white;
+			color:black;
 		}
 	}
 
@@ -42,7 +42,7 @@
 			align-self:center;
 			margin-top: -13px;
 			margin-bottom:2px;
-			border: 2px solid black;
+			border: 1px solid $mint;
 			text-align: center;
 			@extend %flex-row;
 			justify-content: center;
@@ -103,4 +103,39 @@
 		transform:translateY(0px);
 	}
 
+}
+
+#geo-popup{
+	@extend %flex-column;
+	justify-content:center;
+	align-items:center;
+	text-align: center;
+
+	h4{
+		margin:0;
+		padding:4px;
+	}
+
+	#geo-popup-row{
+		@extend %flex-row;
+		justify-content:center;
+		align-items:center;
+
+		.btn{
+			max-width:60px;
+			padding:4px;
+			cursor: pointer;
+			margin:2px;
+			font-size: 10px;
+		}
+
+		#geo-focal-button-a{
+			background-color: #FE7452;
+		}
+		#geo-focal-button-b{
+			background-color: #7BCBB4;
+		}
+	}
+
+	
 }
