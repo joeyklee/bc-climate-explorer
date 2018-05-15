@@ -39,6 +39,36 @@ app.geo = (function() {
       el.geo.addLayer(el.colors.zoneStyles)
       renderMapStyleChange(el.colors.zoneStyles.paint, 'zones')
 
+      let highlightStyleA = {
+        "id": "bec-layer-highlight-a",
+        "source": "bec-layer",
+        "source-layer": "BGCv10beta_100m",
+        "paint": {
+           "line-width": 4,
+          "line-color": '#FE7452',
+          "line-opacity":0.75,
+          "line-blur": 0
+        },
+        "type": "line",
+        "filter": ["in", "MAP_LABEL", el.focalUnitA]
+      }
+      let highlightStyleB = {
+        "id": "bec-layer-highlight-b",
+        "source": "bec-layer",
+        "source-layer": "BGCv10beta_100m",
+        "paint": {
+          "line-width": 4,
+          "line-color": '#7BCBB4',
+          "line-opacity":0.75,
+          "line-blur": 0
+        },
+        "type": "line",
+        "filter": ["in", "MAP_LABEL", el.focalUnitB]
+      }
+
+      el.geo.addLayer(highlightStyleA)
+      el.geo.addLayer(highlightStyleB)
+
     })
   }
 
@@ -205,6 +235,39 @@ app.geo = (function() {
       PubSub.publish("mapYButtonClicked", {style: currentStyle, feature: 'units'})
   }
 
+  function changeFocalUnitHighlight(){
+    // add highlight layer:
+    // let focalUnitSelection = el[`focalUnit${select}`];
+
+    // console.log(el.geo)
+    el.geo.setFilter('bec-layer-highlight-a', ['in', 'MAP_LABEL', el.focalUnitA]);
+    el.geo.setFilter('bec-layer-highlight-b', ['in', 'MAP_LABEL', el.focalUnitB]);
+    // let focalA = el.geo.querySourceFeatures('bec-layer', { 
+    //   sourceLayer: 'BGCv10beta_100m', 
+    //   filter: ["in", "MAP_LABEL", el.focalUnitA] });
+    // let focalB = el.geo.querySourceFeatures('bec-layer', { 
+    //   sourceLayer: 'BGCv10beta_100m', 
+    //   filter: ["in", "MAP_LABEL", el.focalUnitB] });
+    
+    // if(select =="A"){
+      
+    // }else{
+
+    // }
+    
+    // function toFeatureCollection(features){
+    //   let jsons = [];
+    //   features.forEach(feat => {
+    //     jsons.push(feat.toJSON())
+    //   })
+    //   let collection = turf.featureCollection(jsons);
+    //   return collection
+    // }
+    // let fc = toFeatureCollection(features)
+    // el.geo.getSource('bec-layer-highlight').setData(fc);
+
+  }
+
 
 
 
@@ -223,6 +286,9 @@ app.geo = (function() {
     PubSub.subscribe("mapXButtonClicked", changeLegend)
     PubSub.subscribe("mapYButtonClicked", changeLegend)
 
+    PubSub.subscribe("focalUnitAChanged", changeFocalUnitHighlight.bind(this, 'A'))
+    PubSub.subscribe("focalUnitBChanged", changeFocalUnitHighlight.bind(this, 'B'))
+
     
     // PubSub.subscribe("mapBasemapChanged", toggleBaseMap)
     loadStyles()
@@ -234,6 +300,8 @@ app.geo = (function() {
         
         changeLegend(el.colors.zoneStyles.paint);
         renderMapStyleChange.bind( el.colors.zoneStyles.paint, 'zones');
+        changeFocalUnitHighlight();
+
         // TODO: publish change to trigger legend on 
         
       })
