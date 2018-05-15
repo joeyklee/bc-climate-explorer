@@ -11,7 +11,7 @@ header, #Controller, #Charts, footer {
   display: flex;
   flex-direction: row; }
 
-#Controller .dropdown-selector, #Charts, #Charts .chart, #Geo, #Geo #Geo-Menu, #geo-popup {
+#Controller .dropdown-selector, #Charts, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
   display: flex;
   flex-direction: column; }
 
@@ -178,14 +178,42 @@ header {
         background-color: white;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap; }
-        #Geo #Geo-Menu .geo-menu-content .map-legend .hidden {
-          padding: 10px;
-          display: flex;
+        flex-wrap: wrap;
+        /* Tooltip container */
+        /* Tooltip text */
+        /* Show the tooltip text when you mouse over the tooltip container */ }
+        #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val {
+          justify-content: center;
+          align-items: center; }
+        #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip {
+          justify-content: center;
+          align-items: center; }
+        #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip .tooltiptext {
           visibility: hidden;
-          z-index: 3000; }
-        #Geo #Geo-Menu .geo-menu-content .map-legend div:hover .hidden {
-          visibility: visible; }
+          width: 40px;
+          background-color: white;
+          color: #000000;
+          text-align: center;
+          padding: 2px;
+          margin-top: -35px;
+          /* Position the tooltip text - see examples below! */
+          position: absolute;
+          z-index: 1; }
+        #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext {
+          visibility: visible;
+          justify-content: center;
+          align-items: center;
+          position: fixed; }
+        #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip .tooltiptext::after {
+          content: " ";
+          position: absolute;
+          top: 100%;
+          /* At the bottom of the tooltip */
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: white transparent transparent transparent; }
       #Geo #Geo-Menu .geo-menu-content .map-basemap-switcher {
         margin-left: 5px;
         width: 20%;
