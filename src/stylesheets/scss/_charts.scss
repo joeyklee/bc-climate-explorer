@@ -12,10 +12,6 @@
 		// margin-bottom:8px;
 	}
 
-	// .row1 .chart:nth-child(1){
- //    margin-right:2px;
- //    width:100%;
-	// }
 	// .row1 .chart:nth-child(2){
  //    margin-left:2px;
  //    width:100%;
@@ -26,6 +22,7 @@
 		@extend %flex-column;
 		width:50%;
 		height:100%;
+		margin-right: 4px;
 	}
 	.col2 .chart:nth-child(1){
     height:50%;
