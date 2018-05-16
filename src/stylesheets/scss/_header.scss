@@ -1,6 +1,6 @@
 header{
 	display: flex;
-	flex-direction:row;
+	flex-direction:column;
 	align-items:center;
 	padding:10px;
 	@extend %outer-margin;
@@ -30,7 +30,8 @@ header{
 
 	// container 2
 	nav{
-		margin-left:40px;
+		// margin-left:40px;
+		font-size: 10px;
 
 		ul{
 			display: flex;
