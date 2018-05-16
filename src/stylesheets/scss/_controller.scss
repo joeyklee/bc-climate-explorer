@@ -11,6 +11,39 @@
 	border:2px solid $mint;
 	box-shadow: 3px 3px $papaya;
 	border-radius: 8px;
+	// turn it into a hamburger
+  // overflow: hidden;
+
+
+	// .icon {
+	//   display: none;
+	// }
+
+	// @media screen and (max-width: 800px) {
+	//   .controller-container {visibility: hidden;}
+	//   .icon {
+	//   	position: absolute;
+	//     right: 0;
+	//     top: 0;
+	//     display: block;
+	//     z-index: 1000;
+	//   }
+	// }
+
+	// @media screen and (max-width: 800px) {
+	//   .controller-container.responsive {position: relative;}
+	//   .controller-container.responsive .icon {
+	//     position: absolute;
+	//     right: 0;
+	//     top: 0;
+	//   }
+	//   .controller-container.responsive{
+	//     float: none;
+	//     visibility:visible;
+	//     text-align: left;
+	//   }
+	// }
+
 
 	.controller-container{
 		@extend %flex-row;
@@ -43,6 +76,8 @@
 			font-size: 10px;
 		}
 	}
+
+
 
 }
 

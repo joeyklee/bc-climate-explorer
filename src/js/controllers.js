@@ -31,6 +31,13 @@ app.controllers = (function() {
 
     // geo menu clicked
     el.selectors.geoMenu.on("click", toggleGeoMenu)
+
+    // hamburger
+    // $('.icon').click(function(){
+    //   console.log("clicked")
+    //   $('.controller-container').toggleClass("responsive");
+    // })
+
   }
 
   /***
