@@ -7,7 +7,7 @@
 header, #Controller, #Charts, footer {
   margin: 1px 6px 4px 6px; }
 
-#Controller, #Controller .selector-container, #Charts, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
+#Controller, #Controller .controller-container, #Controller .selector-container, #Charts, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
   display: flex;
   flex-direction: row; }
 
@@ -64,17 +64,20 @@ header {
           color: black; }
 
 #Controller {
-  padding: 10px;
+  padding: 2px;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  align-items: center;
   background-color: white;
   border: 2px solid #7BCBB4;
   box-shadow: 3px 3px #000000;
   border-radius: 8px; }
   #Controller #Focal-Unit-Selectors, #Controller #Variable-Selectors {
-    align-items: flex-end; }
-  #Controller .selector-container div {
-    margin-right: 5px; }
+    align-items: flex-end;
+    margin-right: 10px; }
+  #Controller #Focal-Unit-A-Selector {
+    margin-right: 10px; }
+  #Controller #Variable-X-Selector {
+    margin-right: 10px; }
   #Controller .dropdown-selector {
     justify-content: flex-start;
     max-width: 160px; }
@@ -118,6 +121,18 @@ header {
       position: relative;
       width: 100%;
       height: 100%; }
+
+@media (max-width: 600px) {
+  #Charts {
+    display: flex;
+    flex-direction: column;
+    min-height: 1200px; }
+    #Charts .col1 {
+      width: 100%;
+      height: 100%; }
+    #Charts .col2 {
+      width: 100%;
+      height: 100%; } }
 
 #Geo {
   position: relative; }
