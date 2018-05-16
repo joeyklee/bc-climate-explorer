@@ -44,5 +44,15 @@
 		}
 	}
 
+}
+
+@media screen and (max-width:980px){
+	#Controller{
+		min-height:100px;
+
+		.controller-container{
+			flex-direction:column;
+		}
+	}
 
 }
