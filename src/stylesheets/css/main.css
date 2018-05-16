@@ -47,7 +47,7 @@ header {
       border-radius: 50%;
       background-color: #7BCBB4;
       margin-right: 10px;
-      box-shadow: 2px 2px #000000; }
+      box-shadow: 2px 2px #FE7452; }
   header nav {
     font-size: 10px; }
     header nav ul {
@@ -69,13 +69,16 @@ header {
   align-items: center;
   background-color: white;
   border: 2px solid #7BCBB4;
-  box-shadow: 3px 3px #000000;
   border-radius: 8px; }
   #Controller #Focal-Unit-Selectors, #Controller #Variable-Selectors {
     align-items: flex-end;
     margin-right: 10px; }
   #Controller #Focal-Unit-A-Selector {
     margin-right: 10px; }
+    #Controller #Focal-Unit-A-Selector label {
+      color: #FE7452; }
+  #Controller #Focal-Unit-B-Selector label {
+    color: #7BCBB4; }
   #Controller #Variable-X-Selector {
     margin-right: 10px; }
   #Controller .dropdown-selector {
@@ -108,8 +111,7 @@ header {
     height: 25%; }
   #Charts .chart {
     background-color: white;
-    border: 2px solid #7BCBB4;
-    box-shadow: 3px 3px #000000; }
+    border: 2px solid #7BCBB4; }
     #Charts .chart .chart-title {
       background-color: #7BCBB4;
       padding: 2px 2px 2px 10px; }
