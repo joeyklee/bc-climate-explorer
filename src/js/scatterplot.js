@@ -22,7 +22,7 @@ app.scatterplot = (function(){
     series1 = {
       x: el.x.scatterplot.data,
       y: el.y.scatterplot.data,
-      label: el.x.scatterplot.zone,
+      label: el.x.scatterplot.zones,
       type: 'scatter',
       mode: 'markers',
       marker: {
@@ -124,7 +124,44 @@ app.scatterplot = (function(){
       Plotly.Plots.resize(gd)
     });
 
+    // click events - light up map:
+    gd.on('plotly_click', function(selectedPoint){
+        // alert('You clicked this Plotly chart!');
+        
+        let idx = selectedPoint.points[0].pointIndex
+        let selectedLabel = selectedPoint.points[0].data.label[idx]
+        let features = el.geo.querySourceFeatures('bec-layer', { 
+          sourceLayer: 'BGCv10beta_100m', 
+          filter: ["in", "MAP_LABEL", selectedLabel] });
+
+        let centroid = getCentroid(features).geometry.coordinates
+
+          el.geo.flyTo({
+                 center: centroid,
+                 zoom: 6
+             });
+
+          // TODO: persist filtering on click
+          // create array of last 2 clicked items
+          // for now, just open popup
+          // mymap.setFilter('bec-layer-clicked', ['in', 'MAP_LABEL', selectedLabel]);
+          // console.log(centroid)
+           el.geo.fire('click', {lngLat: [centroid[0], centroid[1] - 0.3] } );
+    });
+
 	}
+
+  function getCentroid(featureArray){
+    let jsons = [];
+    featureArray.forEach(feat => {
+      jsons.push(feat.toJSON())
+    })
+
+    let collection = turf.featureCollection(jsons);
+    return turf.centerOfMass(collection)
+
+  }
+
 
   function rollingAverage(myArr){
     let chunkyArray = createGroupedArray(myArr, 10);
@@ -151,6 +188,7 @@ app.scatterplot = (function(){
     PubSub.subscribe("focalUnitBChanged", buildChart)
     PubSub.subscribe("yTimescaleChanged", buildChart)
     PubSub.subscribe("xTimescaleChanged", buildChart)
+    PubSub.subscribe("projectedDataLoaded", buildChart)
 	};
 
 

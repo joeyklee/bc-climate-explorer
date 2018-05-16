@@ -114,6 +114,7 @@ app.geo = (function() {
   @ updateFocalUnitA
   */
   function updateFocalUnitA(val) {
+    console.log("focal a clicked!")
     el.focalUnitA = val;
     el.selectors.focalUnitA.val(el.focalUnitA).trigger("chosen:updated")
     PubSub.publish("focalUnitAChanged", { data: el.focalUnitA })
@@ -122,6 +123,7 @@ app.geo = (function() {
   @ updateFocalUnitB
   */
   function updateFocalUnitB(val) {
+    console.log("focal B clicked!")
     el.focalUnitB = val;
     el.selectors.focalUnitB.val(el.focalUnitB).trigger("chosen:updated")
     PubSub.publish("focalUnitBChanged", { data: el.focalUnitB })
