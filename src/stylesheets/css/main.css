@@ -7,11 +7,11 @@
 header, #Controller, #Charts, footer {
   margin: 1px 6px 4px 6px; }
 
-#Controller, #Controller .selector-container, #Charts .row1, #Charts .row2, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
+#Controller, #Controller .selector-container, #Charts, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
   display: flex;
   flex-direction: row; }
 
-#Controller .dropdown-selector, #Charts, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
+#Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
   display: flex;
   flex-direction: column; }
 
@@ -84,25 +84,19 @@ header {
 #Charts {
   flex: 1;
   background-color: white; }
-  #Charts .row1 {
-    width: 100%;
-    height: 72%;
-    margin-bottom: 8px; }
-  #Charts .row1 .chart:nth-child(1) {
-    margin-right: 2px;
-    width: 50%; }
-  #Charts .row1 .chart:nth-child(2) {
-    margin-left: 2px;
-    width: 50%; }
-  #Charts .row2 {
-    width: 100%;
-    height: 28%; }
-  #Charts .row2 .chart:nth-child(1) {
-    margin-right: 2px;
-    width: 50%; }
-  #Charts .row2 .chart:nth-child(2) {
-    margin-left: 2px;
-    width: 50%; }
+  #Charts .col1 {
+    width: 50%;
+    height: 100%;
+    margin-right: 4px; }
+  #Charts .col2 {
+    width: 50%;
+    height: 100%; }
+  #Charts .col2 .chart:nth-child(1) {
+    height: 50%; }
+  #Charts .col2 .chart:nth-child(2) {
+    height: 25%; }
+  #Charts .col2 .chart:nth-child(3) {
+    height: 25%; }
   #Charts .chart {
     background-color: white;
     border: 2px solid #7BCBB4;

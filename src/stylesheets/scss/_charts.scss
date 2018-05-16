@@ -1,40 +1,50 @@
 #Charts{
-	@extend %flex-column;
+	@extend %flex-row;
 	@extend %outer-margin;
 	flex: 1;
 	background-color:white;
 
-	.row1{
-		@extend %flex-row;
-		width:100%;
-		height:72%;
-		margin-bottom:8px;
+	.col1{
+		@extend %flex-column;
+		width:50%;
+		height:100%;
+		margin-right: 4px;
+		// margin-bottom:8px;
 	}
 
-	.row1 .chart:nth-child(1){
-    margin-right:2px;
-    width:50%;
-	}
-	.row1 .chart:nth-child(2){
-    margin-left:2px;
-    width:50%;
-	}
+	// .row1 .chart:nth-child(1){
+ //    margin-right:2px;
+ //    width:100%;
+	// }
+	// .row1 .chart:nth-child(2){
+ //    margin-left:2px;
+ //    width:100%;
+	// }
 	
 
-	.row2{
-		@extend %flex-row;
-		width:100%;
-		height:28%;
+	.col2{
+		@extend %flex-column;
+		width:50%;
+		height:100%;
+	}
+	.col2 .chart:nth-child(1){
+    height:50%;
+	}
+	.col2 .chart:nth-child(2){
+    height:25%;
+	}
+	.col2 .chart:nth-child(3){
+    height:25%;
 	}
 
-	.row2 .chart:nth-child(1){
-    margin-right:2px;
-    width:50%;
-	}
-	.row2 .chart:nth-child(2){
-    margin-left:2px;
-    width:50%;
-	}
+	// .row2 .chart:nth-child(1){
+ //    margin-right:2px;
+ //    width:100%;
+	// }
+	// .row2 .chart:nth-child(2){
+ //    margin-left:2px;
+ //    width:100%;
+	// }
 
 	.chart{
 		@extend %flex-column;
