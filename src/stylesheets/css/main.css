@@ -28,41 +28,29 @@ html, body {
 
 header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 10px;
-  background-image: url(../../../src/assets/header-bg-1.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  color: black;
-  text-shadow: 0.5px 0.5px white;
-  border-radius: 8px; }
-  header #Logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center; }
-    header #Logo .logo-placeholder {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: #7BCBB4;
-      margin-right: 10px;
-      box-shadow: 2px 2px #FE7452; }
-  header nav {
-    font-size: 10px; }
-    header nav ul {
-      display: flex;
-      flex-direction: row;
-      margin: 0;
-      padding: 0;
-      list-style: none; }
-      header nav ul li {
-        list-style: none;
-        margin-right: 10px; }
-        header nav ul li a {
-          text-decoration: none;
-          color: black; }
+  justify-content: space-between;
+  padding: 4px 2px 2px 2px;
+  color: #7BCBB4;
+  letter-spacing: 2px;
+  font-size: 10px;
+  text-align: center; }
+  header #header-title {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 4px; }
+  header div {
+    min-width: 100px; }
+  header div:nth-child(1) {
+    text-align: left;
+    font-weight: 400; }
+  header div:nth-child(3) {
+    text-align: right;
+    font-weight: 400; }
+  header a {
+    text-decoration: none;
+    color: #7BCBB4; }
 
 #Controller {
   padding: 2px;

@@ -1,58 +1,37 @@
 header{
 	display: flex;
-	flex-direction:column;
+	flex-direction:row;
 	align-items:center;
-	padding:10px;
+	justify-content:space-between;
+	padding: 4px 2px 2px 2px;
 	@extend %outer-margin;
-	background-image: url(../../../src/assets/header-bg-1.svg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	color: black;
-	text-shadow: 0.5px 0.5px white;
-	border-radius: 8px;
+	color: $mint;
+	letter-spacing: 2px;
+	font-size: 10px;
+	text-align: center;
 
-	// container 1
-	#Logo{
-		display: flex;
-		flex-direction:row;
-		align-items:center;
-
-		.logo-placeholder{
-			width:30px;
-			height: 30px;
-			border-radius: 50%;
-			background-color: $mint;
-			margin-right:10px;
-			box-shadow: 2px 2px $papaya;
-		}
+	#header-title{
+		font-weight: 700;
+		font-size: 12px;
+		letter-spacing: 4px;
 	}
 
-	// container 2
-	nav{
-		// margin-left:40px;
-		font-size: 10px;
+	div{
+		min-width:100px;
+	}
+	div:nth-child(1){
+		text-align: left;
+		font-weight: 400;
+	}
+	div:nth-child(3){
+		text-align: right;
+		font-weight: 400;
+	}
 
-		ul{
-			display: flex;
-			flex-direction:row;
-			margin:0;
-			padding:0;
-			list-style: none;
+	a{
+		text-decoration: none;
+		color:$mint;
+	}
 
-			li{
-				list-style: none;
-				margin-right:10px;
-
-				a{
-					text-decoration: none;
-					color:black;
-				} // end a
-
-			} // end li
-
-		} // end ul
-
-	} // end nav
 
 } // end header
