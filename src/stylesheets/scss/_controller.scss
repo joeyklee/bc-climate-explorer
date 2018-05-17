@@ -20,6 +20,7 @@
 			margin:0px 20px 0px 10px;
 			letter-spacing: -1px;
 			font-weight: 700;
+			color:$midnight;
 		}
 	}
 
@@ -29,11 +30,13 @@
 	// }
 
 	#Focal-Unit-Selectors{
-		@extend %flex-column;
+		@extend %flex-row;
+		flex-wrap:wrap;
 	}
 
 	#Variable-Selectors{
-		@extend %flex-column;
+		@extend %flex-row;
+		flex-wrap:wrap;
 	}
 
 
@@ -63,6 +66,7 @@
 	.time-dropdown{
 		max-width: 90px;
 	}
+
 	.focal-dropdown,
 	.variable-dropdown{
 		max-width: 180px;

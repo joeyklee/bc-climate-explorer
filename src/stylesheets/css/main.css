@@ -7,11 +7,11 @@
 header, #Controller, #Charts, footer {
   margin: 4px 6px 1px 6px; }
 
-#Controller, #Controller .controller-container, #Controller .selector-container, #Charts, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
+#Controller, #Controller .controller-container, #Controller #Focal-Unit-Selectors, #Controller #Variable-Selectors, #Controller .selector-container, #Charts, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
   display: flex;
   flex-direction: row; }
 
-#Controller #Focal-Unit-Selectors, #Controller #Variable-Selectors, #Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
+#Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
   display: flex;
   flex-direction: column; }
 
@@ -78,7 +78,12 @@ header {
       font-size: 40px;
       margin: 0px 20px 0px 10px;
       letter-spacing: -1px;
-      font-weight: 700; }
+      font-weight: 700;
+      color: #45475D; }
+  #Controller #Focal-Unit-Selectors {
+    flex-wrap: wrap; }
+  #Controller #Variable-Selectors {
+    flex-wrap: wrap; }
   #Controller #Focal-Unit-A-Selector {
     margin-right: 10px; }
     #Controller #Focal-Unit-A-Selector label {
@@ -127,7 +132,8 @@ header {
       background-color: #FFFFFF;
       padding: 2px 2px 2px 10px; }
       #Charts .chart .chart-title label {
-        font-size: 10px; }
+        font-size: 10px;
+        color: #45475D; }
     #Charts .chart #Scatterplot {
       position: relative;
       width: 100%;
@@ -167,26 +173,28 @@ header {
     flex-wrap: wrap; }
     #Geo #Geo-Controls .btn {
       padding: 2px;
-      border: 1px solid #7BCBB4;
+      border: 2px solid #45475D;
       margin-right: 5px;
       background-color: white;
       cursor: pointer;
       min-width: 80px;
       font-size: 10px;
-      color: black; }
+      color: black;
+      letter-spacing: 2px; }
   #Geo #Geo-Menu {
     position: absolute;
     width: 100%;
     height: 120px;
     bottom: 0px;
     z-index: 1000;
-    background-color: #7BCBB4;
+    background-color: rgba(255, 255, 255, 0.5);
     transform: translateY(110px); }
     #Geo #Geo-Menu .geo-menu-toggle {
       align-self: center;
       margin-top: -13px;
       margin-bottom: 2px;
-      border: 1px solid #7BCBB4;
+      border: 2px solid #45475D;
+      letter-spacing: 2px;
       text-align: center;
       justify-content: center;
       align-items: center;
@@ -203,7 +211,9 @@ header {
         width: 80%;
         height: 100px;
         z-index: 1000;
-        background-color: white;
+        border-right: 2px solid #45475D;
+        border-top: 2px solid #45475D;
+        border-bottom: 2px solid #45475D;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -247,15 +257,19 @@ header {
         width: 20%;
         height: 100px;
         z-index: 1000;
+        border-left: 2px solid #45475D;
+        border-top: 2px solid #45475D;
+        border-bottom: 2px solid #45475D;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: white;
+        background-color: none;
         text-align: center;
         flex-wrap: wrap;
         font-size: 12px;
-        cursor: pointer; }
+        cursor: pointer;
+        letter-spacing: 2px; }
   #Geo #Geo-Menu.active {
     transform: translateY(0px); }
 
@@ -282,9 +296,12 @@ header {
 
 footer {
   justify-content: center;
-  padding: 2px; }
-  footer small {
-    font-size: 8px; }
+  padding: 2px;
+  font-size: 8px;
+  color: #7BCBB4; }
+  footer a {
+    color: #7BCBB4;
+    text-decoration: underline; }
 
 .chosen-container-single .chosen-single {
   position: relative;

@@ -17,13 +17,14 @@
 
 		.btn{
 			padding:2px;
-			border:1px solid $mint;
+			border:2px solid $midnight;
 			margin-right:5px;
 			background-color: white;
 			cursor: pointer;
 			min-width: 80px;
 			font-size: 10px;
 			color:black;
+			letter-spacing: 2px;
 		}
 	}
 
@@ -34,7 +35,7 @@
 		bottom:0px;
 		z-index: 1000;
 		// border:1px solid $papaya;
-		background-color: $mint;
+		background-color: rgba(255,255,255,0.5);
 		@extend %flex-column;
 		transform:translateY(110px);
 
@@ -42,7 +43,8 @@
 			align-self:center;
 			margin-top: -13px;
 			margin-bottom:2px;
-			border: 1px solid $mint;
+			border: 2px solid $midnight;
+			letter-spacing: 2px;
 			text-align: center;
 			@extend %flex-row;
 			justify-content: center;
@@ -63,8 +65,9 @@
 				width:80%;
 				height: 100px;
 				z-index: 1000;
-				background-color: white;
-				// border:1px solid black;
+				border-right:2px solid $midnight;
+				border-top:2px solid $midnight;
+				border-bottom:2px solid $midnight;
 				display: flex;
 				flex-direction: row;
 				flex-wrap:wrap;
@@ -138,16 +141,19 @@
 				width:20%;
 				height:100px;
 				z-index: 1000;
-				// border:1px solid black;
+				border-left:2px solid $midnight;
+				border-top:2px solid $midnight;
+				border-bottom:2px solid $midnight;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				background-color: white;
+				background-color: none;
 				text-align: center;
 				flex-wrap:wrap;
 				font-size: 12px;
 				cursor: pointer;
+				letter-spacing: 2px;
 			}
 		}
 
