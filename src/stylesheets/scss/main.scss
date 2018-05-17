@@ -1,9 +1,11 @@
 // colors
 $border-color: #000000;
 $pink: #FF47A3;
-$mint:#7BCBB4;
+$mint: #7BCBB4;
 $mango:#F1BD53;
 $papaya: #FE7452; 
+$white: #FFFFFF;
+$midnight: #45475D;
 
 // fonts
 $font-main: Helvetica, sans-serif;
@@ -22,7 +24,7 @@ $font-main: Helvetica, sans-serif;
 
 // 4px padding around edge
 %outer-margin{
-	margin: 1px 6px 4px 6px;
+	margin: 4px 6px 1px 6px;
 }
 
 %flex-row{
@@ -41,7 +43,7 @@ html,body{
 	height:100%;
 	margin:0;
 	font-family: $font-main;
-	background-color: #45475D;
+	background-color: $midnight;
 }
 
 
@@ -65,3 +67,4 @@ html,body{
 @import 'charts';
 @import 'geo';
 @import 'footer';
+@import 'chosenStyles';

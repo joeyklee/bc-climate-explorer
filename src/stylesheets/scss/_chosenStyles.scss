@@ -1,0 +1,70 @@
+.chosen-container-single .chosen-single {
+
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0 0 0 8px;
+    height: 25px;
+    border:none;
+    border-bottom: 1px solid #aaa;
+    border-radius: 0px;
+    background-color: #fff;
+    background: none;
+    background-clip: padding-box;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #444;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+
+}
+
+.chosen-container-active .chosen-single {
+
+    border-bottom: 1px solid #aaa;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single {
+
+    border: none;
+    border-bottom: 1px solid #aaa;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-image: none;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+}
+
+.chosen-container .chosen-drop {
+
+    position: absolute;
+    top: 100%;
+    z-index: 1010;
+    width: 100%;
+    border: none;
+    border-top: 0;
+    background: #fff;
+    background-clip: border-box;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: none;
+
+}
+
+.chosen-container .chosen-results {
+    color: #444;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0 0px 0px 0;
+    padding: 0 0 0 4px;
+    max-height: 240px;
+    -webkit-overflow-scrolling: touch;
+
+}

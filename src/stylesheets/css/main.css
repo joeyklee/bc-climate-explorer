@@ -5,13 +5,13 @@
   height: 100%; }
 
 header, #Controller, #Charts, footer {
-  margin: 1px 6px 4px 6px; }
+  margin: 4px 6px 1px 6px; }
 
 #Controller, #Controller .controller-container, #Controller .selector-container, #Charts, #Geo #Geo-Controls, #Geo #Geo-Menu .geo-menu-toggle, #geo-popup #geo-popup-row, footer {
   display: flex;
   flex-direction: row; }
 
-#Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
+#Controller #Focal-Unit-Selectors, #Controller #Variable-Selectors, #Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
   display: flex;
   flex-direction: column; }
 
@@ -69,10 +69,16 @@ header {
   justify-content: flex-start;
   align-items: center;
   background-color: white;
-  border: 2px solid #7BCBB4; }
-  #Controller #Focal-Unit-Selectors, #Controller #Variable-Selectors {
-    align-items: flex-end;
-    margin-right: 10px; }
+  border: 2px solid #FFFFFF; }
+  #Controller .controller-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%; }
+    #Controller .controller-container .controller-text {
+      font-size: 40px;
+      margin: 0px 20px 0px 10px;
+      letter-spacing: -1px;
+      font-weight: 700; }
   #Controller #Focal-Unit-A-Selector {
     margin-right: 10px; }
     #Controller #Focal-Unit-A-Selector label {
@@ -81,13 +87,17 @@ header {
     color: #7BCBB4; }
   #Controller #Variable-X-Selector {
     margin-right: 10px; }
+  #Controller .time-dropdown {
+    max-width: 90px; }
+  #Controller .focal-dropdown,
+  #Controller .variable-dropdown {
+    max-width: 180px; }
   #Controller .dropdown-selector {
-    justify-content: flex-start;
-    max-width: 160px; }
+    justify-content: flex-start; }
     #Controller .dropdown-selector label {
       font-size: 10px; }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 600px) {
   #Controller {
     min-height: 100px; }
     #Controller .controller-container {
@@ -95,26 +105,26 @@ header {
 
 #Charts {
   flex: 1;
-  background-color: white; }
+  background-color: #45475D; }
   #Charts .col1 {
     width: 50%;
     height: 100%;
     margin-right: 4px; }
   #Charts .col2 {
     width: 50%;
-    height: 100%;
-    margin-right: 4px; }
+    height: 100%; }
   #Charts .col2 .chart:nth-child(1) {
     height: 50%; }
   #Charts .col2 .chart:nth-child(2) {
+    margin-top: 4px;
     height: 25%; }
   #Charts .col2 .chart:nth-child(3) {
+    margin-top: 4px;
     height: 25%; }
   #Charts .chart {
-    background-color: white;
-    border: 2px solid #7BCBB4; }
+    background-color: #FFFFFF; }
     #Charts .chart .chart-title {
-      background-color: #7BCBB4;
+      background-color: #FFFFFF;
       padding: 2px 2px 2px 10px; }
       #Charts .chart .chart-title label {
         font-size: 10px; }
@@ -275,3 +285,60 @@ footer {
   padding: 2px; }
   footer small {
     font-size: 8px; }
+
+.chosen-container-single .chosen-single {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0 0 0 8px;
+  height: 25px;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  border-radius: 0px;
+  background-color: #fff;
+  background: none;
+  background-clip: padding-box;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #444;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 24px; }
+
+.chosen-container-active .chosen-single {
+  border-bottom: 1px solid #aaa;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important; }
+
+.chosen-container-active.chosen-with-drop .chosen-single {
+  border: none;
+  border-bottom: 1px solid #aaa;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-image: none;
+  background-image: none;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
+.chosen-container .chosen-drop {
+  position: absolute;
+  top: 100%;
+  z-index: 1010;
+  width: 100%;
+  border: none;
+  border-top: 0;
+  background: #fff;
+  background-clip: border-box;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  display: none; }
+
+.chosen-container .chosen-results {
+  color: #444;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0 0px 0px 0;
+  padding: 0 0 0 4px;
+  max-height: 240px;
+  -webkit-overflow-scrolling: touch; }

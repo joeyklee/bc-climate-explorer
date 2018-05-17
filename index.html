@@ -33,13 +33,11 @@
     <!-- controller -->
     <div id="Controller">
       <!-- header -->
-      <header id="Header">
-        <!-- logo -->
+      <!-- <header id="Header">
         <div id="Logo">
           <div class="logo-placeholder"></div>
           <div>BC Climate Explorer</div>
         </div>
-        <!-- nav -->
         <nav>
           <ul>
             <li><a href="#">about</a></li>
@@ -47,37 +45,38 @@
             <li><a href="#">help</a></li>
           </ul>
         </nav>
-      </header>
+      </header> -->
       <div class="controller-container">
+        <div class="controller-text">CHOOSE</div>
         <!-- focal unit selectors -->
         <div id="Focal-Unit-Selectors" class="selector-container">
           
           <!-- focal unit A -->
-          <div id="Focal-Unit-A-Selector" class="dropdown-selector">
+          <div id="Focal-Unit-A-Selector" class="dropdown-selector focal-dropdown">
             <div>
               <label>Focal Unit A</label>
             </div>
           </div>
           <!-- focal unit B -->
-          <div id="Focal-Unit-B-Selector" class="dropdown-selector">
+          <div id="Focal-Unit-B-Selector" class="dropdown-selector focal-dropdown">
             <div>
               <label>Focal Unit B</label>
             </div>
           </div>
         </div>
+        <div class="controller-text">EXAMINE</div>
         <!-- map variable selectors -->
         <div id="Variable-Selectors" class="selector-container">
-          
           <!-- variable x -->
           <div id="Variable-X-Selector" class="selector-container">
             <!-- timescale selector -->
-            <div id="X-Time-Dropdown" class="dropdown-selector">
+            <div id="X-Time-Dropdown" class="dropdown-selector time-dropdown">
               <div>
                 <label>Timescale</label>
               </div>
             </div>
             <!-- variable selector -->
-            <div id="X-Variable-Dropdown" class="dropdown-selector">
+            <div id="X-Variable-Dropdown" class="dropdown-selector variable-dropdown">
               <div>
                 <label>X Variable</label>
               </div>
@@ -88,13 +87,13 @@
           <!-- variable y -->
           <div id="Variable-Y-Selector" class="selector-container">
             <!-- timescale selector -->
-            <div id="Y-Time-Dropdown" class="dropdown-selector">
+            <div id="Y-Time-Dropdown" class="dropdown-selector time-dropdown">
               <div>
                 <label>Timescale</label>
               </div>
             </div>
             <!-- variable selector -->
-            <div id="Y-Variable-Dropdown" class="dropdown-selector">
+            <div id="Y-Variable-Dropdown" class="dropdown-selector variable-dropdown">
               <div>
                 <label>Y Variable</label>
               </div>

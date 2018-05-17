@@ -6,53 +6,37 @@
 	@extend %outer-margin;
 	justify-content:flex-start;
 	align-items: center;
-	// flex-wrap:wrap;
 	background-color:white;
-	border:2px solid $mint;
-	// box-shadow: 3px 3px $papaya;
-	// border-radius: 8px;
-	// turn it into a hamburger
-  // overflow: hidden;
-
-
-	// .icon {
-	//   display: none;
-	// }
-
-	// @media screen and (max-width: 800px) {
-	//   .controller-container {visibility: hidden;}
-	//   .icon {
-	//   	position: absolute;
-	//     right: 0;
-	//     top: 0;
-	//     display: block;
-	//     z-index: 1000;
-	//   }
-	// }
-
-	// @media screen and (max-width: 800px) {
-	//   .controller-container.responsive {position: relative;}
-	//   .controller-container.responsive .icon {
-	//     position: absolute;
-	//     right: 0;
-	//     top: 0;
-	//   }
-	//   .controller-container.responsive{
-	//     float: none;
-	//     visibility:visible;
-	//     text-align: left;
-	//   }
-	// }
-
+	border:2px solid $white;
 
 	.controller-container{
 		@extend %flex-row;
+		justify-content:center;
+		align-items:center;
+		width:100%;
+
+		.controller-text{
+			font-size: 40px;
+			margin:0px 20px 0px 10px;
+			letter-spacing: -1px;
+			font-weight: 700;
+		}
 	}
 
-	#Focal-Unit-Selectors, #Variable-Selectors{
-		align-items:flex-end;
-		margin-right: 10px;
+	// #Focal-Unit-Selectors, #Variable-Selectors{
+	// 	align-items:flex-end;
+	// 	margin-right: 10px;
+	// }
+
+	#Focal-Unit-Selectors{
+		@extend %flex-column;
 	}
+
+	#Variable-Selectors{
+		@extend %flex-column;
+	}
+
+
 
 	#Focal-Unit-A-Selector{
 		margin-right: 10px;
@@ -76,10 +60,17 @@
 
 	}
 
+	.time-dropdown{
+		max-width: 90px;
+	}
+	.focal-dropdown,
+	.variable-dropdown{
+		max-width: 180px;
+	}
+
 	.dropdown-selector{
 		@extend %flex-column;
 		justify-content:flex-start;
-		max-width:160px;
 
 		label{
 			font-size: 10px;
@@ -87,10 +78,9 @@
 	}
 
 
-
 }
 
-@media screen and (max-width:980px){
+@media screen and (max-width:600px){
 	#Controller{
 		min-height:100px;
 
