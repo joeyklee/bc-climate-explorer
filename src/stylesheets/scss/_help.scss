@@ -1,0 +1,21 @@
+#Help{
+	display: none;
+	background-color: rgba(0, 0, 0, 0.5);
+	@extend %full-width-and-height;
+
+	.active{
+		@extend %flex-column;
+		justify-content:center;
+		align-items:center;
+
+
+		#Help-content{
+			@extend %flex-column;
+			padding:10px;
+			background-color: white;
+			width:60%;
+			height:60%;
+
+		}
+	}
+}

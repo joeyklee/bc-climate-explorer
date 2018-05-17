@@ -160,9 +160,24 @@ app.setup = (function() {
     })
   }
 
+  function toggleAbout(){
+    $("#About-button, #About-close").click(function(){
+      console.log("about clicked!")
+      $("#About").toggleClass("active")
+    })
+  };
+
+  function toggleHelp(){
+    $("#Help-button").click(function(){
+      $("#Help").toggleClass("active")
+    })
+  };
+
 
   var init = function() {
     el = app.main.el;
+    toggleAbout()
+    toggleHelp()
     // Load up all the components
     return loadTimescales()
       .then(loadClimateVariables)

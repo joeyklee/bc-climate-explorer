@@ -1,6 +1,6 @@
 /* Border style */
 /* Full width and height */
-.App, #Charts .chart, #Geo {
+.App, #Charts .chart, #Geo, #About, #Help {
   width: 100%;
   height: 100%; }
 
@@ -11,7 +11,7 @@ header, #Controller, #Charts, footer {
   display: flex;
   flex-direction: row; }
 
-#Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup {
+#Controller .dropdown-selector, #Charts .col1, #Charts .col2, #Charts .chart, #Geo, #Geo #Geo-Menu, #Geo #Geo-Menu .geo-menu-content .map-legend .legend-val, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip, #Geo #Geo-Menu .geo-menu-content .map-legend .tooltip:hover .tooltiptext, #geo-popup, #About.active, #About.active #About-content, #About.active .modal-header, #Help .active, #Help .active #Help-content {
   display: flex;
   flex-direction: column; }
 
@@ -366,3 +366,40 @@ footer {
   padding: 0 0 0 4px;
   max-height: 240px;
   -webkit-overflow-scrolling: touch; }
+
+#About {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+#About.active {
+  z-index: 5000;
+  justify-content: center;
+  align-items: center; }
+  #About.active #About-content {
+    padding: 10px;
+    background-color: white;
+    width: 60%;
+    height: 60%;
+    overflow-y: auto; }
+  #About.active .modal-header {
+    justify-content: center;
+    align-items: center;
+    text-align: center; }
+    #About.active .modal-header #About-close {
+      align-self: flex-end; }
+
+#Help {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5); }
+  #Help .active {
+    justify-content: center;
+    align-items: center; }
+    #Help .active #Help-content {
+      padding: 10px;
+      background-color: white;
+      width: 60%;
+      height: 60%; }
