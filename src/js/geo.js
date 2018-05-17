@@ -9,8 +9,8 @@ app.geo = (function() {
     mapboxgl.accessToken = 'pk.eyJ1Ijoiam9leWtsZWUiLCJhIjoiY2pncmFuZGlkMDd2aDJ6cnQydHZ6ZXV4YSJ9.rgxCsa4n54D2nNH13dNs1A';
 
     el.geo = new mapboxgl.Map({
-      center: [-123.1, 52.2],
-      zoom: 3,
+      center: [-125.0, 54.8],
+      zoom: 4.3,
       minZoom: 3,
       maxZoom: 10,
       container: 'Geo',
