@@ -170,7 +170,7 @@ app.geo = (function() {
     // loop through
     switched.style['fill-color'].forEach( (item, idx, arr) => {      
       if( idx > 1 && idx < arr.length - 1 && item.startsWith("#")){
-        legendItems += `<div class="tooltip" style="width:10px;height:10px;background-color:${item}"><span class="tooltiptext">${arr[idx-1]}</span></div>\n`
+        legendItems += `<div class="tooltip" style="width:12px;height:12px;background-color:${item}"><span class="tooltiptext">${arr[idx-1]}</span></div>\n`
       }
     })
 

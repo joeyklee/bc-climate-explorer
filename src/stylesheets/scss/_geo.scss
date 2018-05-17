@@ -74,6 +74,8 @@
 				justify-content:flex-start;
 				align-content:center;
 				flex-wrap:wrap;
+				overflow-x:hidden;
+				overflow-y:auto;
 
 				.legend-val{
 					@extend %flex-column;

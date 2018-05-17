@@ -219,6 +219,8 @@ header {
         justify-content: flex-start;
         align-content: center;
         flex-wrap: wrap;
+        overflow-x: hidden;
+        overflow-y: auto;
         /* Tooltip container */
         /* Tooltip text */
         /* Show the tooltip text when you mouse over the tooltip container */ }
