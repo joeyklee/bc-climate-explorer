@@ -86,10 +86,26 @@
 
 @media screen and (max-width:600px){
 	#Controller{
-		min-height:100px;
+		min-height:300px;
 
 		.controller-container{
 			flex-direction:column;
+			justify-content:center;
+
+			#Focal-Unit-Selectors{
+				flex-direction:column;
+				// flex-wrap:wrap;
+			}
+
+			#Variable-Selectors{
+				flex-direction:column;
+				// flex-wrap:wrap;
+			}
+
+			.controller-text{
+				margin-top: 10px;
+			}
+
 		}
 	}
 

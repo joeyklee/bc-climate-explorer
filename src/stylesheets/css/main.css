@@ -104,9 +104,16 @@ header {
 
 @media screen and (max-width: 600px) {
   #Controller {
-    min-height: 100px; }
+    min-height: 300px; }
     #Controller .controller-container {
-      flex-direction: column; } }
+      flex-direction: column;
+      justify-content: center; }
+      #Controller .controller-container #Focal-Unit-Selectors {
+        flex-direction: column; }
+      #Controller .controller-container #Variable-Selectors {
+        flex-direction: column; }
+      #Controller .controller-container .controller-text {
+        margin-top: 10px; } }
 
 #Charts {
   flex: 1;
