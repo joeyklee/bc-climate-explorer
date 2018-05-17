@@ -5,7 +5,7 @@
 	@extend %flex-row;
 	@extend %outer-margin;
 	justify-content:flex-start;
-	align-items: center;
+	align-items: flex-start;
 	background-color:white;
 	border:2px solid $white;
 
@@ -14,35 +14,39 @@
 		justify-content:center;
 		align-items:center;
 		width:100%;
+		flex-wrap:wrap;
 
 		.controller-text{
-			font-size: 40px;
+			font-size: 16px;
 			margin:0px 20px 0px 10px;
 			letter-spacing: -1px;
 			font-weight: 700;
 			color:$midnight;
+			text-align: center;
 		}
 	}
 
-	// #Focal-Unit-Selectors, #Variable-Selectors{
-	// 	align-items:flex-end;
-	// 	margin-right: 10px;
-	// }
 
 	#Focal-Unit-Selectors{
 		@extend %flex-row;
-		flex-wrap:wrap;
+		justify-content:flex-start;
+		align-items:flex-end;
+		// flex-basis:50%;
+		// flex-wrap:wrap;
 	}
 
 	#Variable-Selectors{
 		@extend %flex-row;
-		flex-wrap:wrap;
+		justify-content:flex-start;
+		align-items:flex-end;
+		// flex-basis:50%;
+		// flex-wrap:wrap;
 	}
 
 
 
 	#Focal-Unit-A-Selector{
-		margin-right: 10px;
+		// margin-right: 10px;
 
 		label{
 			color: $papaya;
@@ -55,7 +59,7 @@
 	}
 
 	#Variable-X-Selector{
-		margin-right: 10px;
+		// margin-right: 10px;
 	}
 
 	.selector-container{
@@ -94,11 +98,15 @@
 
 			#Focal-Unit-Selectors{
 				flex-direction:column;
+				justify-content:center;
+				align-items:center;
 				// flex-wrap:wrap;
 			}
 
 			#Variable-Selectors{
 				flex-direction:column;
+				justify-content:center;
+				align-items:center;
 				// flex-wrap:wrap;
 			}
 
