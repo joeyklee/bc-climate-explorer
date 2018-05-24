@@ -1,3 +1,5 @@
+import mapboxgl from 'mapbox-gl';
+
 var app = app || {};
 
 app.geo = (function() {
