@@ -1,12 +1,10 @@
+.idea/
+build/
+release/
 node_modules/
-
-*.log
-
 private/*
-.DS_Store
-
 layout/.sass-cache/
-
 data/archive/*
-
 data/spatialData/*
+.DS_Store
+*.log
