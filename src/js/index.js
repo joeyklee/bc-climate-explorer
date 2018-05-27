@@ -1,3 +1,5 @@
+import '../stylesheets/scss/main.scss'
+
 var app = app || {};
 
 app.main = (function() {
