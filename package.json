@@ -28,12 +28,15 @@
     "npm": "^6.1.0"
   },
   "devDependencies": {
+    "css-loader": "^0.28.11",
     "hex-to-hsl": "^1.0.2",
     "hsl-to-hex": "^1.0.0",
     "http-server": "^0.11.1",
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.4",
-    "webpack": "^4.8.3",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4"
   }
 }
