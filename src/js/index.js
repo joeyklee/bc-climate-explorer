@@ -4,6 +4,11 @@ import "../stylesheets/scss/main.scss"
 // Bc-climate-explorer files
 import "./setup";
 import "./controllers";
+import "./geo";
+
+// NPM dependencies;
+import "chosen-js";
+import "mapbox-gl";
 
 var app = app || {};
 

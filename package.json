@@ -29,6 +29,7 @@
     "webpack": "^4.9.1"
   },
   "devDependencies": {
+    "chosen-js": "^1.8.5",
     "css-loader": "^0.28.11",
     "hex-to-hsl": "^1.0.2",
     "hsl-to-hex": "^1.0.0",

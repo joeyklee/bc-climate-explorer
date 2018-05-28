@@ -1,16 +1,18 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-    entry: './src/js/index.js',
+    entry: "./src/js/index.js",
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist")
     },
     plugins: [
         new webpack.ProvidePlugin({
-            $: 'jquery',
-            PubSub: 'pubsub-js'
+            $: "jquery",
+            jQuery: "jquery",
+            PubSub: "pubsub-js",
+            mapboxgl: "mapbox-gl"
         })
     ],
     module: {
@@ -24,6 +26,5 @@ module.exports = {
                 loader: "sass-loader"
             }]
         }]
-    },
-
+    }
 };
