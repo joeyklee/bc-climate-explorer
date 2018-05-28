@@ -9,7 +9,8 @@ module.exports = {
     },
     plugins: [
         new webpack.ProvidePlugin({
-            $: 'jquery'
+            $: 'jquery',
+            PubSub: 'pubsub-js'
         })
     ],
     module: {

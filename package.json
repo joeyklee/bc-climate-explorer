@@ -36,7 +36,9 @@
     "jquery": "^3.3.1",
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.4",
+    "pubsub-js": "^1.6.0",
     "sass-loader": "^7.0.1",
-    "style-loader": "^0.21.0"
+    "style-loader": "^0.21.0",
+    "webpack-cli": "^2.1.4"
   }
 }

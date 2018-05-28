@@ -3,11 +3,12 @@ import "../stylesheets/scss/main.scss"
 
 // Bc-climate-explorer files
 import "./setup";
+import "./controllers";
 
 var app = app || {};
 
 app.main = (function () {
-    console.log("hello from index")
+    console.log("hello from index");
     // store variables in el and expose them to other js files
     let el = {
         focalUnitA: 'SBSdw3',
