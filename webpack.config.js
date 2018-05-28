@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/js/index.js',
@@ -6,6 +7,11 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery'
+        })
+    ],
     module: {
         rules: [{
             test: /\.scss$/,
@@ -17,5 +23,6 @@ module.exports = {
                 loader: "sass-loader"
             }]
         }]
-    }
+    },
+
 };

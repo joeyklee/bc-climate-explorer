@@ -1,3 +1,4 @@
+// Styles
 import '../stylesheets/scss/main.scss'
 
 var app = app || {};
