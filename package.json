@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
   "dependencies": {
+    "d3": "^5.4.0",
     "mapbox-gl": "^0.45.0",
     "npm": "^6.1.0",
     "webpack": "^4.9.1"

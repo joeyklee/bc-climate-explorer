@@ -9,6 +9,7 @@ import "./geo";
 // NPM dependencies;
 import "chosen-js";
 import "mapbox-gl";
+import "d3";
 
 var app = app || {};
 
