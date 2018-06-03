@@ -385,12 +385,16 @@ footer {
     width: 60%;
     height: 60%;
     overflow-y: auto; }
+    #About.active #About-content section div {
+      margin-bottom: 10px; }
   #About.active .modal-header {
     justify-content: center;
     align-items: center;
     text-align: center; }
     #About.active .modal-header #About-close {
       align-self: flex-end; }
+  #About.active a:hover {
+    cursor: pointer; }
 
 #Help {
   display: none;

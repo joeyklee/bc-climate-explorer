@@ -23,6 +23,10 @@
 			width:60%;
 			height:60%;
 			overflow-y:auto;
+
+			section div{
+				margin-bottom: 10px;
+			}
 		}
 
 		.modal-header{
@@ -35,5 +39,9 @@
 			#About-close{
 				align-self:flex-end;
 			}
+		}
+
+		a:hover{
+			cursor: pointer;
 		}
 	}
