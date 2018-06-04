@@ -5,6 +5,8 @@ import "../stylesheets/scss/main.scss"
 import "./setup";
 import "./controllers";
 import "./geo";
+import "./scatterplot";
+import "./timeseries";
 
 // NPM dependencies;
 import "chosen-js";
