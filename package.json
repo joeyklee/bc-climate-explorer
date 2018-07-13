@@ -24,10 +24,13 @@
   },
   "homepage": "https://github.com/joeyklee/bc-climate-explorer#readme",
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "d3": "^5.4.0",
     "mapbox-gl": "^0.45.0",
     "npm": "^6.1.0",
-    "webpack": "^4.9.1"
+    "webpack": "^4.16.0"
   },
   "devDependencies": {
     "chosen-js": "^1.8.5",
