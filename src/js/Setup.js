@@ -1,16 +1,18 @@
-var app = app || {};
+'use strict';
 
-app.setup = (function () {
-    console.log("hello from setup")
-    var el = null;
+export default class {
+
+    constructor(data) {
+        this._data = data;
+    }
 
     /***
      * @ Load Climate Variables
      * @ Loads the climate normal variables from a json and appends them to the page
      **/
-    async function loadClimateVariables() {
-        let data = await $.getJSON("src/data/climate-variables-master/climate-variables-list.json", () => {
-            let dropdownMenu = createClimateVariablesDropdown(data);
+    loadClimateVariables() {
+        return $.getJSON("data/climate-variables-master/climate-variables-list.json", (data) => {
+            let dropdownMenu = this.createClimateVariablesDropdown(data);
 
             $("#X-Variable-Dropdown").append(dropdownMenu);
             $("#Y-Variable-Dropdown").append(dropdownMenu);
@@ -20,21 +22,21 @@ app.setup = (function () {
 
     }
 
-    function createClimateVariablesDropdown(json) {
+    createClimateVariablesDropdown(json) {
         let dropdownOptionsList = [];
 
         json.forEach(function (d) {
             let dropdownOption = `<option label="${d.timeScale}" data-timescale="${d.timeScale}" data-logtransform="${d.logTransform}" value="${d.variable}">${d.variable} - ${d.description}</option>`
             dropdownOptionsList.push(dropdownOption)
-        })
+        });
 
 
-        let dropdown = `
-                <select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
+        let dropdown =
+                `<select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
                   <option value=""></option>
                   ${dropdownOptionsList.join("\n")}
-                </select>
-        `
+                </select>`;
+
         return dropdown;
     }
 
@@ -43,9 +45,9 @@ app.setup = (function () {
      * @ Load timescales
      * @ Loads the timescale units from a json and appends them to the page
      * @ */
-    async function loadTimescales() {
-        let data = await $.getJSON("src/data/timescale-list/timescale-list.json", () => {
-            let dropdownMenu = createTimescaleDropdown(data);
+    loadTimescales() {
+        return $.getJSON("data/timescale-list/timescale-list.json", function(data) {
+            let dropdownMenu = this.createTimescaleDropdown(data);
 
             $("#X-Time-Dropdown").append(dropdownMenu);
             $("#Y-Time-Dropdown").append(dropdownMenu);
@@ -54,13 +56,13 @@ app.setup = (function () {
         });
     }
 
-    function createTimescaleDropdown(json) {
+    createTimescaleDropdown(json) {
         let dropdownOptionsList = [];
 
         json.forEach(function (d) {
             let dropdownOption = `<option value="${d.timeUnit}" data-timescale="${d.timeScale}">${d.timeUnit}</option>`
             dropdownOptionsList.push(dropdownOption)
-        })
+        });
 
 
         let dropdown = `
@@ -68,8 +70,10 @@ app.setup = (function () {
                   <option value=""></option>
                   ${dropdownOptionsList.join("\n")}
                 </select>
-        `
-        return dropdown;
+        `;
+
+        $("#X-Time-Dropdown").append(dropdown);
+        $("#Y-Time-Dropdown").append(dropdown);
     }
 
 
@@ -77,9 +81,9 @@ app.setup = (function () {
      * @ Load Focal Units
      * @ Loads the focal units from a json and appends them to the page
      */
-    async function loadFocalUnits() {
-        let data = await $.getJSON("src/data/bec-names-list/BGCunits_Ver10_2017.json", () => {
-            let dropdownMenu = createFocalUnitDropdown(data);
+     loadFocalUnits() {
+        return $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json", (data) => {
+            let dropdownMenu = this.createFocalUnitDropdown(data);
 
             $("#Focal-Unit-A-Selector").append(dropdownMenu);
             $("#Focal-Unit-B-Selector").append(dropdownMenu);
@@ -88,7 +92,7 @@ app.setup = (function () {
         });
     }
 
-    function createFocalUnitDropdown(json) {
+    createFocalUnitDropdown(json) {
         let dropdownOptionsList = [];
 
         json.forEach(function (d) {
@@ -111,34 +115,34 @@ app.setup = (function () {
      * @ #Controller, #Charts
      * @
      */
-    function loadSelectors() {
+    loadSelectors() {
         let ControllerSelectors, ChartSelectors;
         // Get DOM elements
         ControllerSelectors = $("#Controller")
         ChartSelectors = $("#Charts")
 
         // focal unit selectors
-        el.selectors.focalUnitA = ControllerSelectors.find("#Focal-Unit-A-Selector select")
-        el.selectors.focalUnitB = ControllerSelectors.find("#Focal-Unit-B-Selector select")
+        this._data.selectors.focalUnitA = ControllerSelectors.find("#Focal-Unit-A-Selector select")
+        this._data.selectors.focalUnitB = ControllerSelectors.find("#Focal-Unit-B-Selector select")
         // time component selectors
-        el.selectors.xTimescale = ControllerSelectors.find("#X-Time-Dropdown select")
-        el.selectors.yTimescale = ControllerSelectors.find("#Y-Time-Dropdown select")
+        this._data.selectors.xTimescale = ControllerSelectors.find("#X-Time-Dropdown select")
+        this._data.selectors.yTimescale = ControllerSelectors.find("#Y-Time-Dropdown select")
         // variable selectors
-        el.selectors.xVariable = ControllerSelectors.find("#X-Variable-Dropdown select")
-        el.selectors.yVariable = ControllerSelectors.find("#Y-Variable-Dropdown select")
+        this._data.selectors.xVariable = ControllerSelectors.find("#X-Variable-Dropdown select")
+        this._data.selectors.yVariable = ControllerSelectors.find("#Y-Variable-Dropdown select")
 
         // geo controllers
-        el.selectors.geoZone = ChartSelectors.find("#Geo-Zone-Button")
-        el.selectors.geoUnit = ChartSelectors.find("#Geo-Unit-Button")
-        el.selectors.geoX = ChartSelectors.find("#Geo-X-Button")
-        el.selectors.geoY = ChartSelectors.find("#Geo-Y-Button")
-        el.selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
-        el.selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
+        this._data.selectors.geoZone = ChartSelectors.find("#Geo-Zone-Button")
+        this._data.selectors.geoUnit = ChartSelectors.find("#Geo-Unit-Button")
+        this._data.selectors.geoX = ChartSelectors.find("#Geo-X-Button")
+        this._data.selectors.geoY = ChartSelectors.find("#Geo-Y-Button")
+        this._data.selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
+        this._data.selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
 
         // geopopup
-        // el.selectors.geoPopup = $("#geo-popup")
-        el.selectors.geoPopupSelectA = null;
-        el.selectors.geoPopupSelectB = null;
+        // this._data.selectors.geoPopup = $("#geo-popup")
+        this._data.selectors.geoPopupSelectA = null;
+        this._data.selectors.geoPopupSelectB = null;
 
         // return a promise in order to use chaining
         return new Promise((resolve, reject) => {
@@ -147,46 +151,51 @@ app.setup = (function () {
 
     }
 
-    function initChosen() {
-        $(".chosen-select").chosen()
+    initChosen() {
+        $(".chosen-select").chosen();
         return new Promise((resolve, reject) => {
             resolve(true)
         })
     }
 
-    function toggleAbout() {
+    toggleAbout() {
         $("#About-button, #About-close").click(function () {
             console.log("about clicked!")
             $("#About").toggleClass("active")
         })
     };
 
-    function toggleHelp() {
+    toggleHelp() {
         $("#Help-button").click(function () {
             $("#Help").toggleClass("active")
         })
     };
 
 
-    var init = function () {
-        el = app.main.el;
-        toggleAbout()
-        toggleHelp()
+    init() {
+        this.toggleAbout();
+        this.toggleHelp();
         // Load up all the components
-        return loadTimescales()
-            .then(loadClimateVariables)
-            .then(loadFocalUnits)
-            .then(loadSelectors)
-            .then(initChosen)
+        return this.loadTimescales()
+            .then(this.loadClimateVariables)
+            .then(this.loadFocalUnits)
+            .then(this.loadSelectors)
+            .then(this.initChosen)
     };
+
+    get data() {
+        return this._data;
+    }
+
+    set data(value) {
+        this._data = value;
+    }
 
     // TODO: Return a promise
     // to make sure everything
     // is loaded, then continue
     // runnning everything else
-    return {
-        init: init
-    }
-
-
-})();
+    // return {
+    //     init: init
+    // }
+}

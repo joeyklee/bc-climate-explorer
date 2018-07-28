@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "chosen-js": "^1.8.5",
+    "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.11",
     "hex-to-hsl": "^1.0.2",
     "hsl-to-hex": "^1.0.0",
