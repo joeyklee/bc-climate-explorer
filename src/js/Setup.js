@@ -46,6 +46,7 @@ export default class {
      * @ Loads the timescale units from a json and appends them to the page
      * @ */
     loadTimescales() {
+        this.testtest("bla");
         return $.getJSON("data/timescale-list/timescale-list.json", function(data) {
             let dropdownMenu = this.createTimescaleDropdown(data);
 
@@ -54,6 +55,10 @@ export default class {
         }).fail(() => {
             console.log("no timescale-list found");
         });
+    }
+
+    testtest(bla) {
+        console.log(bla);
     }
 
     createTimescaleDropdown(json) {
@@ -177,6 +182,8 @@ export default class {
         this.toggleHelp();
         // Load up all the components
         return this.loadTimescales()
+            //TODO in here no class functions can be called
+            // because the scope of the promise will be taken
             .then(this.loadClimateVariables)
             .then(this.loadFocalUnits)
             .then(this.loadSelectors)

@@ -29,7 +29,7 @@
     "babel-preset-env": "^1.7.0",
     "d3": "^5.4.0",
     "mapbox-gl": "^0.45.0",
-    "npm": "^6.1.0",
+    "npm": "^6.2.0",
     "webpack": "^4.16.0"
   },
   "devDependencies": {
