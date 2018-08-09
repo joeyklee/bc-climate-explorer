@@ -5,7 +5,7 @@ import * as helper from './Helper';
 
 export default class {
     constructor(data) {
-        console.log('controller');
+        console.log('Controller');
         this._data = data;
         this._formatClimateName = helper.formatClimateName;
 
@@ -39,30 +39,30 @@ export default class {
     }
 
     bindEvents() {
-        this._data.selectors.focalUnitA.on("change", updateFocalUnitA);
-        this._data.selectors.focalUnitB.on("change", updateFocalUnitB);
+        this._data._selectors.focalUnitA.on("change", updateFocalUnitA);
+        this._data._selectors.focalUnitB.on("change", updateFocalUnitB);
 
         // timescale changes
-        this._data.selectors.xTimescale.on("change", updateXTimescale);
-        this._data.selectors.yTimescale.on("change", updateYTimescale);
-        this._data.selectors.xTimescale.on("change", filterDropdownTemporally.bind(this, this._data.selectors.xVariable, "x"));
-        this._data.selectors.yTimescale.on("change", filterDropdownTemporally.bind(this, this._data.selectors.yVariable, "y"));
-        this._data.selectors.xTimescale.on("change", loadClimateNormalData);
-        this._data.selectors.yTimescale.on("change", loadClimateNormalData);
+        this._data._selectors.xTimescale.on("change", updateXTimescale);
+        this._data._selectors.yTimescale.on("change", updateYTimescale);
+        this._data._selectors.xTimescale.on("change", filterDropdownTemporally.bind(this, this._data._selectors.xVariable, "x"));
+        this._data._selectors.yTimescale.on("change", filterDropdownTemporally.bind(this, this._data._selectors.yVariable, "y"));
+        this._data._selectors.xTimescale.on("change", loadClimateNormalData);
+        this._data._selectors.yTimescale.on("change", loadClimateNormalData);
 
         // x & y variable changes
-        this._data.selectors.xVariable.on("change", updateXVariable);
-        this._data.selectors.yVariable.on("change", updateYVariable);
-        this._data.selectors.xVariable.on("change", loadClimateNormalData);
-        this._data.selectors.yVariable.on("change", loadClimateNormalData);
-        this._data.selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
-        this._data.selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
-        this._data.selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
-        this._data.selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
+        this._data._selectors.xVariable.on("change", updateXVariable);
+        this._data._selectors.yVariable.on("change", updateYVariable);
+        this._data._selectors.xVariable.on("change", loadClimateNormalData);
+        this._data._selectors.yVariable.on("change", loadClimateNormalData);
+        this._data._selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
+        this._data._selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
+        this._data._selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
+        this._data._selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
 
 
         // geo menu clicked
-        this._data.selectors.geoMenu.on("click", toggleGeoMenu);
+        this._data._selectors.geoMenu.on("click", toggleGeoMenu);
 
         // hamburger
         // $('.icon').click(function(){
@@ -77,22 +77,22 @@ export default class {
     @ set the values of the initial data
     */
     setInitialControllerState() {
-        this._data.selectors.focalUnitB.val(this._data.focalUnitB).trigger("chosen:updated");
-        this._data.selectors.focalUnitA.val(this._data.focalUnitA).trigger("chosen:updated");
-        this._data.selectors.xTimescale.val(this._data.x.timescale).trigger("chosen:updated");
-        this._data.selectors.yTimescale.val(this._data.y.timescale).trigger("chosen:updated");
-        this._data.selectors.xVariable.val(this._data.x.variable).trigger("chosen:updated");
-        this._data.selectors.yVariable.val(this._data.y.variable).trigger("chosen:updated");
+        this._data._selectors.focalUnitB.val(this._data.focalUnitB).trigger("chosen:updated");
+        this._data._selectors.focalUnitA.val(this._data.focalUnitA).trigger("chosen:updated");
+        this._data._selectors.xTimescale.val(this._data.x.timescale).trigger("chosen:updated");
+        this._data._selectors.yTimescale.val(this._data.y.timescale).trigger("chosen:updated");
+        this._data._selectors.xVariable.val(this._data.x.variable).trigger("chosen:updated");
+        this._data._selectors.yVariable.val(this._data.y.variable).trigger("chosen:updated");
 
         // TODO: not a great solution, but for now fill in the geo map climate buttons
-        this._data.selectors.geoX.find(".x-timescale-title").html(this._data.x.timescale);
-        this._data.selectors.geoX.find(".x-variable-title").html(this._data.x.variable);
-        this._data.selectors.geoY.find(".y-timescale-title").html(this._data.y.timescale);
-        this._data.selectors.geoY.find(".y-variable-title").html(this._data.y.variable);
+        this._data._selectors.geoX.find(".x-timescale-title").html(this._data.x.timescale);
+        this._data._selectors.geoX.find(".x-variable-title").html(this._data.x.variable);
+        this._data._selectors.geoY.find(".y-timescale-title").html(this._data.y.timescale);
+        this._data._selectors.geoY.find(".y-variable-title").html(this._data.y.variable);
 
         // TODO: not a great solution but for now adjust variables here
-        this.filterDropdownTemporally(this._data.selectors.xVariable);
-        this.filterDropdownTemporally(this._data.selectors.yVariable);
+        this.filterDropdownTemporally(this._data._selectors.xVariable);
+        this.filterDropdownTemporally(this._data._selectors.yVariable);
     };
 
     /***

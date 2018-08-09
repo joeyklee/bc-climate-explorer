@@ -3,23 +3,8 @@
 export default class {
 
     constructor(data) {
+        console.log('Setup');
         this._data = data;
-    }
-
-    /***
-     * @ Load Climate Variables
-     * @ Loads the climate normal variables from a json and appends them to the page
-     **/
-    loadClimateVariables() {
-        return $.getJSON("data/climate-variables-master/climate-variables-list.json", (data) => {
-            let dropdownMenu = this.createClimateVariablesDropdown(data);
-
-            $("#X-Variable-Dropdown").append(dropdownMenu);
-            $("#Y-Variable-Dropdown").append(dropdownMenu);
-        }).fail(() => {
-            console.log("no climate-variables-list found")
-        });
-
     }
 
     createClimateVariablesDropdown(json) {
@@ -32,33 +17,12 @@ export default class {
 
 
         let dropdown =
-                `<select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
+            `<select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
                   <option value=""></option>
                   ${dropdownOptionsList.join("\n")}
                 </select>`;
 
         return dropdown;
-    }
-
-
-    /***
-     * @ Load timescales
-     * @ Loads the timescale units from a json and appends them to the page
-     * @ */
-    loadTimescales() {
-        this.testtest("bla");
-        return $.getJSON("data/timescale-list/timescale-list.json", function(data) {
-            let dropdownMenu = this.createTimescaleDropdown(data);
-
-            $("#X-Time-Dropdown").append(dropdownMenu);
-            $("#Y-Time-Dropdown").append(dropdownMenu);
-        }).fail(() => {
-            console.log("no timescale-list found");
-        });
-    }
-
-    testtest(bla) {
-        console.log(bla);
     }
 
     createTimescaleDropdown(json) {
@@ -82,21 +46,6 @@ export default class {
     }
 
 
-    /***
-     * @ Load Focal Units
-     * @ Loads the focal units from a json and appends them to the page
-     */
-     loadFocalUnits() {
-        return $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json", (data) => {
-            let dropdownMenu = this.createFocalUnitDropdown(data);
-
-            $("#Focal-Unit-A-Selector").append(dropdownMenu);
-            $("#Focal-Unit-B-Selector").append(dropdownMenu);
-        }).fail(() => {
-            console.log("no focal units found")
-        });
-    }
-
     createFocalUnitDropdown(json) {
         let dropdownOptionsList = [];
 
@@ -116,44 +65,60 @@ export default class {
 
 
     /**
-     * @ Get all the selectors
+     * @ Get all the _selectors
      * @ #Controller, #Charts
      * @
      */
     loadSelectors() {
         let ControllerSelectors, ChartSelectors;
         // Get DOM elements
-        ControllerSelectors = $("#Controller")
-        ChartSelectors = $("#Charts")
+        ControllerSelectors = $("#Controller");
+        ChartSelectors = $("#Charts");
 
-        // focal unit selectors
-        this._data.selectors.focalUnitA = ControllerSelectors.find("#Focal-Unit-A-Selector select")
-        this._data.selectors.focalUnitB = ControllerSelectors.find("#Focal-Unit-B-Selector select")
-        // time component selectors
-        this._data.selectors.xTimescale = ControllerSelectors.find("#X-Time-Dropdown select")
-        this._data.selectors.yTimescale = ControllerSelectors.find("#Y-Time-Dropdown select")
-        // variable selectors
-        this._data.selectors.xVariable = ControllerSelectors.find("#X-Variable-Dropdown select")
-        this._data.selectors.yVariable = ControllerSelectors.find("#Y-Variable-Dropdown select")
+        // focal unit _selectors
+        this._data._selectors.focalUnitA = ControllerSelectors.find("#Focal-Unit-A-Selector select")
+        this._data._selectors.focalUnitB = ControllerSelectors.find("#Focal-Unit-B-Selector select")
+        // time component _selectors
+        this._data._selectors.xTimescale = ControllerSelectors.find("#X-Time-Dropdown select")
+        this._data._selectors.yTimescale = ControllerSelectors.find("#Y-Time-Dropdown select")
+        // variable _selectors
+        this._data._selectors.xVariable = ControllerSelectors.find("#X-Variable-Dropdown select")
+        this._data._selectors.yVariable = ControllerSelectors.find("#Y-Variable-Dropdown select")
 
         // geo controllers
-        this._data.selectors.geoZone = ChartSelectors.find("#Geo-Zone-Button")
-        this._data.selectors.geoUnit = ChartSelectors.find("#Geo-Unit-Button")
-        this._data.selectors.geoX = ChartSelectors.find("#Geo-X-Button")
-        this._data.selectors.geoY = ChartSelectors.find("#Geo-Y-Button")
-        this._data.selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
-        this._data.selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
+        this._data._selectors.geoZone = ChartSelectors.find("#Geo-Zone-Button")
+        this._data._selectors.geoUnit = ChartSelectors.find("#Geo-Unit-Button")
+        this._data._selectors.geoX = ChartSelectors.find("#Geo-X-Button")
+        this._data._selectors.geoY = ChartSelectors.find("#Geo-Y-Button")
+        this._data._selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
+        this._data._selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
 
         // geopopup
-        // this._data.selectors.geoPopup = $("#geo-popup")
-        this._data.selectors.geoPopupSelectA = null;
-        this._data.selectors.geoPopupSelectB = null;
+        // this._data._selectors.geoPopup = $("#geo-popup")
+        this._data._selectors.geoPopupSelectA = null;
+        this._data._selectors.geoPopupSelectB = null;
 
         // return a promise in order to use chaining
         return new Promise((resolve, reject) => {
             resolve(true)
         })
 
+    }
+
+    loadData() {
+        return $.when(
+            $.getJSON("data/timescale-list/timescale-list.json"),
+            $.getJSON("data/climate-variables-master/climate-variables-list.json"),
+            $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json")
+        ).then((timescaleList, climateVariablesList, bgUnits) => {
+            this.createTimescaleDropdown(timescaleList[0]);
+            this.createClimateVariablesDropdown(climateVariablesList[0]);
+            this.createFocalUnitDropdown(bgUnits[0]);
+            this.loadSelectors();
+            this.initChosen();
+        }, error => {
+            console.error(error);
+        });
     }
 
     initChosen() {
@@ -165,7 +130,7 @@ export default class {
 
     toggleAbout() {
         $("#About-button, #About-close").click(function () {
-            console.log("about clicked!")
+            console.log("about clicked!");
             $("#About").toggleClass("active")
         })
     };
@@ -176,18 +141,12 @@ export default class {
         })
     };
 
-
     init() {
         this.toggleAbout();
         this.toggleHelp();
         // Load up all the components
-        return this.loadTimescales()
-            //TODO in here no class functions can be called
-            // because the scope of the promise will be taken
-            .then(this.loadClimateVariables)
-            .then(this.loadFocalUnits)
-            .then(this.loadSelectors)
-            .then(this.initChosen)
+        // TODO return real promise
+        return this.loadData();
     };
 
     get data() {
@@ -197,12 +156,4 @@ export default class {
     set data(value) {
         this._data = value;
     }
-
-    // TODO: Return a promise
-    // to make sure everything
-    // is loaded, then continue
-    // runnning everything else
-    // return {
-    //     init: init
-    // }
 }

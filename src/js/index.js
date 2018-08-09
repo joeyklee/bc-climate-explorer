@@ -10,9 +10,13 @@ function main() {
     let dataHandler = new Data();
     let setup = new Setup(dataHandler);
 
-    setup.init().then(data => {
+    /*setup.init().then(data => {
+        console.log(data);
         let promiseController = new Controller(setup.data);
-    });
+    });*/
+
+    setup.init();
+    let promiseController = new Controller(setup.data);
 }
 
 main();
