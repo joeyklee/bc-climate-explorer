@@ -1,6 +1,7 @@
 'use strict';
 
 export default function formatClimateName(climateVar, stateTime, seasons, months) {
+    console.log("helper");
     let climate_selected = null;
     let timevar;
     let specials = ["DD_0", "DD0", "DD_18", "DD18", "DD5", "DD_18"];

@@ -1,13 +1,12 @@
 'use strict';
 
 import 'pubsub-js';
-import * as helper from './Helper';
+import formatClimateName from './Helper';
 
 export default class {
     constructor(data) {
         console.log('Controller');
         this._data = data;
-        this._formatClimateName = helper.formatClimateName;
 
         PubSub.subscribe("temporalSelectionChanged", this.loadClimateNormalData);
 
@@ -39,30 +38,30 @@ export default class {
     }
 
     bindEvents() {
-        this._data._selectors.focalUnitA.on("change", updateFocalUnitA);
-        this._data._selectors.focalUnitB.on("change", updateFocalUnitB);
+        this._data._selectors.focalUnitA.on("change", this.updateFocalUnitA);
+        this._data._selectors.focalUnitB.on("change", this.updateFocalUnitB);
 
         // timescale changes
-        this._data._selectors.xTimescale.on("change", updateXTimescale);
-        this._data._selectors.yTimescale.on("change", updateYTimescale);
-        this._data._selectors.xTimescale.on("change", filterDropdownTemporally.bind(this, this._data._selectors.xVariable, "x"));
-        this._data._selectors.yTimescale.on("change", filterDropdownTemporally.bind(this, this._data._selectors.yVariable, "y"));
-        this._data._selectors.xTimescale.on("change", loadClimateNormalData);
-        this._data._selectors.yTimescale.on("change", loadClimateNormalData);
+        this._data._selectors.xTimescale.on("change", this.updateXTimescale);
+        this._data._selectors.yTimescale.on("change", this.updateYTimescale);
+        this._data._selectors.xTimescale.on("change", this.filterDropdownTemporally.bind(this, this._data._selectors.xVariable, "x"));
+        this._data._selectors.yTimescale.on("change", this.filterDropdownTemporally.bind(this, this._data._selectors.yVariable, "y"));
+        this._data._selectors.xTimescale.on("change", this.loadClimateNormalData);
+        this._data._selectors.yTimescale.on("change", this.loadClimateNormalData);
 
         // x & y variable changes
-        this._data._selectors.xVariable.on("change", updateXVariable);
-        this._data._selectors.yVariable.on("change", updateYVariable);
-        this._data._selectors.xVariable.on("change", loadClimateNormalData);
-        this._data._selectors.yVariable.on("change", loadClimateNormalData);
-        this._data._selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
-        this._data._selectors.xVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
-        this._data._selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
-        this._data._selectors.yVariable.on("change", loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
+        this._data._selectors.xVariable.on("change", this.updateXVariable);
+        this._data._selectors.yVariable.on("change", this.updateYVariable);
+        this._data._selectors.xVariable.on("change", this.loadClimateNormalData);
+        this._data._selectors.yVariable.on("change", this.loadClimateNormalData);
+        this._data._selectors.xVariable.on("change", this.loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
+        this._data._selectors.xVariable.on("change", this.loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
+        this._data._selectors.yVariable.on("change", this.loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp45_2011_2100msyt', 'rcp45'));
+        this._data._selectors.yVariable.on("change", this.loadClimateProjections.bind(this, 'bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85'));
 
 
         // geo menu clicked
-        this._data._selectors.geoMenu.on("click", toggleGeoMenu);
+        this._data._selectors.geoMenu.on("click", this.toggleGeoMenu);
 
         // hamburger
         // $('.icon').click(function(){
@@ -96,18 +95,73 @@ export default class {
     };
 
     /***
+     @ Toggle Geo Menu
+     @*/
+    toggleGeoMenu() {
+        this._data._selectors.geoMenu.toggleClass("active");
+    }
+
+    /***
+     @ updateFocalUnitA
+     */
+    updateFocalUnitA() {
+        this._data._focalUnitA = $(this).find("option:selected").val();
+        PubSub.publish("focalUnitAChanged", {data: this._data._focalUnitA})
+    }
+
+    /***
+     @ updateFocalUnitB
+     */
+    updateFocalUnitB() {
+        this._data._focalUnitB = $(this).find("option:selected").val();
+        PubSub.publish("focalUnitBChanged", {data: this._data._focalUnitB})
+    }
+
+    /***
+     @ updateXTimescale
+     */
+    updateXTimescale() {
+        this._data._x.timescale = $(this).find("option:selected").val();
+        PubSub.publish("xTimescaleChanged", {data: this._data._x.timescale})
+    }
+
+    /***
+     @ updateYTimescale
+     */
+    updateYTimescale() {
+        this._data._y.timescale = $(this).find("option:selected").val();
+        PubSub.publish("yTimescaleChanged", {data: this._data._y.timescale})
+    }
+
+    /***
+     @ updateXVariable
+     */
+    updateXVariable() {
+        this._data._x.variable = $(this).find("option:selected").val();
+        PubSub.publish("xVariableChanged", {data: this._data._x.variable})
+    }
+
+    /***
+     @ updateYVariable
+     */
+    updateYVariable() {
+        this._data._y.variable = $(this).find("option:selected").val();
+        PubSub.publish("yVariableChanged", {data: this._data._y.variable})
+    }
+
+    /***
      @ filterDropdownTemporally
      @*/
     filterDropdownTemporally($varSelector, sel) {
         // x
         if (sel === "x") {
-            if (this._data.x.timescale === "Annual") {
+            if (this._data._x.timescale === "Annual") {
                 $varSelector.find("option[label=nonannual]").prop("disabled", true);
                 $varSelector.find("option[label=annual]").prop("disabled", false);
                 if ($varSelector.find("option:selected").length) {
                     if ($varSelector.find("option:selected")[0].label !== 'annual') {
-                        this._data.x.variable = "MAT";
-                        $varSelector.val(this._data.x.variable).trigger("chosen:updated");
+                        this._data._x.variable = "MAT";
+                        $varSelector.val(this._data._x.variable).trigger("chosen:updated");
 
                     }
                 }
@@ -116,20 +170,20 @@ export default class {
                 $varSelector.find("option[label=annual]").prop("disabled", true);
                 if ($varSelector.find("option:selected").length) {
                     if ($varSelector.find("option:selected")[0].label !== 'nonannual') {
-                        this._data.x.variable = "Tave";
-                        $varSelector.val(this._data.x.variable).trigger("chosen:updated");
+                        this._data._x.variable = "Tave";
+                        $varSelector.val(this._data._x.variable).trigger("chosen:updated");
                     }
                 }
             }
         } else {
             // y
-            if (this._data.y.timescale === "Annual") {
+            if (this._data._y.timescale === "Annual") {
                 $varSelector.find("option[label=nonannual]").prop("disabled", true);
                 $varSelector.find("option[label=annual]").prop("disabled", false);
                 if ($varSelector.find("option:selected").length) {
                     if ($varSelector.find("option:selected")[0].label !== 'annual') {
-                        this._data.y.variable = "MAT";
-                        $varSelector.val(this._data.y.variable).trigger("chosen:updated");
+                        this._data._y.variable = "MAT";
+                        $varSelector.val(this._data._y.variable).trigger("chosen:updated");
                     }
                 }
             } else {
@@ -137,38 +191,38 @@ export default class {
                 $varSelector.find("option[label=annual]").prop("disabled", true);
                 if ($varSelector.find("option:selected").length) {
                     if ($varSelector.find("option:selected")[0].label !== 'nonannual') {
-                        this._data.y.variable = "Tave";
-                        $varSelector.val(this._data.y.variable).trigger("chosen:updated");
+                        this._data._y.variable = "Tave";
+                        $varSelector.val(this._data._y.variable).trigger("chosen:updated");
                     }
                 }
             }
         }
 
         $varSelector.trigger("chosen:updated");
-        PubSub.publish("temporalSelectionChanged", {x: this._data.x.timescale, y: this._data.y.timescale})
+        PubSub.publish("temporalSelectionChanged", {x: this._data._x.timescale, y: this._data._y.timescale})
     }
 
     /***
      @ load timeSeries
      @*/
     loadTimeSeries(selected) {
-        let selection = this._formatClimateName(this._data[selected].variable, this._data[selected].timescale)
-        let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${selection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${this._data.focalUnitA}' OR id2 = '${this._data.focalUnitB}') AND year >= 1901 AND year <=2014`);
+        let selection = formatClimateName(this._data[selected].variable, this._data[selected].timescale)
+        let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${selection} FROM bec10centroid_1901_2014msyt WHERE id2 IS NOT NULL AND (id2 = '${this._data._focalUnitA}' OR id2 = '${this._data._focalUnitB}') AND year >= 1901 AND year <=2014`);
         let data = $.getJSON(query, () => {
             let dataA, dataB;
             dataA = data.rows.filter(obj => {
-                return obj.id2 === this._data.focalUnitA
+                return obj.id2 === this._data._focalUnitA
             });
             dataB = data.rows.filter(obj => {
-                return obj.id2 === this._data.focalUnitB
+                return obj.id2 === this._data._focalUnitB
             });
 
             this._data[selected].timeseries.years = [...new Set(data.rows.map(item => item.year))];
             this._data[selected].timeseries.a = dataA.map(obj => {
-                if (obj.id2 == this._data.focalUnitA) return obj[selection]
+                if (obj.id2 == this._data._focalUnitA) return obj[selection]
             });
             this._data[selected].timeseries.b = dataB.map(obj => {
-                if (obj.id2 == this._data.focalUnitB) return obj[selection]
+                if (obj.id2 == this._data._focalUnitB) return obj[selection]
             });
 
             PubSub.publish(`timeseries${selected.toUpperCase()}Loaded`, this._data[selected].timeseries)
@@ -184,8 +238,8 @@ export default class {
     @ */
 
     loadClimateProjections(dataSrc, rcpArr) {
-        let xSelection = this._formatClimateName(this._data.x.variable, this._data.x.timescale);
-        let ySelection = this._formatClimateName(this._data.y.variable, this._data.y.timescale);
+        let xSelection = formatClimateName(this._data.x.variable, this._data.x.timescale);
+        let ySelection = formatClimateName(this._data.y.variable, this._data.y.timescale);
         let query = encodeURI(`https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT id2, year, ${xSelection}, ${ySelection} FROM ${dataSrc} WHERE id2 IS NOT NULL AND (id2='${this._data.focalUnitA}' OR id2='${this._data.focalUnitB}') AND (year > 2010 AND year <=2100)`)
 
         let data = $.getJSON(query, () => {
@@ -216,8 +270,9 @@ export default class {
      @ Get Scatterplot data
      @*/
     loadClimateNormalData() {
-        let xSelection = this._formatClimateName(this._data.x.variable, this._data.x.timescale);
-        let ySelection = this._formatClimateName(this._data.y.variable, this._data.y.timescale);
+        // TODO: cannot read property _data of undefined fix it!!
+        let xSelection = formatClimateName(this._data._x.variable, this._data._x.timescale);
+        let ySelection = formatClimateName(this._data._y.variable, this._data._y.timescale);
 
         let query = `https://becexplorer.cartodb.com/api/v2/sql?q=SELECT DISTINCT map_label, ${xSelection}, ${ySelection} FROM bgcv10beta_200m_wgs84_merge_normal_1981_2010msy WHERE map_label IS NOT NULL AND '${xSelection}' IS NOT NULL AND '${ySelection}' IS NOT NULL`
         // console.log(encodeURI(query))

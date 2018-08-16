@@ -1,5 +1,8 @@
 'use strict';
 
+import Controller from "./Controller";
+import 'chosen-js';
+
 export default class {
 
     constructor(data) {
@@ -106,7 +109,7 @@ export default class {
     }
 
     loadData() {
-        return $.when(
+        $.when(
             $.getJSON("data/timescale-list/timescale-list.json"),
             $.getJSON("data/climate-variables-master/climate-variables-list.json"),
             $.getJSON("data/bec-names-list/BGCunits_Ver10_2017.json")
@@ -116,9 +119,14 @@ export default class {
             this.createFocalUnitDropdown(bgUnits[0]);
             this.loadSelectors();
             this.initChosen();
+            this.initController();
         }, error => {
             console.error(error);
         });
+    }
+
+    initController() {
+        new Controller(this._data);
     }
 
     initChosen() {
@@ -144,9 +152,7 @@ export default class {
     init() {
         this.toggleAbout();
         this.toggleHelp();
-        // Load up all the components
-        // TODO return real promise
-        return this.loadData();
+        this.loadData();
     };
 
     get data() {

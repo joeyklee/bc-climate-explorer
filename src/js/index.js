@@ -2,7 +2,6 @@
 
 import 'pubsub-js';
 import Data from './Data';
-import Controller from './Controller';
 import Setup from './Setup';
 
 function main() {
@@ -16,7 +15,6 @@ function main() {
     });*/
 
     setup.init();
-    let promiseController = new Controller(setup.data);
 }
 
 main();
