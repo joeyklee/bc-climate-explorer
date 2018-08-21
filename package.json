@@ -28,7 +28,6 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "d3": "^5.4.0",
-    "mapbox-gl": "^0.45.0",
     "npm": "^6.2.0",
     "webpack": "^4.16.0"
   },
@@ -40,6 +39,7 @@
     "hsl-to-hex": "^1.0.0",
     "http-server": "^0.11.1",
     "jquery": "^3.3.1",
+    "mapbox-gl": "^0.45.0",
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.4",
     "pubsub-js": "^1.6.0",

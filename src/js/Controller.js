@@ -1,6 +1,7 @@
 'use strict';
 
 import formatClimateName from './Helper';
+import Geo from './Geo';
 
 export default class {
     constructor(data) {
@@ -34,6 +35,12 @@ export default class {
         this.loadClimateProjections('bec10centroid_ensemblemean_rcp85_2011_2100msyt', 'rcp85');
         this.loadTimeSeries('x');
         this.loadTimeSeries('y');
+
+        this.initGeo();
+    }
+
+    initGeo() {
+        new Geo(this._data);
     }
 
     bindEvents() {

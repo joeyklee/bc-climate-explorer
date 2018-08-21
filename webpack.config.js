@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: "./src/js/index.js",
@@ -13,7 +13,8 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery",
             PubSub: "pubsub-js",
-            mapboxgl: "mapbox-gl"
+            mapboxgl: "mapbox-gl",
+            d3: "d3"
         }),
         new CopyWebpackPlugin([
             { from: 'src/data', to: 'data/' }
