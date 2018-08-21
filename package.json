@@ -32,6 +32,7 @@
     "webpack": "^4.16.0"
   },
   "devDependencies": {
+    "@turf/turf": "^5.1.6",
     "chosen-js": "^1.8.7",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.11",

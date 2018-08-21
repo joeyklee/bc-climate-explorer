@@ -14,7 +14,8 @@ module.exports = {
             jQuery: "jquery",
             PubSub: "pubsub-js",
             mapboxgl: "mapbox-gl",
-            d3: "d3"
+            d3: "d3",
+            turf: "@turf/turf"
         }),
         new CopyWebpackPlugin([
             { from: 'src/data', to: 'data/' }

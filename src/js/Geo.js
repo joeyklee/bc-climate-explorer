@@ -1,5 +1,7 @@
 'use strict';
 
+import Scatterplot from './Scatterplot';
+
 export default class {
     constructor(data) {
         console.log("Geo");
@@ -16,7 +18,6 @@ export default class {
         PubSub.subscribe("mapStyleChanged", this.changeLegend);
         PubSub.subscribe("xTimescaleChanged", this.updateXTimescaleButton);
         PubSub.subscribe("xVariableChanged", this.updateXVariableButton);
-
         PubSub.subscribe("yTimescaleChanged", this.updateYTimescaleButton);
         PubSub.subscribe("yVariableChanged", this.updateYVariableButton);
 
@@ -27,6 +28,11 @@ export default class {
         PubSub.subscribe("focalUnitBChanged", this.changeFocalUnitHighlight.bind(this, 'B'));
 
         this.loadStyles();
+        this.initScatterplot();
+    }
+
+    initScatterplot() {
+        new Scatterplot(this._data);
     }
 
     initMap() {
