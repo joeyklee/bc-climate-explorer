@@ -1,12 +1,11 @@
 'use strict';
 
 export default function formatClimateName(climateVar, stateTime, seasons, months) {
-    console.log("helper");
     let climate_selected = null;
     let timevar;
     let specials = ["DD_0", "DD0", "DD_18", "DD18", "DD5", "DD_18"];
 
-    if (stateTime.toLowerCase() == 'annual') {
+    if (stateTime.toLowerCase() === 'annual') {
         climate_selected = climateVar;
     } else if (seasons.filter(i => (i.season === stateTime)).length > 0) {
         timevar = seasons.filter(i => (i.season === stateTime))[0].abbv;
