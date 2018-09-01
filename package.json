@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start-dev": "http-server -p 4000",
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "build-css": "node-sass --include-path scss src/stylesheets/scss/main.scss src/stylesheets/css/main.css",
     "watch-css": "nodemon -e scss -x 'npm run build-css'",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -16,13 +16,13 @@ export default class {
         this.initMap();
 
         PubSub.subscribe("mapStyleChanged", this.changeLegend.bind(this));
-        PubSub.subscribe("xTimescaleChanged", this.updateXTimescaleButton);
-        PubSub.subscribe("xVariableChanged", this.updateXVariableButton);
-        PubSub.subscribe("yTimescaleChanged", this.updateYTimescaleButton);
-        PubSub.subscribe("yVariableChanged", this.updateYVariableButton);
+        PubSub.subscribe("xTimescaleChanged", this.updateXTimescaleButton.bind(this));
+        PubSub.subscribe("xVariableChanged", this.updateXVariableButton.bind(this));
+        PubSub.subscribe("yTimescaleChanged", this.updateYTimescaleButton.bind(this));
+        PubSub.subscribe("yVariableChanged", this.updateYVariableButton.bind(this));
 
-        PubSub.subscribe("mapXButtonClicked", this.changeLegend);
-        PubSub.subscribe("mapYButtonClicked", this.changeLegend);
+        PubSub.subscribe("mapXButtonClicked", this.changeLegend.bind(this));
+        PubSub.subscribe("mapYButtonClicked", this.changeLegend.bind(this));
 
         PubSub.subscribe("focalUnitAChanged", this.changeFocalUnitHighlight.bind(this, 'A'));
         PubSub.subscribe("focalUnitBChanged", this.changeFocalUnitHighlight.bind(this, 'B'));
@@ -54,7 +54,7 @@ export default class {
      */
     addSources() {
         // load in bec-layer source
-        this._data._geo.on('load', function () {
+        this._data._geo.on('load', () => {
             // add sources
             this._data._geo.addSource('bec-layer', {
                 "type": "vector",
@@ -231,8 +231,8 @@ export default class {
         this._data._selectors.geoZone.on('click', this.changeMapZone.bind(this, this._data._colors.zoneStyles.paint, 'zones'));
         this._data._selectors.geoUnit.on('click', this.changeMapZone.bind(this, this._data._colors.unitStyles.paint, 'units'));
 
-        this._data._selectors.geoX.on('click', this.changeMapX);
-        this._data._selectors.geoY.on('click', this.changeMapY);
+        this._data._selectors.geoX.on('click', this.changeMapX.bind(this));
+        this._data._selectors.geoY.on('click', this.changeMapY.bind(this));
 
         // @ DISABLED FOR NOW
         // el.selectors.basemap.on('click', toggleBaseMap)
