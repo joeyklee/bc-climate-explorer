@@ -1,6 +1,5 @@
 'use strict';
-
-import 'pubsub-js';
+import '../stylesheets/scss/main.scss';
 import Data from './Data';
 import Setup from './Setup';
 
