@@ -12,7 +12,7 @@ export default class {
             temp: ['steelblue', 'brown']
         };
 
-
+        // TODO map variables in this._geo won't be initialized
         this.initMap();
 
         PubSub.subscribe("mapStyleChanged", this.changeLegend.bind(this));
@@ -199,13 +199,13 @@ export default class {
 
         // clear the dom
         $mapLegend.html('');
+
+        // loop through
         switched.style['fill-color'].forEach((item, idx, arr) => {
             if (idx > 1 && idx < arr.length - 1 && item.startsWith("#")) {
                 legendItems += `<div class="tooltip" style="width:12px;height:12px;background-color:${item}"><span class="tooltiptext">${arr[idx - 1]}</span></div>\n`
             }
         });
-        // loop through
-        console.log(switched);
 
         $mapLegend.html(legendItems);
     }

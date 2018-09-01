@@ -8,31 +8,29 @@ export default class {
     constructor(data) {
         console.log('Setup');
         this._data = data;
+        this.init();
     }
 
     createClimateVariablesDropdown(json) {
         let dropdownOptionsList = [];
 
         json.forEach(function (d) {
-            let dropdownOption = `<option label="${d.timeScale}" data-timescale="${d.timeScale}" data-logtransform="${d.logTransform}" value="${d.variable}">${d.variable} - ${d.description}</option>`
+            let dropdownOption = `<option label="${d.timeScale}" data-timescale="${d.timeScale}" data-logtransform="${d.logTransform}" value="${d.variable}">${d.variable} - ${d.description}</option>`;
             dropdownOptionsList.push(dropdownOption)
         });
 
 
-        let dropdown =
-            `<select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
+        return `<select data-placeholder="Climate Variable" class="chosen-select dropdown" tabindex="2">
                   <option value=""></option>
                   ${dropdownOptionsList.join("\n")}
                 </select>`;
-
-        return dropdown;
     }
 
     createTimescaleDropdown(json) {
         let dropdownOptionsList = [];
 
         json.forEach(function (d) {
-            let dropdownOption = `<option value="${d.timeUnit}" data-timescale="${d.timeScale}">${d.timeUnit}</option>`
+            let dropdownOption = `<option value="${d.timeUnit}" data-timescale="${d.timeScale}">${d.timeUnit}</option>`;
             dropdownOptionsList.push(dropdownOption)
         });
 
@@ -53,17 +51,16 @@ export default class {
         let dropdownOptionsList = [];
 
         json.forEach(function (d) {
-            let dropdownOption = `<option value="${d.BGC_NoSpace}">${d.BGC_NoSpace} - ${d.SubzVarPh_Description}</option>`
+            let dropdownOption = `<option value="${d.BGC_NoSpace}">${d.BGC_NoSpace} - ${d.SubzVarPh_Description}</option>`;
             dropdownOptionsList.push(dropdownOption)
-        })
+        });
 
-        let dropdown = `
+        return `
                 <select data-placeholder="BEC Zone" class="chosen-select dropdown" tabindex="2">
                   <option value=""></option>
                   ${dropdownOptionsList.join("\n")}
                 </select>
-        `
-        return dropdown;
+        `;
     }
 
 
@@ -79,22 +76,22 @@ export default class {
         ChartSelectors = $("#Charts");
 
         // focal unit _selectors
-        this._data._selectors.focalUnitA = ControllerSelectors.find("#Focal-Unit-A-Selector select")
-        this._data._selectors.focalUnitB = ControllerSelectors.find("#Focal-Unit-B-Selector select")
+        this._data._selectors.focalUnitA = ControllerSelectors.find("#Focal-Unit-A-Selector select");
+        this._data._selectors.focalUnitB = ControllerSelectors.find("#Focal-Unit-B-Selector select");
         // time component _selectors
-        this._data._selectors.xTimescale = ControllerSelectors.find("#X-Time-Dropdown select")
-        this._data._selectors.yTimescale = ControllerSelectors.find("#Y-Time-Dropdown select")
+        this._data._selectors.xTimescale = ControllerSelectors.find("#X-Time-Dropdown select");
+        this._data._selectors.yTimescale = ControllerSelectors.find("#Y-Time-Dropdown select");
         // variable _selectors
-        this._data._selectors.xVariable = ControllerSelectors.find("#X-Variable-Dropdown select")
-        this._data._selectors.yVariable = ControllerSelectors.find("#Y-Variable-Dropdown select")
+        this._data._selectors.xVariable = ControllerSelectors.find("#X-Variable-Dropdown select");
+        this._data._selectors.yVariable = ControllerSelectors.find("#Y-Variable-Dropdown select");
 
         // geo controllers
-        this._data._selectors.geoZone = ChartSelectors.find("#Geo-Zone-Button")
-        this._data._selectors.geoUnit = ChartSelectors.find("#Geo-Unit-Button")
-        this._data._selectors.geoX = ChartSelectors.find("#Geo-X-Button")
-        this._data._selectors.geoY = ChartSelectors.find("#Geo-Y-Button")
-        this._data._selectors.basemap = ChartSelectors.find(".map-basemap-switcher")
-        this._data._selectors.geoMenu = ChartSelectors.find("#Geo-Menu")
+        this._data._selectors.geoZone = ChartSelectors.find("#Geo-Zone-Button");
+        this._data._selectors.geoUnit = ChartSelectors.find("#Geo-Unit-Button");
+        this._data._selectors.geoX = ChartSelectors.find("#Geo-X-Button");
+        this._data._selectors.geoY = ChartSelectors.find("#Geo-Y-Button");
+        this._data._selectors.basemap = ChartSelectors.find(".map-basemap-switcher");
+        this._data._selectors.geoMenu = ChartSelectors.find("#Geo-Menu");
 
         // geopopup
         // this._data._selectors.geoPopup = $("#geo-popup")
@@ -102,7 +99,7 @@ export default class {
         this._data._selectors.geoPopupSelectB = null;
 
         // return a promise in order to use chaining
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(true)
         })
 
@@ -131,7 +128,7 @@ export default class {
 
     initChosen() {
         $(".chosen-select").chosen();
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(true)
         })
     }
