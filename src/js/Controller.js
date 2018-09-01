@@ -276,7 +276,6 @@ export default class {
      @ Get Scatterplot data
      @*/
     loadClimateNormalData() {
-        // TODO: cannot read property _data of undefined fix it!!
         let xSelection = formatClimateName(this._data._x.variable, this._data._x.timescale);
         let ySelection = formatClimateName(this._data._y.variable, this._data._y.timescale);
 

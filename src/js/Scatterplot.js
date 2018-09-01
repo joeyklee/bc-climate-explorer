@@ -1,4 +1,5 @@
 'use strict';
+import Timeseries from './Timeseries';
 
 export default class {
 
@@ -7,13 +8,19 @@ export default class {
 
         this._data = data;
 
-        PubSub.subscribe("scatterDataLoaded", this.buildChart);
-        PubSub.subscribe("temporalSelectionChanged", this.buildChart);
-        PubSub.subscribe("focalUnitAChanged", this.buildChart);
-        PubSub.subscribe("focalUnitBChanged", this.buildChart);
-        PubSub.subscribe("yTimescaleChanged", this.buildChart);
-        PubSub.subscribe("xTimescaleChanged", this.buildChart);
-        PubSub.subscribe("projectedDataLoaded", this.buildChart);
+        PubSub.subscribe("scatterDataLoaded", this.buildChart.bind(this));
+        PubSub.subscribe("temporalSelectionChanged", this.buildChart.bind(this));
+        PubSub.subscribe("focalUnitAChanged", this.buildChart.bind(this));
+        PubSub.subscribe("focalUnitBChanged", this.buildChart.bind(this));
+        PubSub.subscribe("yTimescaleChanged", this.buildChart.bind(this));
+        PubSub.subscribe("xTimescaleChanged", this.buildChart.bind(this));
+        PubSub.subscribe("projectedDataLoaded", this.buildChart.bind(this));
+
+        this.initTimeseries();
+    }
+
+    initTimeseries() {
+        new Timeseries(this._data);
     }
 
     buildChart(){

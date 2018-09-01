@@ -15,7 +15,8 @@ module.exports = {
             PubSub: "pubsub-js",
             mapboxgl: "mapbox-gl",
             d3: "d3",
-            turf: "@turf/turf"
+            turf: "@turf/turf",
+            Plotly: "plotly.js-dist"
         }),
         new CopyWebpackPlugin([
             { from: 'src/data', to: 'data/' }

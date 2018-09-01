@@ -29,6 +29,7 @@
     "babel-preset-env": "^1.7.0",
     "d3": "^5.4.0",
     "npm": "^6.2.0",
+    "plotly.js-dist": "^1.40.1",
     "webpack": "^4.16.0"
   },
   "devDependencies": {

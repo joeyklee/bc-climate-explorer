@@ -15,7 +15,7 @@ export default class {
 
         this.initMap();
 
-        PubSub.subscribe("mapStyleChanged", this.changeLegend);
+        PubSub.subscribe("mapStyleChanged", this.changeLegend.bind(this));
         PubSub.subscribe("xTimescaleChanged", this.updateXTimescaleButton);
         PubSub.subscribe("xVariableChanged", this.updateXVariableButton);
         PubSub.subscribe("yTimescaleChanged", this.updateYTimescaleButton);
@@ -162,8 +162,8 @@ export default class {
      */
     loadStyles() {
         $.when(
-            $.getJSON("src/data/bec-colors/bec-zone-colors.json"),
-            $.getJSON("src/data/bec-colors/bec-unit-colors.json")
+            $.getJSON("data/bec-colors/bec-zone-colors.json"),
+            $.getJSON("data/bec-colors/bec-unit-colors.json")
         ).then((zoneStyles, unitStyles) => {
             this._data._colors.zoneStyles = zoneStyles;
             this._data._colors.unitStyles = unitStyles;
@@ -227,8 +227,8 @@ export default class {
      @ Bind Module events
      */
     bindEvents() {
-        this._data._selectors.geoZone.on('click', changeMapZone.bind(this, this._data._colors.zoneStyles.paint, 'zones'));
-        this._data._selectors.geoUnit.on('click', changeMapZone.bind(this, this._data._colors.unitStyles.paint, 'units'));
+        this._data._selectors.geoZone.on('click', this.changeMapZone.bind(this, this._data._colors.zoneStyles.paint, 'zones'));
+        this._data._selectors.geoUnit.on('click', this.changeMapZone.bind(this, this._data._colors.unitStyles.paint, 'units'));
 
         this._data._selectors.geoX.on('click', this.changeMapX);
         this._data._selectors.geoY.on('click', this.changeMapY);
