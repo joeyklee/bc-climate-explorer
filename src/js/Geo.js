@@ -290,7 +290,7 @@ export default class {
         // TODO: on variable change, call change map x or y
         let color = d3.scaleLinear()
             .domain(extent)
-            .range(selectPalette(selected.sel, colorPalettes));
+            .range(this.selectPalette(selected.sel, this.colorPalettes));
 
         selected.data.forEach((item, i) => {
             selected.colorsObject.push(selected.zone[i], d3.color(color(item)).hex())
@@ -315,7 +315,7 @@ export default class {
         // TODO: on variable change, call change map x or y
         let color = d3.scaleLinear()
             .domain(extent)
-            .range(this.selectPalette(selected.sel, colorPalettes));
+            .range(this.selectPalette(selected.sel, this.colorPalettes));
 
         selected.data.forEach((item, i) => {
             selected.colorsObject.push(selected.zone[i], d3.color(color(item)).hex())
