@@ -6,7 +6,7 @@ import 'chosen-js';
 export default class {
 
     constructor(data) {
-        console.log('Setup');
+        console.log('---Setup');
         this._data = data;
         this.init();
     }

@@ -4,7 +4,7 @@ import Timeseries from './Timeseries';
 export default class {
 
     constructor(data) {
-        console.log('scatterplot');
+        console.log('---Scatterplot');
 
         this._data = data;
 

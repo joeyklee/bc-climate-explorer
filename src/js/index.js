@@ -3,6 +3,8 @@ import '../stylesheets/scss/main.scss';
 import Data from './Data';
 import Setup from './Setup';
 
+// TODO finding: all classes get loaded two times except the Setup class
+// TODO modify webpack conf (see https://webpack.js.org/guides/output-management/)
 function main() {
     console.log('index');
     let dataHandler = new Data();

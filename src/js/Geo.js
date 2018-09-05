@@ -4,7 +4,7 @@ import Scatterplot from './Scatterplot';
 
 export default class {
     constructor(data) {
-        console.log("Geo");
+        console.log("---Geo");
         this._data = data;
         this.myPopUp = new mapboxgl.Popup();
         this.colorPalettes = {

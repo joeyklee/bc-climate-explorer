@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: "./src/js/index.js",
@@ -9,6 +10,7 @@ module.exports = {
         path: path.resolve(__dirname, "dist")
     },
     plugins: [
+        new CleanWebpackPlugin(['dist']),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",

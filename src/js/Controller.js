@@ -5,7 +5,7 @@ import Geo from './Geo';
 
 export default class {
     constructor(data) {
-        console.log('Controller');
+        console.log('---Controller');
         this._data = data;
 
         PubSub.subscribe("temporalSelectionChanged", this.loadClimateNormalData.bind(this));

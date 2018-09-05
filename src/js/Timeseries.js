@@ -2,7 +2,7 @@
 
 export default class {
     constructor(data) {
-        console.log("Timeseries");
+        console.log("---Timeseries");
         this._data = data;
 
         ['timeseriesXLoaded',
