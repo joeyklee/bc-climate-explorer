@@ -1,12 +1,22 @@
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: "./src/js/index.js",
+    entry: {
+        app: "./src/js/index.js",
+        data: "./src/js/Data.js",
+        geo: "./src/js/Geo.js",
+        helper: "./src/js/Helper.js",
+        scatterplot: "./src/js/Scatterplot.js",
+        setup: "./src/js/Setup.js",
+        timeseries: "./src/js/Timeseries.js",
+        controller: "./src/js/Controller.js"
+    },
     output: {
-        filename: "bundle.js",
+        filename: "[name].bundle.js",
         path: path.resolve(__dirname, "dist")
     },
     plugins: [
@@ -20,9 +30,13 @@ module.exports = {
             turf: "@turf/turf",
             Plotly: "plotly.js-dist"
         }),
-        new CopyWebpackPlugin([
+        new HtmlWebpackPlugin({
+            title: 'BC Climate Explorer - App',
+            template: 'index.html'
+        }),
+         new CopyWebpackPlugin([
             { from: 'src/data', to: 'data/' }
-        ], {})
+        ])
     ],
     module: {
         rules: [
