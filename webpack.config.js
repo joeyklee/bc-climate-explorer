@@ -2,7 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -15,12 +14,14 @@ module.exports = {
         timeseries: "./src/js/Timeseries.js",
         controller: "./src/js/Controller.js"
     },
+    devServer: {
+        contentBase: './dist'
+    },
     output: {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname, "dist")
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",

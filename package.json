@@ -4,8 +4,10 @@
   "description": "This is the current working repo of the bc-climate-explorer",
   "private": true,
   "scripts": {
+    "start": "webpack-dev-server --open --mode=development",
     "start-dev": "http-server -p 4000",
-    "build": "webpack --mode=production",
+    "build-dev": "webpack --mode=development",
+    "watch": "webpack --mode=development --watch",
     "build-css": "node-sass --include-path scss src/stylesheets/scss/main.scss src/stylesheets/css/main.css",
     "watch-css": "nodemon -e scss -x 'npm run build-css'",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -49,6 +51,7 @@
     "pubsub-js": "^1.6.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
-    "webpack-cli": "^2.1.4"
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.8"
   }
 }
